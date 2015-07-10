@@ -222,7 +222,12 @@ int main(int argc, char **argv)
     } else {
 	file = "snmp.json";
     }
-    jLocalSettings = json_object_from_file(file);
+    /*Coverity fix 10200*/
+    if(NULL != file)
+    {
+        jLocalSettings = json_object_from_file(file);
+    }
+
     DEBUG("jLocalSettings: %p", jLocalSettings);
     DEBUG("jLocalSettings: %s",
 	  json_object_to_json_string(jLocalSettings));
@@ -269,6 +274,7 @@ int main(int argc, char **argv)
     }
     fflush(stdout);
 
+    array_list_free(al);
     return 0;
 
 }
@@ -291,7 +297,7 @@ static array_list *getQueryProps()
 {
     char *queryStr = getenv("QUERY_STRING");
 //      if(!queryStr) queryStr = strdup("this=that&pn=192.168.1.10&grp=public");
-    array_list *al = array_list_new(0);
+    array_list *al = array_list_new(free);
     if (queryStr) {
 	char *tok_ptr1 = 0;
 	char *pair = strtok_r(queryStr, "&", &tok_ptr1);
@@ -408,13 +414,22 @@ void json_snmpwalk(json_object * json_query, json_object * my_object,
     session.version = SNMP_VERSION_2c;
     /* set the SNMPv1 community name used for authentication */
     session.community_len = strlen(session.community);
-
-//      DEBUG("bailing \n"); return my_object;
-    DEBUG("json_oids: %s ", json_object_get_string(json_oids));
-
-    /* return if there are no OIDs */
-    if (json_object_array_length(json_oids) <= 0) return;
-
+    /*Coverity fix 10200*/
+    if(NULL != json_oids)
+    {
+        // DEBUG("bailing \n"); return my_object;
+        DEBUG("json_oids: %s ", json_object_get_string(json_oids));
+        /* return if there are no OIDs */
+        if (json_object_array_length(json_oids) <= 0)
+        {
+            return;
+        }
+    }
+    else
+    {
+        DEBUG("json_oids is NULL");
+        return;
+    }
     /*
      * read in MIB database and initialize the snmp library
      */
