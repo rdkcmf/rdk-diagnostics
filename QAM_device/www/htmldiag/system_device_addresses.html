@@ -1,0 +1,99 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!--#include file="includes/header.html" -->
+
+<!-- $Id: network_storage.html 3159 2010-01-11 20:10:58Z slemoine $ -->
+
+<script type="text/javascript">
+$(document).ready(function() {
+    loadScripts("System > Device Addresses", "nav-sys-device-addrs");
+});
+</script>
+
+<div id="sub-header">
+	<!--#include file="includes/userbar.html" -->
+</div><!-- end #sub-header -->
+
+<!--#include file="includes/nav.html" -->
+
+<div id="content" class='snmp-get' >
+	<h1>System > Device Addresses</h1>
+  
+<div class="module forms data">
+	<h2>Device Addresses</h2>
+<table class="data snmp-get" cellpadding="0" cellspacing="0">
+	<thead>
+		<tr>
+			<th scope="col">Device</th>
+			<th scope="col">MAC</th>
+			<th scope="col">IP</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="odd">
+			<td><span class="value">eSTB<span></td>
+			<td><span class="value" data-property-file="read#DEVICE_ADDRESS:::ESTB_MAC"></span></td>
+                        <td><span class="value" data-property-file="read#DEVICE_ADDRESS:::ESTB_IP"></span></td>
+		</tr>
+		<tr>
+			<td><span class="value">eCM</span></td>
+                        <td><span class="value" data-property-file="read#DEVICE_ADDRESS:::ECM_MAC"></span></td>
+                        <td><span class="value" data-property-file="read#DEVICE_ADDRESS:::ECM_IP"></span></td>
+		</tr>
+		<tr class="odd">
+			<td><span class="value">Card</span></td>
+			<td><span class="value" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardMacAddress.0"></span></td>
+			<td><span class="value" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardIpAddress.0"></span></td>
+		</tr>
+                <tr>
+                        <td><span class="value">IP Remote Control</span></td>
+                        <td><span class="value" data-property-file="read#DEVICE_ADDRESS:::IPCONTROL_MAC"></span></td>
+                        <td><span class="value" data-property-file="read#DEVICE_ADDRESS:::IPCONTROL_IP"></span></td>
+                </tr>
+	</tbody>
+</table>
+</div> <!-- end .module -->
+
+    <div class="module forms">
+		<h2>Flows in Use</h2>
+		<div class="form-row odd">
+            <span class="readonlyLabel">MPEG:</span>
+            <span class="value" data-property-file="read#DSG_FLOW_STATS:::MPEG"></span>
+        </div>
+		<div class="form-row">
+            <span class="readonlyLabel">IPU:</span>
+            <span class="value" data-property-file="read#DSG_FLOW_STATS:::IP_U"></span>
+        </div>
+		<div class="form-row odd">
+            <span class="readonlyLabel">IPM:</span>
+            <span class="value" data-property-file="read#DSG_FLOW_STATS:::IP_M"></span>
+        </div>
+		<div class="form-row">
+            <span class="readonlyLabel">DSG:</span>
+            <span class="value" data-property-file="read#DSG_FLOW_STATS:::DSG"></span>
+        </div>
+		<div class="form-row odd">
+            <span class="readonlyLabel">Socket:</span>
+            <span class="value" data-property-file="read#DSG_FLOW_STATS:::SOCKET"></span>
+        </div>
+	</div> <!-- end .module -->
+
+</div><!-- end #content -->
+
+<!--#include file="includes/footer.html" -->

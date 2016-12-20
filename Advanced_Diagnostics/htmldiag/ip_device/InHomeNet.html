@@ -1,0 +1,258 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!doctype html>
+<html>
+	<head>
+		<!--#include virtual="/htmldiag2/common/html/header.html" -->
+		<!--#include file="includes/menu.html" -->
+	</head>
+	<body>
+		<table id="myTable"  class="tg">
+			<tr>
+				<th class="tg-xodn">Device - Local</th>
+				<th class="tg-xodn">Connected Devices</th>
+				<th class="tg-xodn">MoCA Transmit Rates</th>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- Device Local Values ---> <br>
+					<table class="tg">
+						<tr>
+							<td class="tg-label tg-singlecol"><b>MoCA Network Status:</b></td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.Enable"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>MoCA Link Status:</td> 
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.Enable"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Network Up-Time: </td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.LastChange"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>MoCA MAC: </td>
+							<td class="tg-goodval" data_donor_id="Device.DeviceInfo.X_COMCAST-COM_STB_MAC"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>This Device's Node ID: </td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.NodeID"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Total Connected Nodes: </td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Preferred NC: </td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.PreferredNC"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Backup NC: </td>
+							<td class="tg-badval"> Node 3, eMTA Device (XB3)</td>
+						</tr>
+					</table> <br>
+				</td>
+				<td class="tg-vals">
+					<!--- Connected Devices --->
+					<table class="tg" id="data"><br/>
+						<tr id="progress">
+							<td class="tg-goodval">Updating ...</td>
+						</tr>
+							<!-- Table is populated via ajax calls -->
+					</table> <br>
+				</td>
+                                <td class="tg-vals">
+                                        <table class="tg" id="mocaTxrate">
+                                                <tr>
+                                                    <td class="mocarate" style='padding-left:10em' ><b>Loading ... Please wait !!!</td>
+                                                </tr>
+                                        </table>
+                                        <br>
+                                </td>
+
+			</tr>
+			<tr>
+				<td class="tg-xodn">Mesh Connections</td>
+				<td class="tg-xodn">UPnP Status</td>
+				<td class="tg-xodn">XRE</td>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- Mesh Connections --->
+					<table class="tg" id="mesh_data">
+						<tr id="mesh_progress">
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- UPnP Status --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Network Type: </td>
+							<td class="tg-badval">Unmanaged</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>IP Address: </td>
+							<td class="tg-badval">Self Assigned / Auto IP</td>
+							<td class="tg-badval">IPv6 Prefixing Enabled</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Controlled Devices: </td>
+							<td class="tg-badval">Pace Xi3v2</td>
+							<td class="tg-badval"><b>Cache Control:</b> 216000sec</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>IP Address: </td>
+							<td class="tg-goodval" data_donor_id="Device.DeviceInfo.X_COMCAST-COM_STB_IP"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Additional Control Points: </td>
+							<td class="tg-badval">2-Arris XG1v1, Arris XB3</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- XRE --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Status: </td>
+							<td class="tg-goodval" data_donor_id="Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreStatus"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Server: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Protocol Version:</td> 
+							<td class="tg-badval"> (2.8.0)</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Release Version: </td>
+							<td class="tg-badval">xappl-XRE_33P1</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Activation: </td>
+							<td class="tg-badval">Activation Successful</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="tg-xodn">MoCA Status</td>
+				<td class="tg-xodn">VOD</td>
+				<td class="tg-xodn">Local Tuner Status</td>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- MoCA Status --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Current MoCA Version: </td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.AssociatedDevice.1.HighestVersion"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>MoCA Privacy: </td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.PrivacyEnabledSetting"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Frequency Band: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Highest Version Supported: </td>
+							<td class="tg-goodval" data_donor_id="Device.MoCA.Interface.1.AssociatedDevice.1.HighestVersion"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Bonded Channels: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Bonded Nodes: </td>
+							<td class="tg-badval">Node 0 <-> 2</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Key Passphrase:</td> 
+							<td class="tg-nullval">N/A</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<!--- VOD --->
+				<td class="tg-vals">
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Status: </td>
+							<td class="tg-badval">Discovery Complete</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>VOD ID:</b></td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- Tuner Status --->
+					<table class="tg">
+						<tr>
+							<table class="tg">
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+                                                                <tr> 
+                                                                    <td>N/A</td>
+                                                                </tr>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			var link=document.getElementById("nav-1");
+			link.href="javascript:void()";
+		</script>
+                <script type="text/javascript" src="js/InHomeNet.js"></script>
+		<!--#include virtual="/htmldiag2/common/html/footer.html" -->
+	</body>
+</html>

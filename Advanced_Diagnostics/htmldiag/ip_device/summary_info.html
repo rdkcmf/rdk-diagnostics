@@ -1,0 +1,585 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!doctype html>
+<html>
+	<head>
+		<!--#include virtual="/htmldiag2/common/html/header.html" -->
+		<!--#include file="includes/menu.html" -->
+	</head>
+	<body>
+		<table  id="myTable" class="tg">
+			 <tr>
+				<th class="tg-xodn">Local Device Status</th>
+				<th class="tg-xodn">Network Connections</th>
+				<th class="tg-xodn">DOCSIS Levels</th>
+			</tr>
+			<tr>
+				<!--- Start Of Local Device Status  Row --->
+				<td class="tg-vals">
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label "><b>eSTB MAC: </td>
+							<td class="tg-badval"  colspan="2" data_donor_id="Device.DeviceInfo.X_COMCAST-COM_STB_MAC"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label "><b>MoCA MAC: </td>
+							<td class="tg-badval"  colspan="2" data_donor_id="Device.MoCA.Interface.1.MACAddress"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label "><b>eCM MAC: </td>
+							<td class="tg-badval"   colspan="2" data_donor_id="Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC">Not Applicable</td>
+						</tr>
+						<tr>
+							<td class="tg-label" ><b>CC MAC Address: </td>
+							<td class="tg-badval" colspan="2">Not Applicable</td>
+						</tr>
+						<tr>
+							<td class="tg-label  "><b>eSTB IP: </td>
+							<td class="tg-badval" colspan="2" data_donor_id="Device.DeviceInfo.X_COMCAST-COM_STB_IP"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>eCM IP: </td>
+							<td class="tg-badval" colspan="2">Not Applicable</td>
+						</tr>
+						<tr>
+							<td class="tg-label "><b>LAN/DHCP IP: </td>
+							<td class="tg-badval" colspan="2">TBD</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Model: </td>
+							<td class="tg-badval  tg-val" data_donor_id="Device.DeviceInfo.ModelName"></td>
+							<td class="tg-label"><b>DAC ID: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Make:</td> 
+							<td class="tg-badval  tg-val">TBD</td>
+							<td class="tg-label"><b>Serial Number:</td> 
+							<td class="tg-badval" data_donor_id="Device.DeviceInfo.SerialNumber"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Receiver ID: </td>
+							<td class="tg-badval  tg-val">TBD</td>
+							<td class="tg-label"><b>HW Rev: </td>
+							<td class="tg-badval" data_donor_id="Device.DeviceInfo.HardwareVersion"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Vendor ID: </td>
+							<td class="tg-badval  tg-val" data_donor_id="Device.DeviceInfo.ModelName"></td>
+							<td class="tg-label"><b>Channel Map ID: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Session Last Mod: </td>
+							<td class="tg-badval  tg-val">TBD</td>
+							<td class="tg-label"><b>Create Date: </td>
+							<td class="tg-badval" id="date_info"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Power Status: </td>
+							<td class="tg-badval  tg-val" data_donor_id="Device.DeviceInfo.X_COMCAST-COM_PowerStatus"></td>
+							<td class="tg-label"><b>DOCSIS Downstream: </td>
+							<td class="tg-badval" style="color:red">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>DSG Tunnels Acquired: </td>
+							<td class="tg-badval  tg-val">TBD</td>
+							<td class="tg-label"><b>DOCSIS Upstream: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Provisioning Status: </td>
+							<td class="tg-badval  tg-val">TBD</td>
+							<td class="tg-label"><b>Friendly Name:</td> 
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<!--- End Of Local Device Status  Row --->
+				<!--- Start of row for Network or  Local/Remote Connections --->
+				<td class="tg-vals">
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>MoCA Status: </td>
+							<td class="tg-badval  tg-val" id="mocaStatus" data_donor_id="Device.MoCA.Interface.1.Status"> </td>
+							<td class="tg-label"><b>NC Device Type: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>This Node's ID: </td>
+							<td class="tg-badval tg-val" data_donor_id="Device.MoCA.Interface.1.NodeID"></td>
+							<td class="tg-label"><b>Connected Devices:</td> 
+							<td class="tg-badval" data_donor_id="Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Network Coordinator: </td>
+							<td class="tg-badval tg-val" data_donor_id="Device.MoCA.Interface.1.NetworkCoordinator"></td>
+							<td class="tg-label"><b>XRE Status: </td>
+							<td class="tg-badval" data_donor_id="Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreStatus"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>NC MAC Address: </td>
+							<td class="tg-badval tg-val" data_donor_id="Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"></td>
+							<td class="tg-label"><b>XRE Version: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Backup NC: </td>
+							<td class="tg-badval tg-val">TBD</td>
+							<td class="tg-label"><b>Connection Established: </td>
+							<td class="tg-badval" data_donor_id="Device.MoCA.Interface.1.Enable"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Controller ID: </td>
+							<td class="tg-badval tg-val">TBD</td>
+							<td class="tg-label"><b>Auto Discovery: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>VOD ID: </td>
+							<td class="tg-badval tg-val">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Mesh Tx/Rx Health: </td>
+							<td class="tg-badval tg-val" colspan="2" style="color:red"> TBD Signal poor between Nodes 1& 2 </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<!--- End of Network or  Local/Remote Connections --->
+				<!--- Start of row for DOCSIS Levels --->
+				<td class="tg-vals">
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream Center Frequency: </td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream Rcvd Power: </td>
+							<td class="tg-badval" data_donor_id="Device.MoCA.Interface.1.AssociatedDevice.1.RxPowerLevel"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream Carrier Lock: </td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream SNR: </td>
+							<td class="tg-badval" data_donor_id="Device.MoCA.Interface.1.AssociatedDevice.1.R SNR"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Upstream Center Frequency: </td>
+							<td class="tg-badval" style="color:red">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Upstream Power:</td> 
+							<td class="tg-badval" data_donor_id="Device.MoCA.Interface.1.AssociatedDevice.1.TxPowerControlReduction"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>DSG Status: </td>
+							<td class="tg-badlval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>CM Status: </td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!--- End of row for DOCSIS Levels --->
+			<tr>
+				<td class="tg-xodn">Firmware</td>
+				<td class="tg-xodn">Cable Card(tm) Summary</td>
+				<td class="tg-xodn">Tuner Status</td>
+			</tr>
+			<tr>
+				<!--- Start of Firmware details --->
+				<td class="tg-vals">
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Running: </td>
+							<td class="tg-badval" data_donor_id="Device.DeviceInfo.X_COMCAST-COM_FirmwareFilename"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Applied Date/Time: </td>
+							<td class="tg-badval" id="firmware_date_info"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Last Downloaded Version: </td>
+							<td class="tg-badval" data_donor_id="Device.DeviceInfo.X_RDKCENTRAL-COM.FirmwareFilename"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Download Status: </td>
+							<td class="tg-badval"data_donor_id="Device.DeviceInfo.X_COMCAST-COM_FirmwareDownloadStatus"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Last Xconf Check: </td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>FW Image Name: </td>
+							<td class="tg-badval" data_donor_id="Device.DeviceInfo.X_COMCAST-COM_FirmwareFilename"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Boot File:</td> 
+							<td class="tg-badval">Not Applicable</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>BOOTR: </td>
+							<td class="tg-badval">Not Applicable</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<!--- End of Firmware details --->
+				<!-- start of CableCard Summary Deatil-->
+				<td class="tg-vals">
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Card Status: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>CC Download Status: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Entitlement Status: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>Card FW Version: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Pairing Status: </td>
+							<td class="tg-badval tg-val"> N/A </td>
+							<td class="tg-label"><b>Hardware: </td>
+							<td class="tg-badval"> N/A </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Manufacturer: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>UpTime: </td>
+							<td class="tg-badval" data_donor_id="Device.DeviceInfo.UpTime"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Certificate Check: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>CP System ID: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>CP/CA Status: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>CA System ID: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>CCard ID: </td>
+							<td class="tg-badval tg-val">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Host ID: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>OOB Mode: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Unit Address: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>Time Zone: </td>
+							<td class="tg-badval" data_donor_id="Device.Time.LocalTimeZone"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>VCT ID: </td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>Last Error: </td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<!--End of Cable Card Summary-->
+				<!--- Start of Tuner/TRM Status --->
+				<td class="tg-vals">
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Active Connections:</td>
+							<td class="tg-badval tg-val"></td>
+							<td class="tg-label"><b>TRM Device Type/s:</td>
+							<td class="tg-badval"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Tuner Status:</td>
+							<td class="tg-badval tg-val">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>TRM Client 1:</td>
+							<td class="tg-badval tg-val"></td>
+							<td class="tg-label"><b>TRM Client 2:</td>
+							<td class="tg-badval"></td>						
+						</tr>
+						<tr>
+							<td class="tg-label"><b>eSTB MAC:</td>
+							<td class="tg-badval tg-val"></td>
+							<td class="tg-label"><b>eSTB MAC:</td>
+							<td class="tg-badval"> /td>						
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Tuner in Use:</td>
+							<td class="tg-badval tg-val"></td>		
+							<td class="tg-label"><b>Tuner in Use:</td>
+							<td class="tg-badval"></td>		
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Channel#:</td>
+							<td class="tg-badval tg-val"></td>
+							<td class="tg-label"><b>Channel#:</td>
+							<td class="tg-badval"></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Channel Name:</td>
+							<td class="tg-badval tg-val"></td>
+							<td class="tg-label"><b>Channel Name:</td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Allocation:</td>
+							<td class="tg-badval tg-val"></td>
+							<td class="tg-label"><b>Allocation:</td>
+							<td class="tg-badval"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<!-- End Of Tunner Status-->
+			<tr>
+				<td class="tg-xodn">Memory Status</td>
+				<td class="tg-xodn">A/V Summary</td>
+				<td class="tg-xodn">Init History</td>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- Start of Memory Status --->
+					<table class="tg" >
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<!--<tr>
+							<td class="tg-label"><b>Total Memory :</td>
+							<td class="tg-badval" data_donor_id="Device.DeviceInfo.MemoryStatus.Total"> </td>
+						</tr>-->
+						<tr>
+							<td class="tg-label"><b>Internal HDD:</td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>Available:</td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Format Enable Status:</td>
+							<td class="tg-badval tg-val">N/A</td>
+							<td class="tg-label"><b>Used:</td>
+							<td class="tg-badval">N/A</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>SMART Health:</td>
+							<td class="tg-badval tg-val">TBD</td>
+							<td class="tg-label"><b>Total:</td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Bad Sector Count:</td>
+							<td class="tg-badval tg-val">3</td>						
+							<td class="tg-label"><b>TSB Enable:</td>
+							<td class="tg-badval"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Sector Count/Time:</td>
+							<td class="tg-badval tg-val"> </td>
+							<td class="tg-label"><b>Max Duration:</td>
+							<td class="tg-badval"> </td>
+						</tr>					
+						<tr>
+							<td class="tg-label"><b>rom:</td>
+							<td class="tg-badval tg-val"> </td>	
+							<td class="tg-label"><b>External HDD:</td>
+							<td class="tg-nullval">Not Supported</td>						
+						</tr>					
+						<tr>						
+							<td class="tg-label"><b>dram:</td>
+							<td class="tg-badval tg-val"> </td>
+							<td class="tg-label"><b>Available:</td>
+							<td class="tg-nullval">Not Supported</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>TSB:</td>
+							<td class="tg-badval tg-val"> </td>
+							<td class="tg-label"><b>flash:</td>
+							<td class="tg-badval"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>TSB Capacity:</td>
+							<td class="tg-badval tg-val" colspan="2"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+					<!-- End of Memory Status table -->
+				</td>
+				<td class="tg-vals">
+					<!--- Start of A/V Summary --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>HDMI: </td>
+							<td class="tg-badval tg-val" data_donor_id="Device.Services.STBService.1.Components.HDMI.1.Status"> </td>
+							<td class="tg-label"><b>HDCP: </td>
+							<td class="tg-badval" data_donor_id="Device.Services.STBService.1.Components.VideoOutput.1.HDCP"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>HDMI Audio: </td>
+							<td class="tg-badval  tg-val" data_donor_id="Device.Services.STBService.1.Components.AudioOutput.1.X_COMCAST-COM_AudioStereoMode"> </td>
+							<td class="tg-label" ><b>HDMI Device: </td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Aspect Ratio: </td>
+							<td class="tg-badval tg-val" data_donor_id="Device.Services.STBService.1.Components.VideoDecoder.1.ContentAspectRatio"> </td>
+							<td class="tg-label"><b>Audio PID: </td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Resolution: </td>
+							<td class="tg-badval tg-val" data_donor_id="Device.Services.STBService.1.Components.VideoOutput.1.DisplayFormat"> </td>
+							<td class="tg-label"><b>Video PID: </td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Audio Mute: </td>
+							<td class="tg-badval  tg-val"> TBD </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<!-- End of A/V Summary -->
+				<td class="tg-vals">
+					<!--- Init History --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Timestamp</b></td>
+							<td class="tg-mesh1"><b>Type<b></td>
+							<td class="tg-mesh1"><b>Status</b></td>
+						</tr>
+						<tr>
+							<td class="tg-mesh2"> </td>
+							<td class="tg-mesh2"> </td>
+							<td class="tg-mesh2">&nbsp;</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="tg-xodn" colspan="3">XRE Connection Table</td>
+			</tr>
+			<tr>
+				<td class="tg-vals" colspan="3" width="99%">
+					<!--- XRE Connection --->
+					<table class="tg" style="width: 99%;">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<!--<tr><td class="tg-badval"> TBD For all values in this table </td></tr>-->
+						<tr>
+							<td class="tg-mesh1"><b>URL</b></td>
+							<td class="tg-mesh1"><b>Status<b></td>
+							<td class="tg-mesh1"><b>Interface</b></td>
+							<td class="tg-mesh1"><b>Connection Established</b></td>
+							<td class="tg-mesh1"><b>Retry Attempts</b></td>
+						</tr>
+					   <tr>
+							<td class="tg-mesh2"> </td>
+							<td class="tg-mesh2"> </td>
+							<td class="tg-mesh2"> </td>
+							<td class="tg-mesh2"> </td>
+							<td class="tg-mesh2"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			var link=document.getElementById("nav-0");
+			link.href="javascript:void()";
+		</script>
+		<script type="text/javascript" src="summary_ip.js"> </script>
+		<!--#include virtual="/htmldiag2/common/html/footer.html" -->
+	</body>
+</html>

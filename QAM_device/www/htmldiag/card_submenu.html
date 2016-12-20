@@ -1,0 +1,215 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!--#include file="includes/header.html" -->
+
+<!-- $Id: at_a_glance.html 2943 2009-08-25 20:58:43Z slemoine $ -->
+
+<script type="text/javascript">
+var counter = 0;
+var canh_page_count = 0;
+var cardWindowId;
+var id = 1;
+var tableValue ;
+var rowNumber = 0;
+function addCardNavEventListener(id) {
+        values = $(".snmp-temp-card");
+        id = id;
+        /* To add handlers for nav elements */
+        $('[class^=snmp-temp-card]').unbind();
+        $('[class^=nav-]').keydown(
+              function(event){
+                  if (event.which != 37 && event.which != 39 ) {
+                     var thisClass = $(this).attr('class').trim();
+                     var navFocusedLink = $(this).children('a').attr('href');
+                     var mainMenuItems = ["nav-gateway", "nav-connected-devices", "nav-parental-control", "nav-addins", "nav-dvr", "nav-reboot", "nav-osd-diag", "nav-sys-debug", "nav-moca"];
+                     var masterMenuLength = mainMenuItems.length;
+                      for (var i=masterMenuLength; i--;) {
+                         if ( thisClass == mainMenuItems[i]) {
+                             isMainMenu = true;
+                             break;
+                         }
+                     }
+
+                     if (!isMainMenu ) {
+                        clearTimeout(redirectionId);
+                        redirectionId = setTimeout(function(){window.location = navFocusedLink},1000);
+                     } else {
+                        clearTimeout(redirectionId);
+                        if (thisClass != "nav-reboot-stb" ) {
+                            if ( event.which != 13 && isMainMenu ) {
+                                $("#content").empty();
+                                $("#content").append("<h1>Press OK button  to display sub-menu</h1>");
+                            }
+                        }
+                     }
+                  }
+              }
+        );
+        $('.nav-addins').unbind();
+
+        $('[class^=snmp-temp-card]').keyup(
+              function(event){
+                  if (event.which == 37 || event.which == 38 || event.which == 39 || event.which == 40 ) { // If key up or down is pressed
+                     event.preventDefault();
+                     if ( event.which == 40 ) {
+                          counter = 0;
+                          id = id + 1;
+                    	  if(values[id] != undefined ) {
+                              var oidValue = values[id].href.split("=")[1];
+                              var temp_id = oidValue.split(".")[1].trim();
+                              var oidId = parseInt(temp_id);
+                              updatePage(oidId);
+                          }
+                      } else if ( event.which == 38 ) {
+                    	  counter = 0 ;
+                    	  id = id - 1; 
+                    	  if(values[id] != undefined ) {
+                              var oidValue = values[id].href.split("=")[1];
+                              var temp_id = oidValue.split(".")[1].trim();
+                              var oidId = parseInt(temp_id);
+                              updatePage(oidId);
+                          }
+                      } else if (event.which == 37 ) {
+                          left(id);
+                      } else if (event.which == 39 ) {
+                          right(id);
+                      }
+                      if (values) {
+                           if ( typeof values[id - 1] != "undefined") {
+	                           values[id].focus();
+                          }
+                      }
+
+                  }
+              }
+        );
+}
+
+function left(id) {
+    if (typeof tableValue != 'undefined' && tableValue.length ) {
+        counter = counter - 1;
+        if ( counter < 0 ) {
+            counter = tableValue.length - 1;
+        }
+        $('#card_value').empty();
+        $('#card_value').append(tableValue[counter]);
+    }
+}
+
+function right(id) {
+    if (typeof tableValue != 'undefined' && tableValue.length ) {
+        counter = counter + 1;
+        if ( counter > (tableValue.length -1)) {
+            counter = 0;
+        }
+        $('#card_value').empty();
+        $('#card_value').append(tableValue[counter]);
+    }
+}
+
+function updatePage(id) {
+     var cardOID = 'OC-STB-HOST-MIB::ocStbHostCCAppInfoPage.' + id;
+     $(".module.forms.enable").empty();
+     var element = '<div><span id\=\"card_value\" class\=\"value\"' +
+                   '> Loading ... </span></div>';
+     $(".module.forms.enable").append(element);
+     if (typeof tableValue != 'undefined' && tableValue.length ) {
+         tableValue.length = 0 ;
+     }
+     $.ajax({
+           async: true,
+           url: "cgi-bin/cardData.sh",
+           timeout: 25000,
+           cache: false,
+           context: document.body,
+           data: "" + cardOID + "\n",
+           dataType: "html",
+           type: "POST",
+           success: function(data, text_status)
+           {
+              if (data.length) {
+                  if ( data.indexOf("####") > -1 ) {
+                    tableValue = data.split("####");
+                    $('#card_value').empty();
+                    $('#card_value').append(tableValue[0]);
+                    $('#nav-help').css('visibility','visible');
+                      
+                  } else {
+                      $('#card_value').empty();
+                      $('#card_value').append(data);
+                      $('#nav-help').css('visibility','hidden');
+                  }
+              }
+           }
+     });
+}
+
+
+$(document).ready(function(){
+var url_arg = window.location.search.substring(1);
+var cardOID = url_arg.split("=")[1].trim();
+var temp_id = cardOID.split(".")[1].trim();
+id = 0;
+focusId = id;
+var SUB_MENU_LOAD_PERIOD = 10;
+var element = '<div><span id\=\"card_value\" class\=\"value\"'  + 
+              '> Loading ... </span></div>';
+$(".module.forms.enable").append(element);
+
+loadScripts("Card > Info", "nav-card-info");
+var focusFuncId = setInterval(function() {
+    var values = $(".snmp-temp-card");
+    if (values) {
+        if ( typeof values[focusId] != "undefined") {
+            var className  = values[id].className;
+            if ( className.search("selected folder-open") != -1 ) {
+                addCardNavEventListener(id);
+                window.clearInterval(focusFuncId);
+                values[0].className = "";
+            } else {
+                values[focusId].className += " selected folder-open";
+                values[focusId].focus();
+            }
+        }
+    }
+
+ }, SUB_MENU_LOAD_PERIOD);
+updatePage(temp_id);
+
+});
+</script>
+
+<div id="sub-header">
+	<!--#include file="includes/userbar.html" -->
+</div><!-- end #sub-header -->
+
+<!--#include file="includes/nav.html" -->
+
+<div id="content" class='snmp-get' >
+
+        <h1>Card > Info</h1>
+        
+    <div class="module forms enable">
+    </div> <!-- end .module -->
+    </div><!-- end #content -->
+    <div id="nav-help" style="visibility:hidden"><b> Press [RIGHT/LEFT] for Next/Previous Page </b></div>
+
+</div><!-- end #sub-header -->
+
+<!--#include file="includes/footer.html" -->
