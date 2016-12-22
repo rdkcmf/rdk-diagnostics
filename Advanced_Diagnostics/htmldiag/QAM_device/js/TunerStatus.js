@@ -18,7 +18,7 @@
 */
 // Retry to get firmware date value in an interval 0f 2 seconds
 
-var TABLE_REFRESH_INTERVAL = 5000;
+var TABLE_REFRESH_INTERVAL = 20000;
 /* 
     All entries in first row first row is in bold and nedds to be from 
     InBandTunerTotalTuneCount

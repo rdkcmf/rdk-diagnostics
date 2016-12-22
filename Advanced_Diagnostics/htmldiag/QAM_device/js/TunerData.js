@@ -17,7 +17,7 @@
  * limitations under the License.
 */
 
-var TABLE_REFRESH_INTERVAL = 5000;
+var TABLE_REFRESH_INTERVAL = 20000;
 
 function updateDataInBg() {
     $.ajax({

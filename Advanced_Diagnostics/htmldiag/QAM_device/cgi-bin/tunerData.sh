@@ -40,6 +40,11 @@ if [ "$updateType" == "get" ]; then
    exit 0
 fi
 
+if [ -f /tmp/.tunerTable_advanced.json.pid ] && [ -d /proc/`cat /tmp/.tunerTable_advanced.json.pid` ]; then
+   exit 0
+fi
+echo $$ > /tmp/.tunerTable_advanced.json.pid
+
 response=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostInBandTunerTable | tr -d ' ' \
           | grep -i "TunerTune\|Correct\|TotalTuneCount"`
 response=`echo $response | sed -e "s/ocStbHost/\", \"/g" -e "s/\",/{/1" -e "s/=/\":\"/g"`

@@ -18,7 +18,7 @@
 */
 // Retry to get firmware date value in an interval 0f 2 seconds
 
-var TABLE_REFRESH_INTERVAL = 15000;
+var TABLE_REFRESH_INTERVAL = 20000;
 
 function updateCableCardSummary() {
         $.ajax({

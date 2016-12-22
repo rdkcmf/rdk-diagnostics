@@ -29,6 +29,15 @@ export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
+cableCardData="/tmp/.cableCardData.json"
+if [ -f /tmp/.cableCardData.json.pid ] && [ -d /proc/`cat /tmp/.cableCardData.json.pid` ]; then
+   echo "Content-Type: text/html"
+   echo ""
+   cat $cableCardData
+   exit 0
+fi
+echo $$ > /tmp/.cableCardData.json.pid
+
 OID="OC-STB-HOST-MIB::ocStbHostCCAppInfoPage"
 
 jsonPrefix="{"
@@ -71,6 +80,9 @@ data="$data \"Hardware\":\"$Hardware\" ,"
 data="$data \"CCId\":\"$CCId\" ,"
 data="$data \"NCMac\":\"$NCMacAddress\" ,"
 data="$data \"EntitlementStatus\":\"$EntitlementStatus\"  $jsonSuffix"
+
+echo $data > $cableCardData
+
 echo "Content-Type: text/html"
 echo ""
 echo $data
