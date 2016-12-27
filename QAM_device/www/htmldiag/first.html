@@ -56,7 +56,7 @@ $.ajax({
    success: function(data)
    {
       if (data.length) {
-          $('#lastDownFirmVersion').text(data.split('.')[0]);
+          $('#lastDownFirmVersion').text(data.replace(".bin", ""));
       }
    }
 });
