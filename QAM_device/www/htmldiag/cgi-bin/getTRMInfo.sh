@@ -17,18 +17,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##########################################################################
-export PATH=$PATH:/usr/bin
+export MIBS=ALL
+export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
+export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
+export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
+snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
-connectedDev=`QueryTRMInfo --connectedDevices`
+snmpwalk -OQ -v 2c -c hDaFHJG7 localhost TRM-MIB::trm > /tmp/trmHtmlDiagData
+
+connectedDev=`cat /tmp/trmHtmlDiagData | grep trmConnectedDevId | cut -d "=" -f2 | cut -c 2-`
 connectedDev="${connectedDev//[$'\t\r\n']}"
-tokenInfo=`QueryTRMInfo --reservedTuners`
+
+tokenInfo=`cat /tmp/trmHtmlDiagData | grep trmReservationTokenInfo | cut -d "=" -f2 | cut -c 2-`
 tokenInfo="${tokenInfo//[$'\t\r\n']}"
-connectionError=`QueryTRMInfo --connectionErrors`
+
+connectionError=`cat /tmp/trmHtmlDiagData | grep trmError | cut -d "=" -f2 | cut -c 2-`
 connectionError="${connectionError//[$'\t\r\n']}"
+if [ "$connectionError" == "" ]; then
+    connectionError="None"
+fi
 
 data="{ \"connectedDevices\" : \"$connectedDev\", \"tokenInfo\" : \"$tokenInfo\", \"connectionError\" : \"$connectionError\" }"
-data=$(sed 's|Empty|None|g' <<< $data)
 
 echo "Content-Type: text/html"
 echo ""
 echo "$data"
+

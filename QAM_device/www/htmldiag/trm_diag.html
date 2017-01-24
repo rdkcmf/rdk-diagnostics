@@ -23,7 +23,7 @@
 <script type="text/javascript">
 function parseJsonMessage(tableData,id){
 	var finalTable = "";
-	var arr = tableData.split(',');
+	var arr = tableData.split(' ');
 	if(0 != arr.length){
 		for(count=0;count<arr.length;count++){
 			finalTable = finalTable + "<tr><td>" +
