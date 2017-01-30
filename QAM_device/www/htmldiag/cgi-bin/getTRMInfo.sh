@@ -17,6 +17,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##########################################################################
+
+#readType : This parameter is passed in the ajax call as data
+#It takes below values 
+# 1. get - This option will just ouput the cache file
+# 2. update - This option will do the snmp query and update the cache file
+# 3. "" (empty value) - This option will do the snmp query, update the cache file and output the data
+
+read dataType
+
+if [ "$dataType" == "get" ]; then
+    if [ -f /tmp/trmHtmlDiagDataOutFile ]; then
+        echo "Content-Type: text/html"
+        echo ""
+        echo "`cat /tmp/trmHtmlDiagDataOutFile`"
+        exit 0
+    fi     
+fi
+
 export MIBS=ALL
 export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
@@ -39,8 +57,10 @@ if [ "$connectionError" == "" ]; then
 fi
 
 data="{ \"connectedDevices\" : \"$connectedDev\", \"tokenInfo\" : \"$tokenInfo\", \"connectionError\" : \"$connectionError\" }"
+echo $data > /tmp/trmHtmlDiagDataOutFile
 
-echo "Content-Type: text/html"
-echo ""
-echo "$data"
-
+if [ "$dataType" == "" ]; then
+    echo "Content-Type: text/html"
+    echo ""
+    echo "$data"
+fi

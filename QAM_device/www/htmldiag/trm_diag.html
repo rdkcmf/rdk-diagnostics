@@ -34,14 +34,18 @@ function parseJsonMessage(tableData,id){
 	}
 }
 
-function updateTables() {
+function updateTables(dataType)
+{
+        if ( dataType == undefined ) {
+            dataType=""
+        }
         $.ajax({
                 async : true,
                 url : "cgi-bin/getTRMInfo.sh",
                 timeout : 125000,
                 cache : false,
                 context : document.body,
-                data : "get",
+                data : dataType,
                 dataType : "html",
                 type : "POST",
                 success : function(data, text_status) {
@@ -64,7 +68,7 @@ function updateTables() {
 
 $(function() {
     loadScripts("OSD Diagnostics", "nav-trm-diag");
-    updateTables();
+    updateTables("get");
 });
 </script>
 

@@ -62,6 +62,19 @@ $.ajax({
        success : function() {}
 });
 
+$.ajax({
+       async : true,
+       url : "cgi-bin/getTRMInfo.sh",
+       timeout : 125000,
+       cache : false,
+       context : document.body,
+       data : "update",
+       dataType : "html",
+       type : "POST",
+       success : function() {}
+});
+
+
 </script>
 
 
