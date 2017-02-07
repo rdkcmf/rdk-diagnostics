@@ -19,15 +19,14 @@
 var link=$("nav-5");
 link.href="javascript:void()";
 
-function updatePage( ) {
-	var cardOID = 'OC-STB-HOST-MIB::ocStbHostCCAppInfoPage';
+function getCableCardData( ) {
 	$.ajax({
 		async: true,
 		url: "cgi-bin/cardData.sh",
 		timeout: 25000,
 		cache: false,
 		context: document.body,
-		data: "" + cardOID + "\n",
+		data: "get",
 		dataType: "html",
 		type: "POST",
 		success: function (data,text_status) {
@@ -55,9 +54,25 @@ function updatePage( ) {
 			}
 		}
 	})
+        setTimeout(updatePage, 30000);
 }
 			
+function updatePage() {
+    $.ajax({
+        async : true,
+        url: "cgi-bin/cardData.sh",
+        timeout: 25000,
+        cache: false,
+        context: document.body,
+        data: "update",
+        dataType: "html",
+        type: "POST",
+        success : function() {}
+    })
+
+}
+
 $(document).ready(function() {
-	updatePage();
+	getCableCardData();
 })
 	

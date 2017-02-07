@@ -18,6 +18,19 @@
 # limitations under the License.
 ##########################################################################
 #
+
+cableCardData="/tmp/.htmlDiagCableCardData"
+read dataType
+
+if [ "$dataType" == "get" ]; then
+    if [ -f $cableCardData ]; then
+        echo "Content-Type: text/html"
+        echo ""
+        cat $cableCardData
+        exit 0
+    fi
+fi
+
 if [ ! -f /etc/os-release ]; then
         export SNMPCONFPATH=/mnt/nfs/bin/target-snmp/sbin
 else
@@ -74,7 +87,9 @@ do
     index=`expr $index + 1`
 done
 
-echo "Content-Type: text/html"
-echo ""
-echo "$jsonPrefix $data $jsonSuffix"
-
+echo "$jsonPrefix $data $jsonSuffix" > $cableCardData
+if [ "$dataType" == "get" ]; then
+    echo "Content-Type: text/html"
+    echo ""
+    cat $cableCardData
+fi
