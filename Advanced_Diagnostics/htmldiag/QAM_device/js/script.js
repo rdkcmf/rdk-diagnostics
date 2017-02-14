@@ -163,6 +163,8 @@ function keyHandler(event) {
 			$('.tg .tg-nullval').css('font-size', curSize);
 			curSize = parseInt($('.tg .tg-meshnull').css('font-size')) + 1;
 			$('.tg .tg-meshnull').css('font-size', curSize);
+			curSize = parseInt($('.tg .column').css('font-size')) + 1;
+			$('.tg .column').css('font-size', curSize);
 			break;
 		case KEY_PAGE_DOWN:
 			$('body').scrollTop(0);
@@ -219,6 +221,13 @@ function keyHandler(event) {
 			if(curSize > 10){
 				curSize = parseInt($('.tg .tg-meshnull').css('font-size')) - 1;
 				$('.tg .tg-meshnull').css('font-size', curSize);
+			}else if(curSize == 10){
+				ZoomOut();
+			}	
+			curSize = parseInt($('.tg .column').css('font-size'))
+			if(curSize > 10){
+				curSize = parseInt($('.tg .column').css('font-size')) - 1;
+				$('.tg .column').css('font-size', curSize);
 			}else if(curSize == 10){
 				ZoomOut();
 			}	

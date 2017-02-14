@@ -50,7 +50,7 @@ function getCableCardData( ) {
 					tableData = tableData+"<tr><td class=\"tg-xodn\">"+connectedNodes[col].header+ "</td></tr>";
 					tableData = tableData+"<tr><td class=\"column lastcol\"> "+connectedNodes[col].value+"</td></tr>";
 				}
-				$("#myTable1").append(tableData);		
+				$("#myTable").append(tableData);		
 			}
 		}
 	})
