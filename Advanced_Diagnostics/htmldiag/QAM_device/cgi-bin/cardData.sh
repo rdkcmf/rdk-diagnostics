@@ -50,16 +50,9 @@ jsonPrefix="{ \"values\" : ["
 jsonSuffix="]}"
 subMenuNames=`snmpwalk -Oqv -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostCCApplicationName`
 indexes=`snmpwalk -Oqv -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoIndex`
-index=0
-
-for values in $indexes
-do
-    indexNum[index]=$values
-    index=`expr $index + 1`
-done
 
 IFS=$'\n'
-index=0
+index=1
 
 data=""
 isFirst=true
@@ -72,7 +65,8 @@ do
         data="$data,{\"header\":\"$menu\","
     fi
     
-    VALUE=`snmpwalk -Oqv -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoPage.${indexNum[index]}`
+    indexValue=`echo $indexes | cut -d " " -f$index`
+    VALUE=`snmpwalk -Oqv -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoPage.$indexValue`
     VALUE=`echo $VALUE | sed -e "s/\"<html>//g" | sed -e "s/<\/html>\"//g"`
     VALUE=`echo $VALUE | sed -e "s/<body>//g" | sed -e "s/<\/body>//g"`
     # Fix for avoiding line break in sentence for cable card pairing page
