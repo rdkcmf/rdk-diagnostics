@@ -24,14 +24,12 @@ export LD_LIBRARY_PATH=/usr/local/lib:/lib:$LD_LIBRARY_PATH
 
 tr69ServerUrl="http://127.0.0.1:"$TR69_HOSTIF_PORT
 
-mocaStatus=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.Enable"}]}' $tr69ServerUrl`
-mocaStatus=`echo "$mocaStatus" | cut -d ":" -f4 | tr -d '{[]}'`
 mac=`curl -d '{"paramList" : [{"name" : "Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"}]}' $tr69ServerUrl | cut -d "\"" -f10`
 
 echo "Content-Type: text/html"
 echo ""
 
-if [ "$mocaStatus" == "true" ] && [ ! -z "$mac" -a "$mac" != "" ]; then
+if [ ! -z "$mac" -a "$mac" != "" ]; then
         echo "HUB $mac Connected"
 else
         echo "Disconnected"

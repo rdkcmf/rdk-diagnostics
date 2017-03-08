@@ -28,29 +28,25 @@
 $(function() {
     loadScripts("Summary > Other", "nav-summary-other");
 
-    if ( getMocaStatus() !== false ) {
-         var intervalId = setInterval ( function () {
-         $.ajax({
-             async: true,
-             url: "cgi-bin/getHubConnectionStatus.sh",
-             timeout: 25000,
-             cache: true,
-             context: document.body,
-             data: " " + "\n",
-             dataType: "html",
-             type: "POST",
-             success: function(data, text_status)
-             {
-                  if ( typeof data !== "undefined" ) {
-                      $("#hub_info").html(data);
-                      clearInterval(intervalId);
-                  }
+    var intervalId = setInterval ( function () {
+    $.ajax({
+        async: true,
+        url: "cgi-bin/getHubConnectionStatus.sh",
+        timeout: 25000,
+        cache: true,
+        context: document.body,
+        data: " " + "\n",
+        dataType: "html",
+        type: "POST",
+        success: function(data, text_status)
+        {
+             if ( typeof data !== "undefined" ) {
+                 $("#hub_info").html(data);
+                 clearInterval(intervalId);
              }
-           });
-         }, 1000);
-    } else {
-       $("#hub_info").html("Not Applicable");
-    }
+        }
+      });
+    }, 1000);
     
 });
 
