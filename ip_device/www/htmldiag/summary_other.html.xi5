@@ -75,7 +75,7 @@ function snmp_make_blue(str, oid, $element) {
                 <span class="value" id="hub_info"> </span>
             </div>
 	    <div class="form-row odd">
-                <span class="readonlyLabel">Tuner/Gateway eCM MAC Address:</span>
+                <span class="readonlyLabel">Tuner/Gateway eSTB MAC Address:</span>
                 <span class="value" data_donor_id="Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"> </span>
             </div>
 	    <div class="form-row">
