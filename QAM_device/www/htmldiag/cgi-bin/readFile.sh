@@ -102,24 +102,31 @@ then
     fi 
     ecmIp=$VALUE
     mocaMac=`ifconfig $MOCA_INTERFACE | grep HWaddr | tr -s ' ' | cut -d ' ' -f5`
-    if [ -f /tmp/estb_ipv4 ]; then
-        mocaIp=`ifconfig $MOCA_INTERFACE | grep inet | tr -s ' ' | cut -d ' ' -f3 | sed -e 's/addr://g'`
+    # Display ipv4 moca ip when box is in ipv6 mode Since RNG devices doesn't support ip6 moca ip
+    if [ "x$DEVICE_NAME" = "xRNG150" ]; then
+    
+            mocaIp=`ifconfig $MOCA_INTERFACE | grep inet | tr -s ' ' | cut -d ' ' -f3 | sed -e 's/addr://g'`
     else
-        # Convert MoCA IP to zero padded format
-        MOCA_IP=`ifconfig $MOCA_INTERFACE | grep 'Scope:Global' | tr -s ' ' | cut -d ' ' -f4 \
+    
+        if [ -f /tmp/estb_ipv4 ]; then
+            mocaIp=`ifconfig $MOCA_INTERFACE | grep inet | tr -s ' ' | cut -d ' ' -f3 | sed -e 's/addr://g'`
+        else
+            # Convert MoCA IP to zero padded format
+            MOCA_IP=`ifconfig $MOCA_INTERFACE | grep 'Scope:Global' | tr -s ' ' | cut -d ' ' -f4 \
             | cut -d '/' -f1 | sed -e 's/::/:0:0:/g' -e 's/:/ /g'`
-        tempIpv6Addr=""
-        for unpaddedAddr in $MOCA_IP
-        do
-            zeroPaddedAddr=`printf "%04x" 0x${unpaddedAddr}`
-            if [ "$tempIpv6Addr" ]; then
-                tempIpv6Addr="$tempIpv6Addr:$zeroPaddedAddr"
-            else
-                tempIpv6Addr="$tempIpv6Addr$zeroPaddedAddr"
-            fi
-        done
-        # End of zero padding conversion
-        mocaIp=`echo $tempIpv6Addr`
+            tempIpv6Addr=""
+            for unpaddedAddr in $MOCA_IP
+            do
+                zeroPaddedAddr=`printf "%04x" 0x${unpaddedAddr}`
+                if [ "$tempIpv6Addr" ]; then
+                    tempIpv6Addr="$tempIpv6Addr:$zeroPaddedAddr"
+                else
+                    tempIpv6Addr="$tempIpv6Addr$zeroPaddedAddr"
+                fi
+            done
+            # End of zero padding conversion
+            mocaIp=`echo $tempIpv6Addr`
+        fi
     fi
 
     ESTB_MAC=`ifconfig -a $ESTB_INTERFACE | grep $ESTB_INTERFACE | tr -s ' ' | cut -d ' ' -f5 | tr -d '\r\n'`
