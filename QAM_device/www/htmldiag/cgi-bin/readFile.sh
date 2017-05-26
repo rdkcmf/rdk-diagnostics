@@ -202,10 +202,18 @@ else
     echo "$RESULT"
 fi
 
+#Adding MoCA 2.0 Support
+mocaversion=`source ./getMoCAVersion.sh`
+if [ "$mocaVersion" == "2.0" ]; then
+    MOCAMIB=MOCA20-MIB
+else
+    MOCAMIB=MOCA11-MIB
+fi
+
 if [ "$FILENAME" = "/tmp/.transmissionRate.txt" ]
 then
      if [ ! -f $meshRateReadInProgress ]; then
-         snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost MOCA11-MIB::mocaMeshTable &
+         snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaMeshTable &
      fi
 fi
 

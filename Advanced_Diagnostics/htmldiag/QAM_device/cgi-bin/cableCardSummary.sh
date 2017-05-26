@@ -60,14 +60,23 @@ CCId=`echo $response | sed -e "s/.*CableCARD ID\:#//g" | cut -d '#' -f1 | tr -d 
 Hardware=`echo $response | sed -e "s/.*HW\:#//g" | cut -d '#' -f1 | tr -d ' '`
 EntitlementStatus=`echo $response | sed -e "s/.*Entitlements\:#//g" | cut -d '#' -f1 | tr -d ' '`
 
+
+#Adding MoCA 2.0 Support
+mocaversion=`source ./getMoCAVersion.sh`
+if [ "$mocaVersion" == "2.0" ]; then
+    MOCAMIB=MOCA20-MIB
+else
+    MOCAMIB=MOCA11-MIB
+fi
+
 # Identify the network controller MAC Address
-thisNodeid=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost MOCA11-MIB::mocaIfNodeID.3 | tr -d ' '`
-ncNodeid=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost MOCA11-MIB::mocaIfNC.3 | tr -d ' '`
+thisNodeid=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaIfNodeID.3 | tr -d ' '`
+ncNodeid=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaIfNC.3 | tr -d ' '`
 NCMacAddress=""
 if [ $thisNodeid -eq $ncNodeid ]; then
-    NCMacAddress=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost MOCA11-MIB::mocaIfMacAddress.3 | tr -d ' '`
+    NCMacAddress=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaIfMacAddress.3 | tr -d ' '`
 else
-    NCMacAddress=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost MOCA11-MIB::mocaNodeMacAddress.3.$ncNodeid | tr -d ' '`
+    NCMacAddress=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaNodeMacAddress.3.$ncNodeid | tr -d ' '`
 fi
 
 data=""

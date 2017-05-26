@@ -25,8 +25,17 @@
 
 <!--#include file="includes/nav.html" -->
 
+<script type="text/javascript" src="cmn/js/moca.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+    if(getMocaVersion() === 2.0) {
+        list = document.getElementsByClassName("form-row odd")[0];
+        list.getElementsByClassName("value")[0].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfEnable:::value");
+        
+        list = document.getElementsByClassName("form-row")[0];
+        list.getElementsByClassName("value")[0].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfStatus:::value");
+    }
+
     loadScripts("MoCA Info > MoCA Diagnostic Details", "nav-moca-diag");
 });
 </script>

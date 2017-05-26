@@ -22,7 +22,33 @@
 		<!--#include virtual="/htmldiag2/common/html/header.html" -->
 		<!--#include file="includes/menu.html" -->
 	</head>
+
 	<body>
+	    <script type="text/javascript" src="cmn/js/moca.js"></script>
+	    <script type="text/javascript">
+	        $(document).ready(function() {
+			if(getMocaVersion() === 2.0) {
+			rootlist = document.getElementsByClassName("tg")[0];
+			vallist = rootlist.getElementsByClassName("tg-vals")[0];
+			list = vallist.getElementsByClassName("tg")[0];
+			list.getElementsByClassName("tg-goodval")[0].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfEnable:::value");
+
+			list.getElementsByClassName("tg-goodval")[1].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfStatus:::value");
+			list.getElementsByClassName("tg-goodval")[4].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNodeID:::value");
+			list.getElementsByClassName("tg-goodval")[5].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNumNodes:::value");
+			list.getElementsByClassName("tg-goodval")[6].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfPreferredNC:::value");
+			list.getElementsByClassName("tg-goodval")[7.setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfBackupNC:::value");
+
+			vallist1 = rootlist.getElementsByClassName("tg")[6];
+			list1 = vallist1.getElementsByClassName("tg")[0];
+			list1.getElementsByClassName("tg-goodval")[0].setAttribute("data-snmp-oid","snmp#MOCA20-MIB::mocaIfMocaVersion.3");
+			list1.getElementsByClassName("tg-goodval")[1].setAttribute("data-snmp-oid","snmp#MOCA20-MIB::mocaIfPrivacyEnable.3");
+			list1.getElementsByClassName("tg-goodval")[2].setAttribute("data-snmp-oid","snmp#MOCA20-MIB::mocaIfRFChannel.3");
+			list1.getElementsByClassName("tg-goodval")[3].setAttribute("data-snmp-oid","snmp#MOCA20-MIB::mocaIfMocaVersion.3");
+			}
+			});
+           </script>
+
 		<table  id="myTable" class="tg">
 			<tr>
 				<th class="tg-xodn">Device - Local</th>

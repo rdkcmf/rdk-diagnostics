@@ -68,7 +68,15 @@ else
 
 fi
 
-if [ "MOCA11-MIB::mocaIfEnable" = "$OID" ]
+#Adding MoCA 2.0 Support
+mocaversion=`source ./getMoCAVersion.sh`
+if [ "$mocaVersion" == "2.0" ]; then
+    MOCAMIB=MOCA20-MIB
+else
+    MOCAMIB=MOCA11-MIB
+fi
+
+if [ "$MOCAMIB::mocaIfEnable" = "$OID" ]
 then
     if [ "$VALUE" = "value: true\n" ]
     then

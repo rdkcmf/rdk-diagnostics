@@ -22,7 +22,24 @@
 		<!--#include virtual="/htmldiag2/common/html/header.html" -->
 		<!--#include file="includes/menu.html" -->
 	</head>
+
 	<body>
+                <script type="text/javascript" src="cmn/js/moca.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                        if(getMocaVersion() === 2.0) {
+                        rootlist = document.getElementsByClassName("tg")[0];
+                        vallist = rootlist.getElementsByClassName("tg-vals")[1];
+                        list = vallist.getElementsByClassName("tg snmp-get")[0];
+                        list.getElementsByClassName("tg-goodval tg-val")[0].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfStatus:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[1].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNodeID:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[2].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNumNodes:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[3].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNC:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[6].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfBackupNC:::value");
+                       }
+                        });
+                </script>
+
 		<table id="myTable" class="tg">
 			<tr>
 				<th class="tg-xodn">Local Device Status</th>

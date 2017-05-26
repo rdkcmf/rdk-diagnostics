@@ -29,7 +29,17 @@ export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
-result=`snmpwalk -Osq -v 2c -c $snmpCommunityVal localhost MOCA11-MIB::mocaMeshTable | \
+
+#Adding MoCA 2.0 Support
+mocaversion=`source ./getMoCAVersion.sh`
+if [ "$mocaVersion" == "2.0" ]; then
+    MOCAMIB=MOCA20-MIB
+else
+    MOCAMIB=MOCA11-MIB
+fi
+
+
+result=`snmpwalk -Osq -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaMeshTable | \
         sed -e "s/mocaMeshTxRate.3.//g" -e "s/\./\", \"RxNode\" : \"/g" \
 		-e "s/^/{\"TxNode\" : \"/" \
         | sed 's/\(.*\) /\1\", \"Value\" : \"/' | sed -e "s/$/\" }, /"`
