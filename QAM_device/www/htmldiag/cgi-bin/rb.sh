@@ -1,4 +1,4 @@
-#!/bin/ash
+#!/bin/sh
 ##########################################################################
 # If not stated otherwise in this file or this component's Licenses.txt
 # file the following copyright and licenses apply:
@@ -18,21 +18,21 @@
 # limitations under the License.
 ##########################################################################
 #
-#QUERY_STRING=3e8
-source=`echo "$QUERY_STRING" | sed "s|q=||"`
-#echo $source
-echo 'Tuning' $source > log.txt
-echo "Content-Type: text/html; charset=utf-8" >> log.txt
-echo "" >> log.txt
 
-cat <<EOF
-t2p:msg selectService
-{"selectService":{"locator":"ocap://0x$source"}}
-t2p:msg
-EOF
-telnet localhost 3773 <<HERE
-t2p:msg selectService
-{"selectService":{"locator":"ocap://0x$source"}}
-t2p:msg
-HERE
+logFile="/opt/logs/htmlDiag.log"
+read arg
 
+if [ "$arg" != "wekorwpap" ]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$arg. Ignore device reboot request !!!" >> $logFile
+    exit 0
+fi
+
+echo "RebootReason: ($0) Restarting STB from HTML diagnostics ..!" >> /opt/logs/rebootInfo.log
+
+if [ -f /rebootNow.sh ] ; then
+    sh /rebootNow.sh
+fi
+echo "Content-Type: text/html"
+echo ""
+echo "   Rebooting ... "
+echo "\\n"

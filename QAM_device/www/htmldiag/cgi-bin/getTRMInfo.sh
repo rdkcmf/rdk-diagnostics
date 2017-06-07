@@ -24,7 +24,16 @@
 # 2. update - This option will do the snmp query and update the cache file
 # 3. "" (empty value) - This option will do the snmp query, update the cache file and output the data
 
+logFile="/opt/logs/htmlDiag.log"
+
 read dataType
+
+if  [[ "$dataType" != "get" ]] && [[ "$dataType" != "update" ]] ; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType" >> $logFile
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
 
 if [ "$dataType" == "get" ]; then
     if [ -f /tmp/trmHtmlDiagDataOutFile ]; then
@@ -42,7 +51,7 @@ export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
-snmpwalk -OQ -v 2c -c hDaFHJG7 localhost TRM-MIB::trm > /tmp/trmHtmlDiagData
+snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost TRM-MIB::trm > /tmp/trmHtmlDiagData
 
 connectedDev=`cat /tmp/trmHtmlDiagData | grep trmConnectedDevId | cut -d "=" -f2 | cut -c 2-`
 connectedDev="${connectedDev//[$'\t\r\n']}"
@@ -59,7 +68,7 @@ fi
 data="{ \"connectedDevices\" : \"$connectedDev\", \"tokenInfo\" : \"$tokenInfo\", \"connectionError\" : \"$connectionError\" }"
 echo $data > /tmp/trmHtmlDiagDataOutFile
 
-if [ "$dataType" == "" ]; then
+if [ "$dataType" == "update" ]; then
     echo "Content-Type: text/html"
     echo ""
     echo "$data"

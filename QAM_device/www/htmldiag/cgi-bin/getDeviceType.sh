@@ -21,6 +21,8 @@
 
 . /etc/device.properties
 
+logFile="/opt/logs/htmlDiag.log"
+
 read PROP
 
 export SNMPCONFPATH=/mnt/nfs/bin/target-snmp/sbin
@@ -32,6 +34,12 @@ snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
 echo "Content-Type: text/html"
 echo ""
+
+if [[ "$PROP" != "BOX_TYPE" ]] && [[ "$PROP" != "CANH" ]] ; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$PROP" >> $logFile
+    exit 0
+fi
+
 if [ "$PROP" == "BOX_TYPE" ];
 then
     echo "$DEVICE_NAME"

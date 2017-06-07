@@ -19,7 +19,10 @@
 ##########################################################################
 #
 . /etc/device.properties
+logFile="/opt/logs/htmlDiag.log"
+
 read PARAM
+
 echo "Content-Type: text/html"
 echo ""
 MPEV_FILE_LOCATION=""
@@ -113,7 +116,10 @@ case "$PARAM" in
                       echo "value:$result\\n"
                       rm -f /tmp/temp.txt
                       ;;
-
+*)
+                      echo "`/bin/timestamp` UNEXPECTED VALUE:$PARAM" >> $logFile
+                      exit 0
+                      ;;
 esac
 # Update the temp file
 /si_cache_parser_121 "$PERSISTENT_DIR"si | grep 'RChannelVCN' | grep 'SRCID' | sed -e 's/RChannelVCN.*Freq\[//g' -e 's/\]\-Mode.*//g' > /tmp/temp.txt

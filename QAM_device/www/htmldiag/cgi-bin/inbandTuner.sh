@@ -22,6 +22,9 @@ if [ ! -f /etc/os-release ]; then
 else
         export SNMPCONFPATH=/tmp
 fi
+
+logFile="/opt/logs/htmlDiag.log"
+
 export MIBS=ALL
 export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
@@ -32,6 +35,14 @@ snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 TunerTableData="/tmp/.tunerTable.json"
 
 read updateType
+
+# Sanity check on input arguments
+if  [[ "$updateType" != "get" ]] && [[ "$updateType" != "update" ]] ; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$updateType" >> $logFile
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
 
 if [ "$updateType" == "get" ]; then
     echo "Content-Type: text/html"

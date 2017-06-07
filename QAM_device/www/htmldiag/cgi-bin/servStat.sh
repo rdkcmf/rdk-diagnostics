@@ -19,7 +19,10 @@
 ##########################################################################
 #
 . /etc/device.properties
-read FILENAME
+logFile="/opt/logs/htmlDiag.log"
+FILENAME="/tmp/dsg_flow_stats.txt"
+
+
 if [ ! -f /tmp/dsg_flow_stats.txt ]
 then
     if [ "$DEVICE_TYPE" == "hybrid" ]; then
@@ -28,20 +31,17 @@ then
         /mnt/nfs/bin/vlapicaller vlDsgDumpDsgStats
     fi
 fi
+
 RESULT=""
 while read LINE
 do
-    if [ "$FILENAME" = "/tmp/dsg_flow_stats.txt" ]
+    TEMP=`echo "$LINE" | grep "Service"`
+    if [ "$TEMP" != "" ]
     then
-        TEMP=`echo $LINE | grep "Service"`
-        if [ "$TEMP" != "" ]
-        then
-            TEMP=`echo $TEMP | tr -s ' ' | sed -e 's/Service.*Type://g' |  sed -e 's/ID://g'`
-            TEMP=`echo $TEMP | sed -e 's/Path://g' |  sed -e 's/Packets://g'`
-            RESULT="$RESULT$TEMP\n"
-        fi
+        TEMP=`echo "$TEMP" | tr -s ' ' | sed -e 's/Service.*Type://g' |  sed -e 's/ID://g'`
+        TEMP=`echo "$TEMP" | sed -e 's/Path://g' |  sed -e 's/Packets://g'`
+        RESULT="$RESULT$TEMP\n"
     fi
-
 done < $FILENAME
 
 echo "Content-Type: text/html"

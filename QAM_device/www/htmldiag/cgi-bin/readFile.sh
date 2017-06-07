@@ -19,7 +19,22 @@
 ##########################################################################
 #
 . /etc/device.properties
+logFile="/opt/logs/htmlDiag.log"
+
 read FILENAME_PROP
+
+if  [[ "$FILENAME_PROP" != "/etc/rmfconfig.ini" ]] && [[ "$FILENAME_PROP" != "/tmp/dsg_flow_stats.txt" ]] \
+&& [[ "$FILENAME_PROP" != "/mnt/nfs/env/apps/ocap-excalibur/config.properties" ]] \
+&& [[ "$FILENAME_PROP" != "DEVICE_ADDRESS" ]] && [[ "$FILENAME_PROP" != "DSG_FLOW_STATS" ]] \
+&& [[ "$FILENAME_PROP" != "MPEOS_VENDOR_INFO" ]] && [[ "$FILENAME_PROP" != "/tmp/.transmissionRate.txt" ]] \
+&& [[ "$FILENAME_PROP" != "/tmp/dsgproxy_server_two_way_status.txt" ]] \
+&& [[ "$FILENAME_PROP" != "/tmp/device_address.txt" ]]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP" >> $logFile
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
+
 meshRateReadInProgress="/tmp/.meshFlag"
 deviceDetailsUpdateFlag="/tmp/.devAddFlag"
 if [ ! -f /etc/os-release ]; then

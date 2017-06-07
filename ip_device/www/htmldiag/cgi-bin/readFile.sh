@@ -18,12 +18,19 @@
 # limitations under the License.
 ##########################################################################
 #
-logFileLocation="/tmp/testDiag.log"
-echo `date` > $logFileLocation
+
+logFile="/opt/logs/htmlDiag.log"
 read FILENAME
-echo "File read started for HTML diagnostics page $FILENAME" >> $logFileLocation
+
+if [[ "$FILENAME" != '/tmp/tr69MeshOutput.txt' ]]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME" >> $logFile
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
+
 RESULT=""
-/opt/www/htmldiag/cgi-bin/mocaTransmissionRate.sh &
+/var/www/htmldiag/cgi-bin/mocaTransmissionRate.sh &
 
 if [ "$FILENAME" == "/tmp/tr69MeshOutput.txt" ]; then
     RESULT=`cat $FILENAME`

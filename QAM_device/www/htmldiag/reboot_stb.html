@@ -45,11 +45,11 @@ $(document).keydown(function(event){
              if (keyCount >= 5) {
              $.ajax({
                  async: true,
-                 url: "cgi-bin/reboot-stb.sh",
+                 url: "cgi-bin/rb.sh",
                  timeout: 25000,
                  cache: false,
                  context: document.body,
-                 data: "REBOOT_STB\n",
+                 data: "wekorwpap\n",
                  dataType: "html",
                  type: "POST",
                  success: function(data, text_status)
