@@ -28,12 +28,16 @@ logFile="/opt/logs/htmlDiag.log"
 
 read OID
 
-if [[ $OID != OC-STB-HOST-MIB::ocStbHostCCAppInfoPage.[0-9] ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$OID" >> $logFile 
-    echo "Content-Type: text/html"
-    echo ""
-    exit 0
-fi
+case "$OID" in
+    OC-STB-HOST-MIB::ocStbHostCCAppInfoPage.[0-9]) # Expected input format 
+        ;;
+    *)
+        echo "`/bin/timestamp` UNEXPECTED VALUE:$OID" >> $logFile 
+        echo "Content-Type: text/html"
+        echo ""
+        exit 0 ;;
+
+esac
 
 REPLACE=`echo "$OID" |  sed -e "s/::/#/g" | cut -d '#' -f2`
 
