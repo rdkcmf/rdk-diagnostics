@@ -30,7 +30,7 @@ fi
 echo "RebootReason: ($0) Restarting STB from HTML diagnostics ..!" >> /opt/logs/rebootInfo.log
 
 if [ -f /rebootNow.sh ] ; then
-    sh /rebootNow.sh
+    sh /rebootNow.sh -s htmlDiagnostics
 fi
 echo "Content-Type: text/html"
 echo ""
