@@ -31,8 +31,8 @@ snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
 
 #Adding MoCA 2.0 Support
-mocaversion=`source ./getMoCAVersion.sh`
-if [ "$mocaVersion" == "2.0" ]; then
+mocaversion=`source ./getMocaVersion.sh`
+if [ "$mocaversion" == "2.0" ]; then
     MOCAMIB=MOCA20-MIB
 else
     MOCAMIB=MOCA11-MIB
