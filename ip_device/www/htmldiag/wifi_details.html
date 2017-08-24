@@ -94,19 +94,48 @@ $(function() {
 
 function getSignalStrength()
 {
-   wifiManagerService = ServiceManager.getServiceForJavaScript("org.rdk.wifiManager");
-   
-   if(typeof(wifiManagerService) == "object")
+   //is async?
+   if (ServiceManager.version)
    {
-      var connected_ssid_info = wifiManagerService.getConnectedSSID();
-
-      if(typeof(connected_ssid_info) != "undefined" && typeof(connected_ssid_info.signalStrength) != "undefined")
-         $("#signal_strength").html(connected_ssid_info.signalStrength);
-      else
-         console.log("getSignalStrength: wifiManagerService.signalStrength doesn't exist - '" + typeof(connected_ssid_info.signalStrength) + "'");
+      //async
+      ServiceManager.getServiceForJavaScript("org.rdk.wifiManager_2", function(wifiManagerService) 
+      {
+         if(typeof(wifiManagerService) == "object")
+         {
+            wifiManagerService.getConnectedSSID( function(connected_ssid_info) 
+            {
+               if(typeof(connected_ssid_info) != "undefined" && typeof(connected_ssid_info.SSID) != "undefined" && typeof(connected_ssid_info.SSID.signalStrength) != "undefined")
+                  $("#signal_strength").html(connected_ssid_info.SSID.signalStrength);
+               else
+                  console.log("getSignalStrength: async wifiManagerService.signalStrength doesn't exist - '"
+                  + typeof(connected_ssid_info) + "' - '"
+                  + (typeof(connected_ssid_info) != "undefined" ? typeof(connected_ssid_info.SSID) : "...") + "' - '"
+                  + (typeof(connected_ssid_info) != "undefined" && typeof(connected_ssid_info.SSID) != "undefined" ? typeof(connected_ssid_info.SSID.signalStrength) : "...") + "'");
+            });
+         }
+         else
+            console.log("getSignalStrength: async org.rdk.wifiManager doesn't exist - '" + typeof(wifiManagerService) + "'");
+         });
    }
    else
-      console.log("getSignalStrength: org.rdk.wifiManager doesn't exist - '" + typeof(wifiManagerService) + "'");
+   {
+      //not async
+      wifiManagerService = ServiceManager.getServiceForJavaScript("org.rdk.wifiManager");
+      
+      if(typeof(wifiManagerService) == "object")
+      {
+         var connected_ssid_info = wifiManagerService.getConnectedSSID();
+
+         console.log(JSON.stringify(connected_ssid_info));
+
+         if(typeof(connected_ssid_info) != "undefined" && typeof(connected_ssid_info.signalStrength) != "undefined")
+            $("#signal_strength").html(connected_ssid_info.signalStrength);
+         else
+            console.log("getSignalStrength: wifiManagerService.signalStrength doesn't exist - '" + typeof(connected_ssid_info.signalStrength) + "'");
+      }
+      else
+         console.log("getSignalStrength: org.rdk.wifiManager doesn't exist - '" + typeof(wifiManagerService) + "'");
+   }
 }
 
 // Retrieve  wifi connection status and pairing status
