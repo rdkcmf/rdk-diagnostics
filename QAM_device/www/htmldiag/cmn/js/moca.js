@@ -19,6 +19,7 @@
 
 
 function getMocaVersion() {
+    var mocaVersion = "";
     $.ajax({
        async: false,
        url: "cgi-bin/getMocaVersion.sh",
@@ -27,11 +28,10 @@ function getMocaVersion() {
        type: "POST",
        success: function(data, text_status)
        {
-           var mocaVersion = "";
            if ( typeof data !== "undefined" && data !== "") {
               mocaVersion = data;
            }
-           return mocaVersion;
        }
     });
+    return mocaVersion;
 }
