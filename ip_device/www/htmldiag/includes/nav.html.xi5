@@ -85,9 +85,9 @@ $(function() {
         </ul>
     </li>
     <li class="nav-wifi">
-        <a class="top-level" href="wifi_details.html">Wifi Details</a>
+        <a class="top-level" href="wifi_details.html">WiFi Details</a>
         <ul>
-            <li class="nav-wifi-details"><a href="wifi_details.html">Wifi Details</a></li>
+            <li class="nav-wifi-details"><a href="wifi_details.html">WiFi Details</a></li>
         </ul>
     </li>
 
