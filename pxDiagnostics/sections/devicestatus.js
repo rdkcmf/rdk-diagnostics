@@ -33,6 +33,24 @@ px.import({
 var DetailsItem = imports.detailsItem;
 var Command = imports.command;
 var Utils = imports.utils.Utils;
+var modelMakeArray = [["PX013AN","Pace XG1v3"],
+                      ["PX022AN","Pace XG2v2"],
+                      ["PX001AN","Pace XG1v1"],
+                      ["PXD01ANI","Pace XiD"],
+                      ["PX032ANI","Pace Xi3v2"],
+                      ["PX051AEI","Pace Xi5"],
+                      ["AX061AEI","Arris Xi6"],
+                      ["AX014AN","Arris XG1v4"],
+                      ["AX013AN","Arris XG1v3"],
+                      ["MX011AN","Arris XG1v1"],
+                      ["SX022AN","Samsung XG2v2"],
+                      ["CXD01ANI","Cisco XiD"],
+                      ["CS011AN","Cisco G8"],
+                      ["PR150BN","Pace RNG150"],
+                      ["SR150BN","Samsung RNG150"]
+                    ];
+
+var modelMakeMap = new Map(modelMakeArray);
 
 var DeviceStatus = function(modelParam) 
 {
@@ -43,8 +61,8 @@ var DeviceStatus = function(modelParam)
     {
         var deviceStatusItem = new DetailsItem(Utils.scene,model);
 
-        deviceStatusItem.addRowLeft("Friendly Name", "TODO");
-        deviceStatusItem.addRowLeft("Make", "TODO");
+        //deviceStatusItem.addRowLeft("Friendly Name", "TODO");
+        deviceStatusItem.addRowLeft("Make", modelMakeMap.get(Utils.modelName));
         deviceStatusObjectMap["Device.DeviceInfo.ModelName"] = deviceStatusItem.addRowLeft("Model", "TODO");
         deviceStatusObjectMap["Device.DeviceInfo.SerialNumber"] = deviceStatusItem.addRowLeft("Serial Number", "TODO");
         
@@ -63,32 +81,32 @@ var DeviceStatus = function(modelParam)
         }
         else
         {
-          deviceStatusItem.addRowLeft("CC Mac", "TODO");
-          deviceStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = deviceStatusItem.addRowLeft("eCM Mac", "TODO");
+          //deviceStatusItem.addRowLeft("CC Mac", "TODO");
+          //deviceStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = deviceStatusItem.addRowLeft("eCM Mac", "TODO");
         }
-        deviceStatusItem.addRowRight("Receiver ID", "TODO");
-        deviceStatusItem.addRowRight("Vendor ID", "TODO");
+        deviceStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreReceiverId"] = deviceStatusItem.addRowRight("Receiver ID", "TODO");
+        //deviceStatusItem.addRowRight("Vendor ID", Utils.modelName);
         if(Utils.isClientDevice == false)
         {
-          deviceStatusItem.addRowRight("DAC ID", "TODO");
+          //deviceStatusItem.addRowRight("DAC ID", "TODO");
         }
         deviceStatusObjectMap["Device.DeviceInfo.HardwareVersion"] = deviceStatusItem.addRowRight("HW Rev", "TODO");
         if(Utils.isClientDevice == false)
         {
-          deviceStatusItem.addRowRight("DSG Tunnels Acquired", "TODO");
+          //deviceStatusItem.addRowRight("DSG Tunnels Acquired", "TODO");
         }
-        deviceStatusItem.addRowRight("Provisioning Status", "TODO");
+        //deviceStatusItem.addRowRight("Provisioning Status", "TODO");
         if(Utils.isClientDevice == false)
         {
-          deviceStatusItem.addRowRight("DOCSIS Upstream", "TODO");
-          deviceStatusItem.addRowRight("DOCSIS Downstream", "TODO");
+          //deviceStatusItem.addRowRight("DOCSIS Upstream", "TODO");
+          //deviceStatusItem.addRowRight("DOCSIS Downstream", "TODO");
         }
         deviceStatusObjectMap["Device.DeviceInfo.UpTime"] = deviceStatusItem.addRowRight("Uptime", "TODO");
         deviceStatusObjectMap["Device.DeviceInfo.X_COMCAST-COM_PowerStatus"] = deviceStatusItem.addRowRight("Power Status", "TODO");
-        deviceStatusItem.addRowRight("Boot Status", "TODO");
+        deviceStatusObjectMap["Device.DeviceInfo.X_RDKCENTRAL-COM.BootStatus"] = deviceStatusItem.addRowRight("Boot Status", "XRE connection established - successful");
         if(Utils.isClientDevice == false)
         {
-          deviceStatusItem.addRowRight("Conditional Access Status", "TODO");
+          //deviceStatusItem.addRowRight("Conditional Access Status", "TODO");
         }
 
     }
@@ -132,7 +150,9 @@ var DeviceStatus = function(modelParam)
               {"name" : "Device.DeviceInfo.UpTime"}, \
               {"name" : "Device.WiFi.SSID.1.MACAddress"}, \
               {"name" : "Device.Ethernet.Interface.1.MACAddress"}, \
-              {"name" : "Device.DeviceInfo.X_COMCAST-COM_PowerStatus"} \
+              {"name" : "Device.DeviceInfo.X_COMCAST-COM_PowerStatus"}, \
+              {"name" : "Device.DeviceInfo.X_RDKCENTRAL-COM.BootStatus"}, \
+              {"name" : "Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreReceiverId"} \
               ]}';
               
         Utils.doHttpPost(options,postData).then(deviceStatusCallback,errorCallback);

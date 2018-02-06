@@ -21,8 +21,6 @@ packagePath += "/modules/";
 
 px.configImport({"module:":packagePath});
 
-//px.configImport({"module:":"/Users/akanda200/Documents/Comcast/Tickets/XRE-11154-Diagnostics-Pxscene/pxscene-test/modules/"});
-
 px.import({
     keyCodes:"px:tools.keys.js",
     utils: 'module:utils.js'
@@ -82,11 +80,24 @@ px.import({
             
             var separator = scene.create({t:"rect",parent:rowBg,x:rowBg.w * SEPARATOR_WIDTH_PERCENT,w:1,h:rowBg.h,fillColor:separatorColor});
 
-            var valueItem = scene.create({t:"text", parent:rowBg,x:separator.x + ITEM_BORDER_LEFT,y:5,w:160,h:25,text:value, font:Utils.regularFont, pixelSize:ITEM_VAL_PIXELSIZE,
-                    alignHorizontal:scene.alignHorizontal.CENTER, textColor:Utils.blackSolidColor});
+            var valueItem = scene.create({t:"textBox", parent:rowBg,x:separator.x + ITEM_BORDER_LEFT,y:5,w:300,h:25,text:value, font:Utils.regularFont, pixelSize:ITEM_VAL_PIXELSIZE,
+                    alignHorizontal:scene.alignHorizontal.CENTER, textColor:Utils.blackSolidColor, wordWrap:true});
+
+            //Check if valueItem text was wrapped and adjust the row height
+            var bounds = valueItem.measureText(value).bounds;
+            if(rowBg.h < (bounds.y2 - bounds.y1))
+            {
+                var oldRowBgHeight = rowBg.h;
+                rowBg.h = bounds.y2 - bounds.y1 + 10;
+                separator.h = rowBg.h;
+                keyItem.y += (rowBg.h - oldRowBgHeight)/2;
+            }
 
             count++;
             rowY += ROW_HEIGHT;
+
+            adjustHeight();
+
             return valueItem;
         }
 
@@ -110,11 +121,24 @@ px.import({
             
             var separator = scene.create({t:"rect",parent:rowBg,x:rowBg.w * SEPARATOR_WIDTH_PERCENT,w:1,h:rowBg.h,fillColor:separatorColor});
 
-            var valueItem = scene.create({t:"text", parent:rowBg,x:separator.x + ITEM_BORDER_LEFT,y:5,w:80,h:25,text:value, font:Utils.regularFont, pixelSize:ITEM_VAL_PIXELSIZE,
-                    alignHorizontal:scene.alignHorizontal.CENTER, textColor:Utils.blackSolidColor});
+            var valueItem = scene.create({t:"textBox", parent:rowBg,x:separator.x + ITEM_BORDER_LEFT,y:5,w:120,h:25,text:value, font:Utils.regularFont, pixelSize:ITEM_VAL_PIXELSIZE,
+                    alignHorizontal:scene.alignHorizontal.CENTER, textColor:Utils.blackSolidColor, wordWrap:true});
+
+            //Check if valueItem text was wrapped and adjust the row height
+            var bounds = valueItem.measureText(value).bounds;
+            if(rowBg.h < (bounds.y2 - bounds.y1))
+            {
+                var oldRowBgHeight = rowBg.h;
+                rowBg.h = bounds.y2 - bounds.y1 + 10;
+                separator.h = rowBg.h;
+                keyItem.y += (rowBg.h - oldRowBgHeight)/2;
+            }
 
             countLeft++;
             rowYLeft += ROW_HEIGHT;
+
+            adjustHeight();
+
             return valueItem;
         }
 
@@ -138,17 +162,45 @@ px.import({
             
             var separator = scene.create({t:"rect",parent:rowBg,x:rowBg.w * SEPARATOR_WIDTH_PERCENT,w:1,h:rowBg.h,fillColor:separatorColor});
 
-            var valueItem = scene.create({t:"text", parent:rowBg,x:separator.x + ITEM_BORDER_LEFT,y:5,w:80,h:25,text:value, font:Utils.regularFont, pixelSize:ITEM_VAL_PIXELSIZE,
-                    alignHorizontal:scene.alignHorizontal.CENTER, textColor:Utils.blackSolidColor});
+            var valueItem = scene.create({t:"textBox", parent:rowBg,x:separator.x + ITEM_BORDER_LEFT,y:5,w:120,h:25,text:value, font:Utils.regularFont, pixelSize:ITEM_VAL_PIXELSIZE,
+                    alignHorizontal:scene.alignHorizontal.CENTER, textColor:Utils.blackSolidColor, wordWrap:true});
+            
+            //Check if valueItem text was wrapped and adjust the row height
+            var bounds = valueItem.measureText(value).bounds;
+            if(rowBg.h < (bounds.y2 - bounds.y1))
+            {
+                var oldRowBgHeight = rowBg.h;
+                rowBg.h = bounds.y2 - bounds.y1 + 10;
+                separator.h = rowBg.h;
+                keyItem.y += (rowBg.h - oldRowBgHeight)/2;
+            }
 
             countRight++;
             rowYRight += ROW_HEIGHT;
+
+            adjustHeight();
+
             return valueItem;
         }
 
-        this.setSeparatorPlacement = function(widthPrecent)
+        this.setSeparatorPlacement = function(widthPercent)
         {
-            SEPARATOR_WIDTH_PERCENT = widthPrecent;
+            SEPARATOR_WIDTH_PERCENT = widthPercent;
+        }
+
+        this.setHeight = function(height)
+        {
+            bg.h = height;
+        }
+
+        // Function is called after each AddRow to resize the bg height to fit all elements
+        function adjustHeight()
+        {
+            var lastChild = bg.getChild(bg.numChildren - 1);
+            if((lastChild.y + lastChild.h) >= bg.h)
+            {
+                bg.h = lastChild.y + lastChild.h + ROW_HEIGHT;
+            }
         }
 
     }

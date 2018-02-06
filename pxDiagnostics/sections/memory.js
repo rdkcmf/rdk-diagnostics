@@ -45,23 +45,23 @@ var MemoryStatus = function(modelParam)
         memoryStatusItem.setSeparatorPlacement(0.5);
         if(Utils.isClientDevice == false)
         {
-            memoryStatusItem.addRowLeft("Internal HDD", "TODO");
-            memoryStatusItem.addRowLeft("SMART Health", "TODO");
-            memoryStatusItem.addRowLeft("TSB", "TODO");
-            memoryStatusItem.addRowLeft("TSB Enable Status", "TODO");
-            memoryStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = memoryStatusItem.addRowLeft("Max duration", "TODO");
-            memoryStatusItem.addRowRight("Available", "TODO");
-            memoryStatusItem.addRowRight("Total", "TODO");
-            memoryStatusItem.addRowRight("Used", "TODO");
-            memoryStatusItem.addRowRight("Type", "TODO");
-            memoryStatusItem.addRowRight("VideoMemory", "TODO");
+            //memoryStatusItem.addRowLeft("Internal HDD", "TODO");
+            //memoryStatusItem.addRowLeft("SMART Health", "TODO");
+            //memoryStatusItem.addRowLeft("TSB", "TODO");
+            //memoryStatusItem.addRowLeft("TSB Enable Status", "TODO");
+            //memoryStatusItem.addRowLeft("Max duration", "TODO");
+            //memoryStatusItem.addRowRight("Available", "TODO");
+            //memoryStatusItem.addRowRight("Total", "TODO");
+            //memoryStatusItem.addRowRight("Used", "TODO");
+            //memoryStatusItem.addRowRight("Type", "TODO");
+            //memoryStatusItem.addRowRight("VideoMemory", "TODO");
         }
         else
         {
             memoryStatusObjectMap["Device.Services.STBService.1.Components.X_RDKCENTRAL-COM_SDCard.Status"] = memoryStatusItem.addRowLeft("SD Card Health", "TODO");
-            memoryStatusItem.addRowLeft("TSB", "TODO");
+            //memoryStatusItem.addRowLeft("TSB", "TODO");
             memoryStatusObjectMap["Device.Services.STBService.1.Components.X_RDKCENTRAL-COM_SDCard.TSBQualified"] = memoryStatusItem.addRowLeft("TSB Enable Status", "TODO");
-            memoryStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = memoryStatusItem.addRowLeft("Max duration", "TODO");
+            //memoryStatusItem.addRowLeft("Max duration", "TODO");
             memoryStatusObjectMap["Device.Services.STBService.1.Components.X_RDKCENTRAL-COM_SDCard.ReadOnly"] = memoryStatusItem.addRowLeft("SD Write Enable", "TODO");
             memoryStatusObjectMap["Device.Services.STBService.1.Components.X_RDKCENTRAL-COM_SDCard.LifeElapsed"] = memoryStatusItem.addRowLeft("Life Elapsed", "TODO");
             memoryStatusObjectMap["Device.Services.STBService.1.Components.X_RDKCENTRAL-COM_SDCard.Capacity"] = memoryStatusItem.addRowRight("Capacity", "TODO");

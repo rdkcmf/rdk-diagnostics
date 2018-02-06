@@ -44,17 +44,17 @@ var FirmwareStatus = function(modelParam)
         var firmwareItem = new DetailsItem(Utils.scene,model);
         firmwareItem.setSeparatorPlacement(0.3);
         firmwareObjectMap["Device.DeviceInfo.X_COMCAST-COM_FirmwareFilename"] = firmwareItem.addRow("Running", "TODO");
-        firmwareItem.addRow("Applied Date/Time", "TBD");
+        //firmwareItem.addRow("Applied Date/Time", "TBD");
         firmwareObjectMap["Device.DeviceInfo.X_RDKCENTRAL-COM_FirmwareFilename"] = firmwareItem.addRow("Last Download Version", "TODO");
         firmwareObjectMap["Device.DeviceInfo.X_COMCAST-COM_FirmwareDownloadStatus"] = firmwareItem.addRow("Download Status", "TODO");
         
-        firmwareItem.addRow("Last Xconf Check", "TODO");
+        //firmwareItem.addRow("Last Xconf Check", "TODO");
         firmwareObjectMap["FW Image Name"] = firmwareItem.addRow("FW Image Name", "TODO");
-        firmwareItem.addRow("Boot Status", "TODO");
+        firmwareObjectMap["Device.DeviceInfo.X_RDKCENTRAL-COM.BootStatus"] = firmwareItem.addRow("Boot Status", "TODO");
         if(Utils.isClientDevice == false)
         {
-          firmwareItem.addRow("Boot File", "TODO");
-          firmwareItem.addRow("BOOTR", "TODO");
+          //firmwareItem.addRow("Boot File", "TODO");
+          //firmwareItem.addRow("BOOTR", "TODO");
         }
 
     }                  
@@ -72,8 +72,6 @@ var FirmwareStatus = function(modelParam)
 
         var firmwareStatusCallback = function(json)
         {
-            console.log("got successful response from tr69 service");     
-            console.log("parse value is " + json.paramList[0].value);  
             for(var i = 0; i < json.paramList.length; i++)
             {
                 if(firmwareObjectMap[json.paramList[i].name] === undefined)
@@ -97,6 +95,7 @@ var FirmwareStatus = function(modelParam)
         var postData = '{"paramList" : [ \
               {"name" : "Device.DeviceInfo.X_COMCAST-COM_FirmwareFilename"}, \
               {"name" : "Device.DeviceInfo.X_RDKCENTRAL-COM_FirmwareFilename"}, \
+              {"name" : "Device.DeviceInfo.X_RDKCENTRAL-COM.BootStatus"}, \
               {"name" : "Device.DeviceInfo.X_COMCAST-COM_FirmwareDownloadStatus"} \
               ]}';
               

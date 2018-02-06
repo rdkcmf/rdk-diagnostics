@@ -43,25 +43,25 @@ var NetworkConnection = function(modelParam)
     {
         var networkConnectionItem = new DetailsItem(Utils.scene,model);
         networkConnectionItem.setSeparatorPlacement(0.4);
-        networkConnectionItem.addRow("Active Transmission Method", "TODO");
+        //networkConnectionItem.addRow("Active Transmission Method", "TODO");
         if(Utils.isClientDevice == false)
         {
-            networkConnectionItem.addRow("eCM IP", "TODO");
+            //networkConnectionItem.addRow("eCM IP", "TODO");
         }
         netConnObjectMap["Device.DeviceInfo.X_COMCAST-COM_STB_IP"] = networkConnectionItem.addRow("eSTB IP", "TODO");
         if(Utils.isClientDevice == false)
         {
-            networkConnectionItem.addRow("Gateway eSTB IP", "TODO");
-            networkConnectionItem.addRow("Gateway eSTB Link Local IP", "TODO");
+            //networkConnectionItem.addRow("Gateway eSTB IP", "TODO");
+            //networkConnectionItem.addRow("Gateway eSTB Link Local IP", "TODO");
         }
         if(Utils.modelName.indexOf("PX051") === -1)
         {
             netConnObjectMap["Device.MoCA.Interface.1.Status"] = networkConnectionItem.addRow("MoCA Status", "TODO");
             netConnObjectMap["Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"] = networkConnectionItem.addRow("# of Connected Devices", "TODO");
             netConnObjectMap["Device.MoCA.Interface.1.NodeID"] = networkConnectionItem.addRow("Node ID", "TODO");
-            networkConnectionItem.addRow("NC Name", "TODO");
+            netConnObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewayDeviceFriendlyName"] = networkConnectionItem.addRow("NC Name", "TODO");
             netConnObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = networkConnectionItem.addRow("NC MoCA MAC", "TODO");
-            networkConnectionItem.addRow("NC Tx/Rx Rates", "TODO");
+            netConnObjectMap["Device.MoCA.Interface.1.AssociatedDevice.1.PHYTxRate"] = networkConnectionItem.addRow("NC Tx/Rx Rates", "TODO");
         }
 
         if(Utils.isClientDevice == true)
@@ -81,19 +81,19 @@ var NetworkConnection = function(modelParam)
             }
             else
             {
-                networkConnectionItem.addRow("MoCA LinkLocal IPv4", "TODO");
-                networkConnectionItem.addRow("MoCA DHCP IPv4", "TODO");
-                networkConnectionItem.addRow("MoCA LinkLocal IPv6", "TODO");
-                networkConnectionItem.addRow("MoCA GloballyUnique IPv6", "TODO");
+                //networkConnectionItem.addRow("MoCA LinkLocal IPv4", "TODO");
+                //networkConnectionItem.addRow("MoCA DHCP IPv4", "TODO");
+                //networkConnectionItem.addRow("MoCA LinkLocal IPv6", "TODO");
+                //networkConnectionItem.addRow("MoCA GloballyUnique IPv6", "TODO");
             }
 
             // TBD add a method in DetailsItem to add whitespace in between to group items 
-            networkConnectionItem.addRow("Hub Connection Status", "TODO",true);
-            networkConnectionItem.addRow("Video Gateway eCM MAC Address", "TODO");
-            networkConnectionItem.addRow("Allocated Tuner Number", "TODO");
-            networkConnectionItem.addRow("Video Gateway (2 of n)", "TODO");
-            networkConnectionItem.addRow("Data Gateway CM MAC", "TODO");
-            networkConnectionItem.addRow("Active Physical Connection", "TODO");
+            netConnObjectMap["HubConnectionStatus"] = networkConnectionItem.addRow("Hub Connection Status", "Disconnected",true);
+            //networkConnectionItem.addRow("Video Gateway eCM MAC Address", "TODO");
+            netConnObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmTunerNumber"] = networkConnectionItem.addRow("Allocated Tuner Number", "TODO");
+            //networkConnectionItem.addRow("Video Gateway (2 of n)", "TODO");
+            //networkConnectionItem.addRow("Data Gateway CM MAC", "TODO");
+            //networkConnectionItem.addRow("Active Physical Connection", "TODO");
         }
 
     }                  
@@ -111,13 +111,28 @@ var NetworkConnection = function(modelParam)
 
         var networkConnectionCallback = function(json)
         {
+            var rxRate;
             for(var i = 0; i < json.paramList.length; i++)
             {
+                if(json.paramList[i].name === "Device.MoCA.Interface.1.AssociatedDevice.1.PHYRxRate")
+                {
+                    rxRate = json.paramList[i].value;
+                }
+                else if(json.paramList[i].name === "Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC")
+                {
+                    if(json.paramList[i].value)
+                    {
+                        netConnObjectMap["HubConnectionStatus"].text = "Hub " + json.paramList[i].value + " Connected";
+                    }
+                }
+                
                 if(netConnObjectMap[json.paramList[i].name] === undefined)
                     continue;
-                    
+    
                 netConnObjectMap[json.paramList[i].name].text = json.paramList[i].value;
             }
+
+            netConnObjectMap["Device.MoCA.Interface.1.AssociatedDevice.1.PHYTxRate"] += "/" + rxRate;
 
         }
 
@@ -132,7 +147,11 @@ var NetworkConnection = function(modelParam)
               {"name" : "Device.MoCA.Interface.1.Status"}, \
               {"name" : "Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"}, \
               {"name" : "Device.MoCA.Interface.1.NodeID"}, \
-              {"name" : "Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"} \
+              {"name" : "Device.MoCA.Interface.1.AssociatedDevice.1.PHYTxRate"}, \
+              {"name" : "Device.MoCA.Interface.1.AssociatedDevice.1.PHYRxRate"}, \
+              {"name" : "Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"}, \
+              {"name" : "Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewayDeviceFriendlyName"}, \
+              {"name" : "Device.X_COMCAST-COM_Xcalibur.TRM.trmTunerNumber"} \
               ]}';
               
         Utils.doHttpPost(options,postData).then(networkConnectionCallback,errorCallback);

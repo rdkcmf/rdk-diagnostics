@@ -51,28 +51,28 @@ var DeviceLocalStatus = function(modelParam)
                 deviceLocalStatusObjectMap["Device.WiFi.SSID.1.MACAddress"] = deviceLocalStatusItem.addRow("WiFi MAC", "TODO");
                 deviceLocalStatusObjectMap["Device.WiFi.SSID.1.Name"] = deviceLocalStatusItem.addRow("SSID", "TODO");
                 deviceLocalStatusObjectMap["Device.WiFi.Radio.1.OperatingFrequencyBand"] = deviceLocalStatusItem.addRow("Frequency", "TODO");
-                deviceLocalStatusItem.addRow("Channel", "TODO");
-                deviceLocalStatusItem.addRow("RSSI", "TODO");
-                deviceLocalStatusItem.addRow("Security", "TODO");
-                deviceLocalStatusItem.addRow("Device", "TODO",true);
+                deviceLocalStatusObjectMap["Device.WiFi.Radio.1.Channel"] = deviceLocalStatusItem.addRow("Channel", "TODO");
+                deviceLocalStatusObjectMap["Device.DeviceInfo.X_RDKCENTRAL-COM_xBlueTooth.DeviceInfo.RSSI"] = deviceLocalStatusItem.addRow("RSSI", "TODO");
+                deviceLocalStatusObjectMap["Device.WiFi.AccessPoint.1.Security.ModeEnabled"] = deviceLocalStatusItem.addRow("Security", "TODO");
+                deviceLocalStatusItem.addRow("Device", "MAC",true);
             }
             else
             {
-                deviceLocalStatusItem.addRow("Device", "TODO");
+                deviceLocalStatusItem.addRow("Device", "MAC");
             }
 
             deviceLocalStatusObjectMap["Device.DeviceInfo.X_COMCAST-COM_STB_MAC"] = deviceLocalStatusItem.addRow("eSTB", "TODO");
             deviceLocalStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = deviceLocalStatusItem.addRow("Video Gateway MAC", "TODO",true);
-            deviceLocalStatusItem.addRow("Data Gateway MAC", "TODO");
+            //deviceLocalStatusItem.addRow("Data Gateway MAC", "TODO");
             deviceLocalStatusObjectMap["Device.Time.LocalTimeZone"] = deviceLocalStatusItem.addRow("Time Zone", "TODO");
             deviceLocalStatusObjectMap["Device.Time.CurrentLocalTime"] = deviceLocalStatusItem.addRow("Local Time", "TODO");
         }
         else
         {
-            deviceLocalStatusItem.addRowLeft("Device", "TODO");
+            deviceLocalStatusItem.addRowLeft("Device", "MAC");
             deviceLocalStatusObjectMap["Device.DeviceInfo.X_COMCAST-COM_STB_MAC"] = deviceLocalStatusItem.addRowLeft("eSTB", "TODO");
             deviceLocalStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = deviceLocalStatusItem.addRowLeft("eCM", "TODO");
-            deviceLocalStatusItem.addRowLeft("Card", "TODO");
+            //deviceLocalStatusItem.addRowLeft("Card", "TODO");
             deviceLocalStatusObjectMap["Device.Time.LocalTimeZone"] = deviceLocalStatusItem.addRowRight("Time Zone", "TODO");
             deviceLocalStatusObjectMap["Device.Time.CurrentLocalTime"] = deviceLocalStatusItem.addRowRight("Local Time", "TODO");
         }
@@ -115,6 +115,9 @@ var DeviceLocalStatus = function(modelParam)
               {"name" : "Device.WiFi.SSID.1.Name"}, \
               {"name" : "Device.WiFi.SSID.1.Status"}, \
               {"name" : "Device.WiFi.SSID.1.MACAddress"}, \
+              {"name" : "Device.WiFi.Radio.1.Channel"}, \
+              {"name" : "Device.DeviceInfo.X_RDKCENTRAL-COM_xBlueTooth.DeviceInfo.RSSI"}, \
+              {"name" : "Device.WiFi.AccessPoint.1.Security.ModeEnabled"}, \
               {"name" : "Device.WiFi.Radio.1.OperatingFrequencyBand"} \
               ]}';
               

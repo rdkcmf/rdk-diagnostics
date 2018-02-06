@@ -43,16 +43,16 @@ var HostPropertiesStatus = function(modelParam)
     {
         var HostPropertiesItem = new DetailsItem(Utils.scene,model);
         HostPropertiesItem.setSeparatorPlacement(0.3);
-        HostPropertiesItem.addRow("HostID", "TODO");
-        HostPropertiesItem.addRow("Vendor ID", "TODO");
-        HostPropertiesItem.addRow("Board Revision", "TODO");
+        //HostPropertiesItem.addRow("Host ID", "TODO");
+        //HostPropertiesItem.addRow("Vendor ID", "TODO");
+        //HostPropertiesItem.addRow("Board Revision", "TODO");
         HostPropertiesObjectMap["Device.DeviceInfo.SerialNumber"] = HostPropertiesItem.addRow("Serial Number", "TODO");
         
-        HostPropertiesItem.addRow("BOOT ROM Ver", "TODO");
+        //HostPropertiesItem.addRow("BOOT ROM Ver", "TODO");
         HostPropertiesObjectMap["Device.DeviceInfo.ModelName"] = HostPropertiesItem.addRow("Model Name", "TODO");
         HostPropertiesObjectMap["Device.DeviceInfo.Manufacturer"] = HostPropertiesItem.addRow("Vendor Name", "TODO");
-        HostPropertiesItem.addRow("Created Date", "TODO");
-        HostPropertiesItem.addRow("Video Memory", "TODO");
+        //HostPropertiesItem.addRow("Created Date", "TODO");
+        //HostPropertiesItem.addRow("Video Memory", "TODO");
         HostPropertiesObjectMap["Device.DeviceInfo.MemoryStatus.Total"] = HostPropertiesItem.addRow("Total Memory", "TODO");
 
     }                  

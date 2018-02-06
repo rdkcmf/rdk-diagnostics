@@ -17,7 +17,7 @@
  * limitations under the License.
 */
 
-// Handles AV Tab of Diagnostics information
+// Handles CableCard Tab of Diagnostics information
 
 var packagePath = px.getPackageBaseFilePath();
 packagePath += "/";
@@ -40,7 +40,7 @@ var AVStatus = imports.avstatus;
 var VODStatus = imports.vodstatus;
 var VScrollList = imports.vscrolllist;
 
-var AVView = function() 
+var CableCardView = function() 
 {
     var updateDataCallbacks = [];
 
@@ -49,6 +49,7 @@ var AVView = function()
         vScroll.clear();
         vScroll.addRow(function(parent,itemCoor) 
         {
+            itemCoor.h = 240;
             var hdmiStatus = new HDMIStatus({
                                                 title:"HDMI",
                                                 parent:parent,
@@ -64,6 +65,11 @@ var AVView = function()
         
         vScroll.addRow(function(parent,itemCoor) 
         {
+            itemCoor.h = Utils.isClientDevice === false ? 560 : 460;
+            if(Utils.modelName.indexOf("PX051") !== -1)
+            {
+                itemCoor.h = 540;
+            }
             var avStatus = new AVStatus({
                                                 title:"A/V",
                                                 parent:parent,
@@ -79,6 +85,7 @@ var AVView = function()
 
         vScroll.addRow(function(parent,itemCoor) 
         {
+            itemCoor.h = 300;
             var vodStatus = new VODStatus({
                                                 title:"VOD",
                                                 parent:parent,
@@ -103,8 +110,8 @@ var AVView = function()
     }
 }
 
-module.exports = AVView;
+module.exports = CableCardView;
 
 }).catch(function importFailed(err){
-    console.error("Import failed for av_tab.js: " + err);
+    console.error("Import failed for cablecard_view.js: " + err);
 });

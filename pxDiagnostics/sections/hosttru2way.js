@@ -45,7 +45,7 @@ var HostTru2WayStatus = function(modelParam)
         hostTru2WayItem.setSeparatorPlacement(0.3);
         hostTru2WayObjectMap["Device.DeviceInfo.HardwareVersion"] = hostTru2WayItem.addRow("Hardware Revision", "TODO");
         hostTru2WayObjectMap["Device.DeviceInfo.Manufacturer"] = hostTru2WayItem.addRow("Vendor", "TODO");
-        hostTru2WayItem.addRow("BOOTR", "TODO");
+        //hostTru2WayItem.addRow("BOOTR", "TODO");
         hostTru2WayObjectMap["Device.DeviceInfo.SoftwareVersion"] = hostTru2WayItem.addRow("Software Revision", "TODO");
         
         hostTru2WayObjectMap["Device.DeviceInfo.ModelName"] = hostTru2WayItem.addRow("Model", "TODO");

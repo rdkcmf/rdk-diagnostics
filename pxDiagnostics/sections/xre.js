@@ -43,15 +43,15 @@ var XREStatus = function(modelParam)
     {
         var xreItem = new DetailsItem(Utils.scene,model);
         xreItem.setSeparatorPlacement(0.35);
-        xreItem.addRow("XRE Receiver Version", "TODO");
+        //xreItem.addRow("XRE Receiver Version", "TODO");
         xreObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreVersion"] = xreItem.addRow("XRE Server Version", "TBD");
-        xreItem.addRow("Last XRE Reconnect Date/Time", "TODO");
-        xreItem.addRow("XRE Reboot Request", "TODO");
+        xreObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreSessionLastModTs"] = xreItem.addRow("Last XRE Reconnect Date/Time", "TODO");
+        //xreItem.addRow("XRE Reboot Request", "TODO");
         
         xreObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreStatus"] = xreItem.addRow("XRE Connection Status", "TODO");
         xreObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreSessionUptime"] = xreItem.addRow("XRE Connection Uptime", "TODO");
         xreObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreVodId"] = xreItem.addRow("XRE VOD ID", "TODO");
-        xreObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreLastURLAccessed"] = xreItem.addRow("XRE Last URL", "TODO");
+        xreObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreLastURLAccessed"] = xreItem.addRow("XRE Last URL", "https://nexus.teamccp.com/nexus/content/repositories/arris_brcm_xg1v3/images/signing_stage/ARRISXG1V3-Yocto-Build/76112/signed/");
           
     }                  
                 
@@ -89,6 +89,7 @@ var XREStatus = function(modelParam)
               {"name" : "Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreSessionUptime"}, \
               {"name" : "Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreLastURLAccessed"}, \
               {"name" : "Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreVodId"}, \
+              {"name" : "Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreSessionLastModTs"}, \
               {"name" : "Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreLastURLAccessed"} \
               ]}';
               

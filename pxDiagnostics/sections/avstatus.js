@@ -55,21 +55,21 @@ var AVStatus = function(modelParam)
         avStatusObjectMap["Device.Services.STBService.1.Components.VideoOutput.1.HDCP"] = avStatusItem.addRow("Scanning Format", "TODO");
         avStatusObjectMap["Device.Services.STBService.1.Components.AudioOutput.1.X_COMCAST-COM_AudioStereoMode"] = avStatusItem.addRow("Audio Setting", "TODO");
         avStatusObjectMap["Device.Services.STBService.1.Components.HDMI.1.DisplayDevice.PreferredResolution"] = avStatusItem.addRow("Resolution", "TODO");
-        avStatusItem.addRow("Audio Mute", "TODO");
-        avStatusItem.addRow("Closed Caption", "TODO");
-        avStatusItem.addRow("Audio PID", "TODO");
-        avStatusItem.addRow("Video PID", "TODO");
-        avStatusItem.addRow("Linear Stream Type", "TODO");
+        //avStatusItem.addRow("Audio Mute", "TODO");
+        //avStatusItem.addRow("Closed Caption", "TODO");
+        //avStatusItem.addRow("Audio PID", "TODO");
+        //avStatusItem.addRow("Video PID", "TODO");
+        //avStatusItem.addRow("Linear Stream Type", "TODO");
         // add bluetooth settings for Xi5
         if(Utils.modelName.indexOf("PX051") !== -1)
         {
             avStatusObjectMap["Device.DeviceInfo.X_RDKCENTRAL-COM_xBlueTooth.Enabled"] = avStatusItem.addRow("Bluetooth Status", "TODO");
             avStatusObjectMap["Device.DeviceInfo.X_RDKCENTRAL-COM_xBlueTooth.DeviceInfo.Profile"] = avStatusItem.addRow("Bluetooth Active Profile", "TODO");
             avStatusObjectMap["Device.DeviceInfo.X_RDKCENTRAL-COM_xBlueTooth.DeviceInfo.Manufacturer"] = avStatusItem.addRow("Bluetooth Active Make/Model", "TODO");
-            avStatusItem.addRow("Bluetooth Mode", "TODO");
+            //avStatusItem.addRow("Bluetooth Mode", "TODO");
         }
-        avStatusItem.addRow("HDR Source", "TODO");
-        avStatusItem.addRow("HDR Output", "TODO");
+        //avStatusItem.addRow("HDR Source", "TODO");
+        //avStatusItem.addRow("HDR Output", "TODO");
        
        if(Utils.isClientDevice == false)
         {

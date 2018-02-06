@@ -44,14 +44,14 @@ var VODStatus = function(modelParam)
         var vodStatusItem = new DetailsItem(Utils.scene,model);
         vodStatusItem.setSeparatorPlacement(0.3);
         
-        vodStatusItem.addRow("Status", "TODO");
+        //vodStatusItem.addRow("Status", "TODO");
         vodStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreVodId"] = vodStatusItem.addRow("VOD ID", "TODO");
-        vodStatusItem.addRow("TSID", "TODO");
-        vodStatusItem.addRow("Frequency", "TODO");
-        vodStatusItem.addRow("Service Group", "TODO");
-        vodStatusItem.addRow("Peer Group", "TODO");
-        vodStatusItem.addRow("Session End Point", "TODO");
-        vodStatusItem.addRow("Autodiscovery", "TODO");
+        //vodStatusItem.addRow("TSID", "TODO");
+        //vodStatusItem.addRow("Frequency", "TODO");
+        //vodStatusItem.addRow("Service Group", "TODO");
+        //vodStatusItem.addRow("Peer Group", "TODO");
+        //vodStatusItem.addRow("Session End Point", "TODO");
+        //vodStatusItem.addRow("Autodiscovery", "TODO");
 
     }                  
                 

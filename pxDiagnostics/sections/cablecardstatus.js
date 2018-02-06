@@ -43,25 +43,25 @@ var CableCardStatus = function(modelParam)
     {
         var cableCardItem = new DetailsItem(Utils.scene,model);
         cableCardItem.setSeparatorPlacement(0.3);
-        cableCardItem.addRow("Card Status", "TODO");
-        cableCardItem.addRow("CC Download Status", "TODO");
-        cableCardItem.addRow("Card FW Version", "TODO");
-        cableCardItem.addRow("Entitlement Status", "TODO");
+        //cableCardItem.addRow("Card Status", "TODO");
+        //cableCardItem.addRow("CC Download Status", "TODO");
+        //cableCardItem.addRow("Card FW Version", "TODO");
+        //cableCardItem.addRow("Entitlement Status", "TODO");
         
-        cableCardItem.addRow("Hardware", "TODO");
+        //cableCardItem.addRow("Hardware", "TODO");
         cableCardObjectMap["Device.DeviceInfo.UpTime"] = cableCardItem.addRow("Uptime", "TODO");
         cableCardObjectMap["Device.DeviceInfo.Manufacturer"] = cableCardItem.addRow("Manufacturer", "TODO");
-        cableCardItem.addRow("Certificate Check", "TODO");
-        cableCardItem.addRow("CP System ID", "TODO");
-        cableCardItem.addRow("CA System ID", "TODO");
-        cableCardItem.addRow("CP/CA Status", "TODO");
-        cableCardItem.addRow("CC ID", "TODO");
-        cableCardItem.addRow("Host ID", "TODO");
-        cableCardItem.addRow("OOB Mode", "TODO");
-        cableCardItem.addRow("Unit Address", "TODO");
-        cableCardItem.addRow("VCT ID", "TODO");
+        //cableCardItem.addRow("Certificate Check", "TODO");
+        //cableCardItem.addRow("CP System ID", "TODO");
+        //cableCardItem.addRow("CA System ID", "TODO");
+        //cableCardItem.addRow("CP/CA Status", "TODO");
+        //cableCardItem.addRow("CC ID", "TODO");
+        //cableCardItem.addRow("Host ID", "TODO");
+        //cableCardItem.addRow("OOB Mode", "TODO");
+        //cableCardItem.addRow("Unit Address", "TODO");
+        //cableCardItem.addRow("VCT ID", "TODO");
         cableCardObjectMap["Device.Time.LocalTimeZone"] = cableCardItem.addRow("Time Zone", "TODO");
-        cableCardItem.addRow("Last Error", "TODO");
+        //cableCardItem.addRow("Last Error", "TODO");
 
     }                  
                

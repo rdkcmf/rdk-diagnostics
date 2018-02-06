@@ -43,24 +43,24 @@ var TunerStatus = function(modelParam)
     {
         var tunerStatusItem = new DetailsItem(Utils.scene,model);
         tunerStatusItem.setSeparatorPlacement(0.5);
-        tunerStatusItem.addRowLeft("Active Status", "TODO");
-        tunerStatusItem.addRowLeft("Active Connections", "TODO");
-        tunerStatusItem.addRowLeft("TRM Device type", "TODO");
-        tunerStatusItem.addRowLeft("TRM Client #(n)", "TODO");
+        //tunerStatusItem.addRowLeft("Active Status", "TODO");
+        //tunerStatusItem.addRowLeft("Active Connections", "TODO");
+        //tunerStatusItem.addRowLeft("TRM Device type", "TODO");
+        //tunerStatusItem.addRowLeft("TRM Client #(n)", "TODO");
         tunerStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewaySTBMAC"] = tunerStatusItem.addRowLeft("TRM eSTB MAC", "TODO");
         tunerStatusObjectMap["Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewayMoCAMAC"] = tunerStatusItem.addRowLeft("TRM MoCA MAC", "TODO");
-        tunerStatusItem.addRowLeft("Tuner in Use", "TODO");
+        //tunerStatusItem.addRowLeft("Tuner in Use", "TODO");
 
-        tunerStatusItem.addRowRight("Channel #", "TODO");
-        tunerStatusItem.addRowRight("Channel Station", "TODO");
-        tunerStatusItem.addRowRight("Allocation", "TODO");
+        //tunerStatusItem.addRowRight("Channel #", "TODO");
+        //tunerStatusItem.addRowRight("Channel Station", "TODO");
+        //tunerStatusItem.addRowRight("Allocation", "TODO");
         if(Utils.isClientDevice == false)
         {
-          tunerStatusItem.addRowRight("Frequency", "TODO");
-          tunerStatusItem.addRowRight("Channel Modulation", "TODO");
-          tunerStatusItem.addRowRight("Channel PCR", "TODO");
-          tunerStatusItem.addRowRight("DAC ID", "TODO");
-          tunerStatusItem.addRowRight("Channel Map ID", "TODO");
+          //tunerStatusItem.addRowRight("Frequency", "TODO");
+          //tunerStatusItem.addRowRight("Channel Modulation", "TODO");
+          //tunerStatusItem.addRowRight("Channel PCR", "TODO");
+          //tunerStatusItem.addRowRight("DAC ID", "TODO");
+          //tunerStatusItem.addRowRight("Channel Map ID", "TODO");
         }
 
     }                  

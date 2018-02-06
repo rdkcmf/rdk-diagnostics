@@ -78,7 +78,6 @@ var NetworkConnectionsView = function()
         vScroll.addRow(function(parent,itemCoor) 
         {
             itemCoor.w = itemCoor.w/2;
-            itemCoor.h = Utils.isClientDevice === false ? 360 : 460;
             var deviceLocalStatus = new DeviceLocalStatus({
                                                 title:"Device Local",
                                                 parent:parent,
@@ -109,7 +108,6 @@ var NetworkConnectionsView = function()
         {
             vScroll.addRow(function(parent,itemCoor) 
             {
-                itemCoor.h = 400;
                 var wifiStatus = new WIFIStatus({
                                                 title:"WIFI Stats",
                                                 parent:parent,
@@ -129,7 +127,6 @@ var NetworkConnectionsView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 360;
                 var docsisStatus = new DocsisStatus({
                                                 title:"DOCSIS",
                                                 parent:parent,
@@ -159,7 +156,6 @@ var NetworkConnectionsView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 440;
                 var inBandNetworkStatus = new InBandNetworkStatus({
                                                 title:"In-Band Network",
                                                 parent:parent,
@@ -189,7 +185,6 @@ var NetworkConnectionsView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 320;
                 var flowsInUseStatus = new FlowsInUseStatus({
                                                 title:"Flows in Use",
                                                 parent:parent,
@@ -219,7 +214,6 @@ var NetworkConnectionsView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 240;
                 var tunnelInfoScreenStatus = new TunnelInfoScreenStatus({
                                                 title:"Tunnel Info Screen 1",
                                                 parent:parent,
@@ -249,7 +243,6 @@ var NetworkConnectionsView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 320;
                 var canhStatus2 = new CanhStatus2({
                                                 title:"CANH Status 2",
                                                 parent:parent,
@@ -280,7 +273,6 @@ var NetworkConnectionsView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 160;
                 var canhStatus4 = new CanhStatus4({
                                                 title:"CANH Status 4",
                                                 parent:parent,
@@ -310,7 +302,6 @@ var NetworkConnectionsView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 420;
                 var canhStatus6 = new CanhStatus6({
                                                 title:"CANH Status 6",
                                                 parent:parent,

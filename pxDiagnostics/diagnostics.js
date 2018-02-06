@@ -34,7 +34,8 @@ px.import({
     hscroll:'module:modules/hscroll.js',
     installsummaryview:'module:sections/installsummary_view.js',
     networkconnectionsview: 'module:sections/networkconnections_view.js',
-    avview: 'module:sections/av_view.js'
+    avview: 'module:sections/av_view.js',
+    cablecardview: 'module:sections/cablecard_view.js'
 }).then(function importsAreReady(imports) {
 
 console.log("Inside Diagnostics.js importsAreReady");
@@ -49,6 +50,7 @@ var HScrollList = imports.hscroll;
 var InstallSummaryView = imports.installsummaryview;
 var NetworkConnectionsView = imports.networkconnectionsview;
 var AVView = imports.avview;
+var CableCardView = imports.cablecardview;
 
 Utils.scene = scene;
 var tabs = [];
@@ -116,7 +118,8 @@ function launchDiagnostics()
     
     if(Utils.isClientDevice == false)
     {
-        var cableCardTab = tabContainer.addTab({title:titles[index++]},null);
+        var cableCardView = new CableCardView();
+        var cableCardTab = tabContainer.addTab({title:titles[index++]},cableCardView);
     }
 
     var avView = new AVView();

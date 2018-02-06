@@ -45,11 +45,11 @@ var HDMIStatus = function(modelParam)
         hdmiStatusItem.setSeparatorPlacement(0.3);
         
         hdmiStatusObjectMap["Device.Services.STBService.1.Components.HDMI.1.Status"] = hdmiStatusItem.addRow("Connection Status", "TODO");
-        hdmiStatusItem.addRow("Connected Device Type", "TODO");
+        //hdmiStatusItem.addRow("Connected Device Type", "TODO");
         hdmiStatusObjectMap["Device.Services.STBService.1.Components.VideoOutput.1.HDCP"] = hdmiStatusItem.addRow("HDCP Status", "TODO");
-        hdmiStatusItem.addRow("HDMI Audio", "TODO");
-        hdmiStatusItem.addRow("HDMI Receiver", "TODO");
-        hdmiStatusItem.addRow("Receiver HDCP Compliance", "TODO");
+        hdmiStatusObjectMap["Device.Services.STBService.1.Components.AudioOutput.1.X_COMCAST-COM_AudioDB"] = hdmiStatusItem.addRow("HDMI Audio", "TODO");
+        //hdmiStatusItem.addRow("HDMI Receiver", "TODO");
+        //hdmiStatusItem.addRow("Receiver HDCP Compliance", "TODO");
 
     }                  
                 
@@ -83,6 +83,7 @@ var HDMIStatus = function(modelParam)
 
         var postData = '{"paramList" : [ \
               {"name" : "Device.Services.STBService.1.Components.VideoOutput.1.HDCP"}, \
+              {"name" : "Device.Services.STBService.1.Components.AudioOutput.1.X_COMCAST-COM_AudioDB"}, \
               {"name" : "Device.Services.STBService.1.Components.HDMI.1.Status"} \
               ]}';
               

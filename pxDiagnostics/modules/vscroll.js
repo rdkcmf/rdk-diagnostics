@@ -149,7 +149,7 @@ px.import({
         {
             if(!nextItemCoor)
             {
-               nextItemCoor = {x:0,y:0,w:clipRect.w,h:400}; 
+               nextItemCoor = {x:0,y:0,w:clipRect.w,h:100}; 
                return nextItemCoor;
             }
 
@@ -158,11 +158,11 @@ px.import({
             // get height of last child in container.
             if(container.numChildren)
             {
-                var lastChildHeight = container.getChild(container.numChildren - 1).h
+                var lastChildHeight = container.getChild(container.numChildren - 1).h;
                 nextItemCoor.y += lastChildHeight;
                 scrollRowMarkers.push(lastChildHeight);
             }
-            nextItemCoor.h = 400;
+            nextItemCoor.h = 100;
 
             return nextItemCoor;
         }
@@ -178,6 +178,22 @@ px.import({
             {
                 vScrollBar.a = 1;
             } 
+
+            //adjust height of this row based on heights of individual sections (DetailsItem)
+            // We assume that 2 columns will be placed in each row
+            var lastChild = container.getChild(container.numChildren - 1);
+            if(lastChild.x)
+            {
+                var lastlastChild = container.getChild(container.numChildren - 2);
+                if(lastChild.h > lastlastChild.h)
+                {
+                    lastlastChild.h = lastChild.h;
+                }
+                else
+                {
+                    lastChild.h = lastlastChild.h;
+                }
+            }
         }
 
         this.clear = function()

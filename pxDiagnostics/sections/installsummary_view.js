@@ -68,8 +68,6 @@ var InstallSummaryView = function()
         vScroll.addRow(function(parent,itemCoor) 
         {
             itemCoor.w = itemCoor.w/2;
-            itemCoor.h = Utils.isClientDevice === false ? 380 : 560;
-
             var deviceStatus = new DeviceStatus({
                                                 title:"Device Status",
                                                 parent:parent,
@@ -100,7 +98,6 @@ var InstallSummaryView = function()
         vScroll.addRow(function(parent,itemCoor) 
         {
             itemCoor.w = itemCoor.w/2;
-            itemCoor.h = 300;
             var firmware = new Firmware({
                                                 title:"Firmware",
                                                 parent:parent,
@@ -130,7 +127,6 @@ var InstallSummaryView = function()
         vScroll.addRow(function(parent,itemCoor) 
         {
             itemCoor.w = itemCoor.w/2;
-            itemCoor.h = 300;
             var tunerStatus = new TunerStatus({
                                                 title:"Tuner Status",
                                                 parent:parent,
@@ -162,7 +158,6 @@ var InstallSummaryView = function()
         {
             vScroll.addRow(function(parent,itemCoor) 
             {
-                itemCoor.h = 300;
                 var wifiStatus = new WIFIStatus({
                                                     title:"WIFI Stats",
                                                     parent:parent,
@@ -182,7 +177,6 @@ var InstallSummaryView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 230;
                 var initHistory = new InitHistory({
                                                     title:"Init History",
                                                     parent:parent,
@@ -214,7 +208,6 @@ var InstallSummaryView = function()
             vScroll.addRow(function(parent,itemCoor) 
             {   
                 itemCoor.w = itemCoor.w/2;
-                itemCoor.h = 560;
                 var hostProperties = new HostProperties({
                                                     title:"Host: Properties",
                                                     parent:parent,
@@ -243,7 +236,6 @@ var InstallSummaryView = function()
 
             vScroll.addRow(function(parent,itemCoor) 
             {
-                itemCoor.h = 300;
                 var mCardCertificateStatus = new MCardCertificateStatus({
                                                     title:"M-Card Certificate",
                                                     parent:parent,
