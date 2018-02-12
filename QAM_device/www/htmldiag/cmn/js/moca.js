@@ -35,3 +35,21 @@ function getMocaVersion() {
     });
     return mocaVersion;
 }
+
+function logMocaDiagnostics() {
+    var msge = "";
+    $.ajax({
+       async: false,
+       url: "cgi-bin/logMocaDiag.sh",
+       context: document.body,
+       dataType: 'json',
+       type: "POST",
+       success: function(data, text_status)
+       {
+           if ( typeof data !== "undefined" && data !== "") {
+              msge = data;
+           }
+       }
+    });
+    return msge;
+}
