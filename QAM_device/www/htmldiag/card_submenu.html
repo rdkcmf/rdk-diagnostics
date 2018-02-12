@@ -37,7 +37,7 @@ function addCardNavEventListener(id) {
                   if (event.which != 37 && event.which != 39 ) {
                      var thisClass = $(this).attr('class').trim();
                      var navFocusedLink = $(this).children('a').attr('href');
-                     var mainMenuItems = ["nav-gateway", "nav-connected-devices", "nav-parental-control", "nav-addins", "nav-dvr", "nav-reboot", "nav-osd-diag", "nav-sys-debug", "nav-moca"];
+                     var mainMenuItems = ["nav-gateway", "nav-connected-devices", "nav-parental-control", "nav-addins", "nav-dvr", "nav-reboot", "nav-osd-diag", "nav-sys-debug", "nav-moca", "nav-remotes"];
                      var masterMenuLength = mainMenuItems.length;
                       for (var i=masterMenuLength; i--;) {
                          if ( thisClass == mainMenuItems[i]) {

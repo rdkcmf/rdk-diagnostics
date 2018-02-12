@@ -28,7 +28,7 @@ comcast.page = function() {
         $('[class^=nav-]').keyup(
               function(event){
                      var thisClass = $(this).attr('class').trim();
-                     var mainMenuItems = ["nav-gateway", "nav-connected-devices", "nav-parental-control", "nav-addins", "nav-dvr", "nav-reboot", "nav-osd-diag", "nav-sys-debug", "nav-moca"];
+                     var mainMenuItems = ["nav-gateway", "nav-connected-devices", "nav-parental-control", "nav-addins", "nav-dvr", "nav-reboot", "nav-osd-diag", "nav-sys-debug", "nav-moca", "nav-remotes"];
 
                      if( "nav-summary-info" == thisClass || "nav-inband-network" == thisClass
                          || "nav-summary-error" == thisClass || thisClass == "nav-gateway") {
@@ -58,14 +58,16 @@ comcast.page = function() {
                         $('.nav-sys-debug').unbind();
                      } else if ( "nav-moca-diag" == thisClass || "nav-moca-mesh" == thisClass ) {
                         $('.nav-moca').unbind();
-                        $('nav-summary-info').unbind();
 
                      } else if ( "nav-reboot-stb" == thisClass ) {
-                         $('nav-reboot').unbind();
+                         $('.nav-reboot').unbind();
+                     } else if ( "nav-remotes-ip" == thisClass || "nav-remotes-reboot" == thisClass ) {
+                         $('.nav-remotes').unbind();
+                        $('nav-summary-info').unbind();
                      }
 
                      /*Enable cyclic navigation even if sub-menus are not expanded*/
-                     if (thisClass == "nav-moca") { // Last main menu item
+                     if (thisClass == "nav-remotes") { // Last main menu item
                          if ( event.which == 40) { //40 is the key code for down arrow key event
                            keycount = keycount + 1;
                            if ( keycount > 1 ) {
@@ -84,7 +86,7 @@ comcast.page = function() {
                              if ( keycount > 1 ) {
                                  $(".selected").removeClass("selected");
                                  $(".top-level-active").removeClass("top-level-active");
-                                 $("#nav li." + "nav-moca" + " a").addClass("selected");
+                                 $("#nav li." + "nav-remotes" + " a").addClass("selected");
                                  $(".selected:first").focus();
                                  $("#nav li:has(.selected) > a.top-level").addClass("top-level-active");
                                  keycount = 0;
@@ -134,10 +136,10 @@ comcast.page = function() {
 	        if ( keycount > 1 ) {
 		      $(".selected").removeClass("selected");
 		      $(".top-level-active").removeClass("top-level-active");
-		      $("#nav li." + "nav-moca" + " a").addClass("selected");
+		      $("#nav li." + "nav-remotes" + " a").addClass("selected");
 		      $(".selected:first").focus();
 		      $("#nav li:has(.selected) > a.top-level").addClass("top-level-active");
-                      setupLeftNavigation("nav-moca");
+                      setupLeftNavigation("nav-remotes");
 		      keycount = 0;
 	        }
 	    }

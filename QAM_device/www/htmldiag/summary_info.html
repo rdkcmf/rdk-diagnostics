@@ -43,7 +43,7 @@ $(document).keydown(function(event){
    if ( event.which == 38) { // 38 is the key code for up arrow key event
 	   $(".selected").removeClass("selected");
 	   $(".top-level-active").removeClass("top-level-active");
-	   $("#nav li." + "nav-moca" + " a").addClass("selected");
+	   $("#nav li." + "nav-remotes" + " a").addClass("selected");
 	   $(".selected:first").focus();
 	   $("#nav li:has(.selected) > a.top-level").addClass("top-level-active");
 	         
