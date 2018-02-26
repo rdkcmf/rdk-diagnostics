@@ -28,9 +28,15 @@
 <script type="text/javascript" src="cmn/js/moca.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
+
+    $('#moca20').hide();
     if(getMocaVersion() === 2.0) {
         $('#moca-network-status').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfEnable:::value');
         $('#moca-link-status').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfStatus:::value');
+
+        $('#moca-turbo-enable').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfTurboModeEnable:::value');
+        $('#moca-network-rfchan').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfRFChannel:::value');
+        $('#moca20').show();
     }
 
     loadScripts("MoCA Info > MoCA Diagnostic Details", "nav-moca-diag");
@@ -62,6 +68,28 @@ $(document).ready(function() {
         <div class="form-row">
             <span class="readonlyLabel">MoCA MAC:</span>
             <span class="value"  data-property-file="read#DEVICE_ADDRESS:::MocaMAC"></span>
+        </div>
+
+        <div class="form-row odd">
+            <span class="readonlyLabel">MoCA Turbo Mode Enable:</span>
+            <span class="value" id="moca-turbo-enable" data-property-file="">false</span>
+        </div>
+
+        <div class="form-row">
+            <span class="readonlyLabel">MoCA RF Channel:</span>
+            <span class="value" id="moca-network-rfchan" data-property-file="snmp#MOCA11-MIB::mocaIfRFChannel:::value"></span>
+        </div>
+        <!-- enable these if device is operating in 2.0 Mode Hide by default  -->
+        <div id="moca20" style="display: none;"> 
+            <div class="form-row odd">
+                <span class="readonlyLabel">MoCA Primary Channel Freq.:</span>
+                <span class="value" id="moca-network-pco" data-property-file="snmp#PrimaryChannelFreq:::value"></span>
+            </div>
+
+            <div class="form-row">
+                <span class="readonlyLabel">MoCA Secondary Channel Freq.:</span>
+                <span class="value" id="moca-network-sco" data-property-file="snmp#SecondaryChannelFreq:::value"></span>
+            </div>
         </div>
 	</div> <!-- end .module -->
 </div><!-- end #content -->

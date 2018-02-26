@@ -24,12 +24,18 @@ export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
+
 read OID
 MULTIPLE_VALUE="SNMPv2-MIB::sysDescr.0"
+
 if [ "OC-STB-HOST-MIB::ocStbHostCardDaylightSavingsTimeDelta" = "$OID" ]; then
     VALUE=`snmpwalk -Oxv -v 2c -c $snmpCommunityVal 127.0.0.1 $OID \
     | sed -e "s/HEX-STRING://gI" | tr -d ' '`
     VALUE=`printf "value:%d" "0x${VALUE}"`
+elif [ "PrimaryChannelFreq" = "$OID" ] || [ "SecondaryChannelFreq" = "$OID" ] \
+     || [ $OID = "MOCA20-MIB::mocaIfRFChannel" ] || [ $OID = "MOCA11-MIB::mocaIfRFChannel" ] ; then
+   # Skip for additional processing
+   :
 else
     VALUE=`snmpwalk -OQ -v 2c -c $snmpCommunityVal 127.0.0.1 $OID`
 fi    
@@ -52,6 +58,25 @@ elif [ "IP-MIB::ipNetToPhysicalPhysAddress.1.ipv4" = "$OID" ]
 then
 	VALUE=`echo $VALUE | cut -d= -f0 |cut -d. -f4,5,6,7`
 	VALUE="value:"`echo $VALUE\\\n`
+# Fields that require additional processing -  PrimaryChannelFreq, SecondaryChannelFreq
+elif [ "$OID" = "MOCA20-MIB::mocaIfRFChannel" ] || [ "$OID" = "MOCA11-MIB::mocaIfRFChannel" ]; then
+    VALUE=`snmpwalk -Onv -v 2c -c $snmpCommunityVal 127.0.0.1 $OID | sed -e "s|.*(||g" -e "s|).*||g"`
+    VALUE="value: $VALUE\n"
+elif [ "PrimaryChannelFreq" = "$OID" ]; then
+    # MOCA20-MIB::mocaIfRFChannel + snmp#MOCA20-MIB:: mocaIfPrimaryChannelOffset
+    rfChannel=`snmpwalk -Onv -v 2c -c $snmpCommunityVal 127.0.0.1 MOCA20-MIB::mocaIfRFChannel | sed -e "s|.*(||g" -e "s|).*||g"`
+    offset=`snmpwalk -OQv -v 2c -c $snmpCommunityVal 127.0.0.1 MOCA20-MIB::mocaIfPrimaryChannelOffset`
+    VALUE=$(($rfChannel + $offset))
+    VALUE="value: $VALUE\n"
+elif [ "SecondaryChannelFreq" = "$OID" ]; then
+    offset=`snmpwalk -OQv -v 2c -c $snmpCommunityVal 127.0.0.1 MOCA20-MIB::mocaIfSecondaryChannelOffset`
+    if [ $offset -eq 0 ]; then
+        VALUE=0
+    else
+        rfChannel=`snmpwalk -Onv -v 2c -c $snmpCommunityVal 127.0.0.1 MOCA20-MIB::mocaIfRFChannel | sed -e "s|.*(||g" -e "s|).*||g"`
+        VALUE=$(($rfChannel + $offset))
+    fi
+    VALUE="value: $VALUE\n"
 else
     REPLACE=`echo "$OID" |  sed -e "s/::/#/g" | cut -d '#' -f2`
     VALUE=`echo $VALUE | sed -e "s/.*$REPLACE.* =/value:/g"`
