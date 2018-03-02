@@ -23,7 +23,7 @@ export SNMP_BIN_DIR=/mnt/nfs/bin/target-snmp/bin
 export MIBS=ALL
 export MIBDIRS=$SNMP_BIN_DIR/../share/snmp/mibs:/usr/share/snmp/mibs
 export PATH=$PATH:$SNMP_BIN_DIR:
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib:/mnt/nfs/usr/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/mnt/nfs/bin/target-snmp/lib:/mnt/nfs/usr/lib
 if [ ! -f /etc/os-release ]; then
 	/htmldiag/cgi-bin/diagnostics/snmp2json  <&0
 else
