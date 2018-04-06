@@ -31,13 +31,13 @@
 			rootlist = document.getElementsByClassName("tg")[0];
 			vallist = rootlist.getElementsByClassName("tg-vals")[0];
 			list = vallist.getElementsByClassName("tg")[0];
-			list.getElementsByClassName("tg-goodval")[0].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfEnable:::value");
+			list.getElementsByClassName("tg-goodval")[0].setAttribute("data-property-file","snmp#mocaIfEnablev2:::value");
 
-			list.getElementsByClassName("tg-goodval")[1].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfStatus:::value");
-			list.getElementsByClassName("tg-goodval")[4].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNodeID:::value");
-			list.getElementsByClassName("tg-goodval")[5].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNumNodes:::value");
-			list.getElementsByClassName("tg-goodval")[6].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfPreferredNC:::value");
-			list.getElementsByClassName("tg-goodval")[7.setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfBackupNC:::value");
+			list.getElementsByClassName("tg-goodval")[1].setAttribute("data-property-file","snmp#mocaIfStatusv2:::value");
+			list.getElementsByClassName("tg-goodval")[4].setAttribute("data-property-file","snmp#mocaIfNodeIDv2:::value");
+			list.getElementsByClassName("tg-goodval")[5].setAttribute("data-property-file","snmp#mocaIfNumNodesv2:::value");
+			list.getElementsByClassName("tg-goodval")[6].setAttribute("data-property-file","snmp#mocaIfPreferredNCv2:::value");
+			list.getElementsByClassName("tg-goodval")[7.setAttribute("data-property-file","snmp#mocaIfBackupNCv2:::value");
 
 			vallist1 = rootlist.getElementsByClassName("tg")[6];
 			list1 = vallist1.getElementsByClassName("tg")[0];
@@ -62,11 +62,11 @@
 					<table class="tg">
 						<tr>
 							<td class="tg-label tg-singlecol"><b>MoCA Network Status:</b></td>
-							<td class="tg-goodval" data-property-file="snmp#MOCA11-MIB::mocaIfEnable:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfEnablev1:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>MoCA Link Status:</td>
-							<td class="tg-goodval" data-property-file="snmp#MOCA11-MIB::mocaIfStatus:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfStatusv1:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Network Up-Time:</td>
@@ -78,19 +78,19 @@
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>This Device's Node ID:</td>
-							<td class="tg-goodval" data-property-file="snmp#MOCA11-MIB::mocaIfNodeID:::value"></td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfNodeIDv1:::value"></td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Total Connected Nodes:</td>
-							<td class="tg-goodval" data-property-file="snmp#MOCA11-MIB::mocaIfNumNodes:::value"></td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfNumNodesv1:::value"></td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Preferred NC:</td>
-							<td class="tg-goodval" data-property-file="snmp#MOCA11-MIB::mocaIfPreferredNC:::value"></td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfPreferredNCv1:::value"></td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Backup NC:</td>
-							<td class="tg-goodval" data-property-file="snmp#MOCA11-MIB::mocaIfBackupNC:::value"></td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfBackupNCv1:::value"></td>
 						</tr>
 					</table> <br>
 				</td>
@@ -172,7 +172,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label"><b>IP Address:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#IF-MIB::ifPhysAddress.1:::value"> </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ifPhysAddress1:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Additional Control Points:</td>
@@ -191,7 +191,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Status:</td>
-							<td class="tg-goodval" data-property-file="snmp#XcaliburClientMIB::xreConnStatus.1.1:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#xreConnStatus1:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Server:</td>

@@ -19,7 +19,6 @@
 ##########################################################################
 #
 . /etc/device.properties
-logFile="/opt/logs/htmlDiag.log"
 FILENAME="/tmp/dsg_flow_stats.txt"
 
 

@@ -18,8 +18,27 @@
 # limitations under the License.
 ##########################################################################
 #
+
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
 RESPONSE=""
 read ATTRIBUTE
+
+if [[ "$ATTRIBUTE" != "DSGPROXY_HOST_TIME_ZONE" ]] && [[ "$ATTRIBUTE" != "DSGPROXY_CA_SYSTEM_ID" ]] \
+&& [[ "$ATTRIBUTE" != "DSGPROXY_CP_SYSTEM_ID" ]] && [[ "$ATTRIBUTE" != "DSGPROXY_VCTID" ]] \
+&& [[ "$ATTRIBUTE" != "DSG UCID Status" ]] && [[ "$ATTRIBUTE" != "DSGPROXY_UCID" ]]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$ATTRIBUTE" >> $LOG_FILE
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
+
 if [ "$ATTRIBUTE" == "DSG UCID Status" ]
 then
     RESPONSE=`cat /tmp/dsgproxy_server_two_way_status.txt`

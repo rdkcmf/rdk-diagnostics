@@ -20,6 +20,13 @@
 #
 . /etc/common.properties
 . /etc/device.properties
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
 read PARAM
 echo "Content-Type: text/html"
 echo ""
@@ -114,7 +121,10 @@ case "$PARAM" in
                       echo "value:$result\\n"
                       rm -f /tmp/temp.txt
                       ;;
-
+*)
+                      echo "`/bin/timestamp` UNEXPECTED VALUE:$PARAM" >> $LOG_FILE
+                      exit 0
+                      ;;
 esac
 # Update the temp file
 /si_cache_parser_121 "$PERSISTENT_DIR"si | grep 'RChannelVCN' | grep 'SRCID' | sed -e 's/RChannelVCN.*Freq\[//g' -e 's/\]\-Mode.*//g' > /tmp/temp.txt

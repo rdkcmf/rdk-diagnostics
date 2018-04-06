@@ -18,6 +18,12 @@
 # limitations under the License.
 ##########################################################################
 #
+
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+
 if [ ! -f /etc/os-release ]; then
         export SNMPCONFPATH=/mnt/nfs/bin/target-snmp/sbin
 else
@@ -27,12 +33,162 @@ export MIBS=ALL
 export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
+
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+MULTIPLE_VALUE="SNMPv2-MIB::sysDescr.0"
+
+read input
+
+echo "$input" | grep -q -v '[\|\;\&\ ]'
+if [ $? -ne 0 ];then
+    echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $input" >> $LOG_FILE
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
+
+OID=""
+
+case $input in
+    ocStbHostDVIHDMIHDCPStatus)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIHDCPStatus"
+    ;;
+    ocStbHostDVIHDMIConnectionStatus)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIConnectionStatus"
+    ;;
+    ocStbHostDVIHDMIAttachedDeviceType)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIAttachedDeviceType"
+    ;;
+    ocStbHostDVIHDMIHostDeviceHDCPStatus)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIHostDeviceHDCPStatus"
+    ;;
+    ocStbHostDVIHDMIOutputFormat)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIOutputFormat"
+    ;;
+    ocStbHostDVIHDMIFrameRate)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIFrameRate"
+    ;;
+    ocStbHostDVIHDMIAspectRatio)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIAspectRatio"
+    ;;
+    ocStbHostCardDaylightSavingsTimeDelta)
+    OID="OC-STB-HOST-MIB::ocStbHostCardDaylightSavingsTimeDelta"
+    ;;
+    ocStbHostDVIHDMIAudioFormat)
+    OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIAudioFormat"
+    ;; 
+    ocStbHostMpeg2ContentSelectedAudioPID)
+    OID="OC-STB-HOST-MIB::ocStbHostMpeg2ContentSelectedAudioPID"
+    ;;
+    ocStbHostMpeg2ContentSelectedVideoPID)
+    OID="OC-STB-HOST-MIB::ocStbHostMpeg2ContentSelectedVideoPID"
+    ;;
+    ocStbHostMpeg2ContentPCRPID)
+    OID="OC-STB-HOST-MIB::ocStbHostMpeg2ContentPCRPID"
+    ;;
+    ipNetToPhysicalPhysAddress)
+    OID="IP-MIB::ipNetToPhysicalPhysAddress.2.ipv4"
+    ;;
+    mocaIfEnablev1)
+    OID="MOCA11-MIB::mocaIfEnable"
+    ;;
+    mocaIfStatusv1)
+    OID="MOCA11-MIB::mocaIfStatus"
+    ;;
+    mocaIfRFChannelv1)
+    OID="MOCA11-MIB::mocaIfRFChannel"
+    ;;
+    mocaIfNodeIDv1)
+    OID="MOCA11-MIB::mocaIfNodeID"
+    ;;
+    mocaIfNumNodesv1)
+    OID="MOCA11-MIB::mocaIfNumNodes"
+    ;;
+    mocaIfPreferredNCv1)
+    OID="MOCA11-MIB::mocaIfPreferredNC"
+    ;;
+    mocaIfNCv1)
+    OID="MOCA11-MIB::mocaIfNC"
+    ;;
+    mocaIfBackupNCv1)
+    OID="MOCA11-MIB::mocaIfBackupNC"
+    ;;
+    mocaIfEnablev2)
+    OID="MOCA20-MIB::mocaIfEnable"
+    ;;
+    mocaIfStatusv2)
+    OID="MOCA20-MIB::mocaIfStatus"
+    ;;
+    mocaIfRFChannelv2)
+    OID="MOCA20-MIB::mocaIfRFChannel"
+    ;;
+    mocaIfNodeIDv2)
+    OID="MOCA20-MIB::mocaIfNodeID"
+    ;;
+    mocaIfNumNodesv2)
+    OID="MOCA20-MIB::mocaIfNumNodes"
+    ;;
+    mocaIfPreferredNCv2)
+    OID="MOCA20-MIB::mocaIfPreferredNC"
+    ;;
+    mocaIfNCv2)
+    OID="MOCA20-MIB::mocaIfNC"
+    ;;
+    mocaIfBackupNCv2)
+    OID="MOCA20-MIB::mocaIfBackupNC"
+    ;;
+    mocaIfTurboModeEnable)
+    OID="MOCA20-MIB::mocaIfTurboModeEnable"
+    ;;
+    sysDescr)
+    OID="SNMPv2-MIB::sysDescr.0"
+    ;;
+    ifPhysAddress1)
+    OID="IF-MIB::ifPhysAddress.1"
+    ;;
+    ifPhysAddress2)
+    OID="IF-MIB::ifPhysAddress.2"
+    ;;
+    xreConnStatus1)
+    OID="XcaliburClientMIB::xreConnStatus.1.1"
+    ;;
+    xreConnEstTs)
+    OID="XcaliburClientMIB::xreConnEstTs.1.1"
+    ;;
+    PrimaryChannelFreq)
+    OID="PrimaryChannelFreq"
+    ;;
+    SecondaryChannelFreq)
+    OID="SecondaryChannelFreq"
+    ;;
+    *)
+    OID=""
+    ;;
+esac
+
+if [ -z "$OID" ]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$input " >> $LOG_FILE
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi    
+
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
-read OID
-MULTIPLE_VALUE="SNMPv2-MIB::sysDescr.0"
-VALUE=`snmpwalk -OQ -v 2c -c $snmpCommunityVal 127.0.0.1 $OID`
+if [ "OC-STB-HOST-MIB::ocStbHostCardDaylightSavingsTimeDelta" = "$OID" ]; then
+    VALUE=`snmpwalk -Oxv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID" \
+    | sed -e "s/HEX-STRING://gI" | tr -d ' '`
+    VALUE=`printf "value:%d" "0x${VALUE}"`
+elif [ "PrimaryChannelFreq" = "$OID" ] || [ "SecondaryChannelFreq" = "$OID" ] \
+     || [ $OID = "MOCA20-MIB::mocaIfRFChannel" ] || [ $OID = "MOCA11-MIB::mocaIfRFChannel" ] ; then
+   # Skip for additional processing
+   :
+else
+    VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID"`
+fi    
 
 if [ "$MULTIPLE_VALUE" = "$OID" ]; then
     VALUE=`echo $VALUE | sed -e 's/.*<<//g'`
@@ -45,14 +201,32 @@ then
     VALUE="value:"`echo $VALUE\\\n`
 elif [ "IF-MIB::ifPhysAddress.2" = "$OID" ]
 then
-    snmpCommunityVal=`head -1 /tmp/snmpd.conf | awk '{print $4}'`
-    VALUE=`snmpwalk -OQ -v 2c -c $snmpCommunityVal 192.168.100.1 $OID`
+    VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 "$OID"`
     VALUE=`echo $VALUE | sed -e "s/.*ifPhysAddress.* =/value:/g"`
     VALUE=`echo $VALUE\\\n`
 elif [ "IP-MIB::ipNetToPhysicalPhysAddress.1.ipv4" = "$OID" ]
 then
 	VALUE=`echo $VALUE | cut -d= -f0 |cut -d. -f4,5,6,7`
 	VALUE="value:"`echo $VALUE\\\n`
+# Fields that require additional processing -  PrimaryChannelFreq, SecondaryChannelFreq
+elif [ "$OID" = "MOCA20-MIB::mocaIfRFChannel" ] || [ "$OID" = "MOCA11-MIB::mocaIfRFChannel" ]; then
+    VALUE=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID" | sed -e "s|.*(||g" -e "s|).*||g"`
+    VALUE="value: $VALUE\n"
+elif [ "PrimaryChannelFreq" = "$OID" ]; then
+    # MOCA20-MIB::mocaIfRFChannel + snmp#MOCA20-MIB:: mocaIfPrimaryChannelOffset
+    rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfRFChannel | sed -e "s|.*(||g" -e "s|).*||g"`
+    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfPrimaryChannelOffset`
+    VALUE=$(($rfChannel + $offset))
+    VALUE="value: $VALUE\n"
+elif [ "SecondaryChannelFreq" = "$OID" ]; then
+    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfSecondaryChannelOffset`
+    if [ $offset -eq 0 ]; then
+        VALUE=0
+    else
+        rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfRFChannel | sed -e "s|.*(||g" -e "s|).*||g"`
+        VALUE=$(($rfChannel + $offset))
+    fi
+    VALUE="value: $VALUE\n"
 else
     REPLACE=`echo "$OID" |  sed -e "s/::/#/g" | cut -d '#' -f2`
     VALUE=`echo $VALUE | sed -e "s/.*$REPLACE.* =/value:/g"`

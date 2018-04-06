@@ -17,10 +17,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##########################################################################
-logFileLocation="/tmp/testDiag.log"
-echo `date` > $logFileLocation
+
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
 read FILENAME
-echo "File read started for HTML diagnostics page $FILENAME" >> $logFileLocation
+
+if [[ "$FILENAME" != '/tmp/tr69MeshOutput.txt' ]]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME" >> $LOG_FILE
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
+
 RESULT=""
 ./mocaTransmissionRate.sh &
 while read LINE

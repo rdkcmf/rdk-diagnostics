@@ -19,8 +19,24 @@
 ##########################################################################
 #
 
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
+
 cableCardData="/tmp/.htmlDiagCableCardData"
 read dataType
+
+if  [[ "$dataType" != "get" ]] && [[ "$dataType" != "update" ]]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType" >> $LOG_FILE
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
+
 
 if [ "$dataType" == "get" ]; then
     if [ -f $cableCardData ]; then

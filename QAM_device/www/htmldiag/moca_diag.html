@@ -31,11 +31,11 @@ $(document).ready(function() {
 
     $('#moca20').hide();
     if(getMocaVersion() === 2.0) {
-        $('#moca-network-status').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfEnable:::value');
-        $('#moca-link-status').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfStatus:::value');
+        $('#moca-network-status').attr('data-property-file', 'snmp#mocaIfEnablev2:::value');
+        $('#moca-link-status').attr('data-property-file', 'snmp#mocaIfStatusv2:::value');
 
-        $('#moca-turbo-enable').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfTurboModeEnable:::value');
-        $('#moca-network-rfchan').attr('data-property-file', 'snmp#MOCA20-MIB::mocaIfRFChannel:::value');
+        $('#moca-turbo-enable').attr('data-property-file', 'snmp#mocaIfTurboModeEnablev2:::value');
+        $('#moca-network-rfchan').attr('data-property-file', 'snmp#mocaIfRFChannelv2:::value');
         $('#moca20').show();
     }
 
@@ -52,12 +52,12 @@ $(document).ready(function() {
         <h2>Diagnostic details</h2>
     <div class="form-row odd">
             <span class="readonlyLabel">MoCA Network Status:</span>
-            <span class="value" id="moca-network-status" data-property-file="snmp#MOCA11-MIB::mocaIfEnable:::value"></span>
+            <span class="value" id="moca-network-status" data-property-file="snmp#mocaIfEnablev1:::value"></span>
         </div>
 
         <div class="form-row">
             <span class="readonlyLabel">MoCA Link Status:</span>
-            <span class="value" id="moca-link-status" data-property-file="snmp#MOCA11-MIB::mocaIfStatus:::value"></span>
+            <span class="value" id="moca-link-status" data-property-file="snmp#mocaIfStatusv1:::value"></span>
         </div>
 
     <div class="form-row odd">
@@ -77,7 +77,7 @@ $(document).ready(function() {
 
         <div class="form-row">
             <span class="readonlyLabel">MoCA RF Channel:</span>
-            <span class="value" id="moca-network-rfchan" data-property-file="snmp#MOCA11-MIB::mocaIfRFChannel:::value"></span>
+            <span class="value" id="moca-network-rfchan" data-property-file="snmp#mocaIfRFChannelv1:::value"></span>
         </div>
         <!-- enable these if device is operating in 2.0 Mode Hide by default  -->
         <div id="moca20" style="display: none;"> 

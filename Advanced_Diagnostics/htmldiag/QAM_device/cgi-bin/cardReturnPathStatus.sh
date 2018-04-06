@@ -30,8 +30,8 @@ export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
-RFC_OPER_STATUS=`snmpget -OQ -v 2c -c $snmpCommunityVal 127.0.0.1 RFC1213-MIB::ifOperStatus.2 | sed -e "s/IF-MIB::ifOperStatus.*=//g"`
-IPNET_PHYSICAL_ADDR=`snmpwalk -OQ -v 2c -c $snmpCommunityVal 127.0.0.1 IP-MIB::ipNetToPhysicalPhysAddress.2.ipv4 | sed -e "s/IP-MIB::ipNetToPhysicalPhysAddress.*=//g"`
+RFC_OPER_STATUS=`snmpget -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 RFC1213-MIB::ifOperStatus.2 | sed -e "s/IF-MIB::ifOperStatus.*=//g"`
+IPNET_PHYSICAL_ADDR=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 IP-MIB::ipNetToPhysicalPhysAddress.2.ipv4 | sed -e "s/IP-MIB::ipNetToPhysicalPhysAddress.*=//g"`
 INVALID_IP=0:0:0:0:0:0
 if [[ "notPresent" == $RFC_OPER_STATUS ]] || [[ $INVALID_IP != $IPNET_PHYSICAL_ADDR ]]
 then

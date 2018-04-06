@@ -41,7 +41,7 @@ esac
 
 REPLACE=`echo "$OID" |  sed -e "s/::/#/g" | cut -d '#' -f2`
 
-VALUE=`snmpwalk -OQv -v 2c -c $snmpCommunityVal 127.0.0.1 "$OID"`
+VALUE=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID"`
 VALUE=`echo "$VALUE" | sed -e "s/\"<html>//g" | sed -e "s/<\/html>\"//g"`
 VALUE=`echo "$VALUE" | sed -e "s/<body>//g" | sed -e "s/<\/body>//g"`
 VALUE=`echo "$VALUE" | sed -e "s/<br><br>/<br>/g" | sed -e "s/<br><br><br>/<br>/g"`

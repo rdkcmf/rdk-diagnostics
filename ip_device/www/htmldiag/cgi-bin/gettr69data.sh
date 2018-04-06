@@ -20,6 +20,10 @@
 #
 . /etc/device.properties
 
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
 tr69ServerUrl="http://127.0.0.1:"$TR69_HOSTIF_PORT
 tmpoutputFile="/tmp/tr69Output.txt"
 cat /dev/null > $tmpoutputFile
@@ -32,6 +36,13 @@ set_flag=0
 
 while read name
 do
+        # Sanity checks
+        echo "$name" | grep -E "^[A-Za-z]+\." | grep -q -v '[\|\;\&\ ]'
+        if [ $? -ne 0 ];then
+            echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $name" >> $LOG_FILE
+            break
+        fi
+
         if [ $set_flag -eq '0' ]; then
            hostIfParameters="$hostIfParameters {\"name\" : \"$name\"}"
            set_flag=1
@@ -45,8 +56,10 @@ echo "Content-Type: text/html"
 echo ""
 
 cat /dev/null > $tmpoutputFile
-hostIfrequest="$hostIfQueryPrefix""$hostIfParameters""$hostIfQuerySufix"
-CURL_CMD="curl -o $tmpoutputFile -d '$hostIfrequest' $tr69ServerUrl"
-eval $CURL_CMD
+if [ ! -z "$hostIfParameters" ]; then
+    hostIfrequest="$hostIfQueryPrefix""$hostIfParameters""$hostIfQuerySufix"
+    CURL_CMD="curl -o $tmpoutputFile -d '$hostIfrequest' $tr69ServerUrl"
+    eval $CURL_CMD
+fi
 cat $tmpoutputFile
 

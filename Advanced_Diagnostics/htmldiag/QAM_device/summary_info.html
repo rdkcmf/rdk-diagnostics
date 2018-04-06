@@ -31,11 +31,11 @@
                         rootlist = document.getElementsByClassName("tg")[0];
                         vallist = rootlist.getElementsByClassName("tg-vals")[1];
                         list = vallist.getElementsByClassName("tg snmp-get")[0];
-                        list.getElementsByClassName("tg-goodval tg-val")[0].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfStatus:::value");
-                        list.getElementsByClassName("tg-goodval tg-val")[1].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNodeID:::value");
-                        list.getElementsByClassName("tg-goodval tg-val")[2].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNumNodes:::value");
-                        list.getElementsByClassName("tg-goodval tg-val")[3].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfNC:::value");
-                        list.getElementsByClassName("tg-goodval tg-val")[6].setAttribute("data-property-file","snmp#MOCA20-MIB::mocaIfBackupNC:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[0].setAttribute("data-property-file","snmp#mocaIfStatusv2:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[1].setAttribute("data-property-file","snmp#mocaIfNodeIDv2:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[2].setAttribute("data-property-file","snmp#mocaIfNumNodesv2:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[3].setAttribute("data-property-file","snmp#mocaIfNCv2:::value");
+                        list.getElementsByClassName("tg-goodval tg-val")[6].setAttribute("data-property-file","snmp#mocaIfBackupNCv2:::value");
                        }
                         });
                 </script>
@@ -102,7 +102,7 @@
 							<td class="tg-label"><b>Receiver ID:</td>
 							<td class="tg-badval tg-val">  TBD P0103729937</td>
 							<td class="tg-label"><b>HW Rev:</td>
-							<td class="tg-goodval" data-property-file="snmp#SNMPv2-MIB::sysDescr.0:::HW_REV"> </td>
+							<td class="tg-goodval" data-property-file="snmp#sysDescr:::HW_REV"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Vendor ID:</td>
@@ -150,21 +150,21 @@
 						</tr>
 						<tr>
 							<td class="tg-label"><b>MoCA Status:</td>
-							<td class="tg-goodval tg-val" id="mocaStatus" data-property-file="snmp#MOCA11-MIB::mocaIfStatus:::value"> </td>
+							<td class="tg-goodval tg-val" id="mocaStatus" data-property-file="snmp#mocaIfStatusv1:::value"> </td>
 							<td class="tg-label"><b>NC Device Type:</td>
 							<td class="tg-badval"> TBD </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>This Node's ID:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#MOCA11-MIB::mocaIfNodeID:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfNodeIDv1:::value">  </td>
 							<td class="tg-label"><b>Connected Devices:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#MOCA11-MIB::mocaIfNumNodes:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfNumNodesv1:::value">  </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Network Coordinator:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#MOCA11-MIB::mocaIfNC:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfNCv1:::value">  </td>
 							<td class="tg-label"><b>XRE Status:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#XcaliburClientMIB::xreConnStatus.1.1:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#xreConnStatus1:::value">  </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>NC MAC Address:</td>
@@ -174,9 +174,9 @@
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Backup NC:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#MOCA11-MIB::mocaIfBackupNC:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfBackupNCv1:::value">  </td>
 							<td class="tg-label"><b>Connection Established:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#XcaliburClientMIB::xreConnEstTs.1.1:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#xreConnEstTs:::value">  </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Controller ID:</td>
@@ -279,7 +279,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>BOOTR:</td>
-							<td class="tg-goodval" data-property-file="snmp#SNMPv2-MIB::sysDescr.0:::BOOTR"> </td>
+							<td class="tg-goodval" data-property-file="snmp#sysDescr:::BOOTR"> </td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>
@@ -389,7 +389,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label"><b>eSTB MAC:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#IF-MIB::ifPhysAddress.1:::value"> </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ifPhysAddress1:::value"> </td>
 							<td class="tg-label"><b>eSTB IP:</td>
 							<td class="tg-goodval" data-property-file="read#DEVICE_ADDRESS:::ESTB_IP"> </td>
 						</tr>
@@ -500,27 +500,27 @@
 						</tr>
 						<tr>
 							<td class="tg-label"><b>HDMI:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#OC-STB-HOST-MIB::ocStbHostDVIHDMIConnectionStatus:::value"> </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIConnectionStatus:::value"> </td>
 							<td class="tg-label"><b>HDCP:</td>
-							<td class="tg-goodval" data-property-file="snmp#OC-STB-HOST-MIB::ocStbHostDVIHDMIHostDeviceHDCPStatus:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIHostDeviceHDCPStatus:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>HDMI Audio:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#OC-STB-HOST-MIB::ocStbHostDVIHDMIAudioFormat:::value">Surround</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIAudioFormat:::value">Surround</td>
 							<td class="tg-label"><b>HDMI Device:</td>
-							<td class="tg-goodval" data-property-file="snmp#OC-STB-HOST-MIB::ocStbHostDVIHDMIAttachedDeviceType:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIAttachedDeviceType:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Aspect Ratio:</td>
-							<td class="tg-goodval tg-val" data-property-file="snmp#OC-STB-HOST-MIB::ocStbHostDVIHDMIAspectRatio:::value"> </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIAspectRatio:::value"> </td>
 							<td class="tg-label"><b>Audio PID:</td>
-							<td class="tg-goodval" data-property-file="snmp#OC-STB-HOST-MIB::ocStbHostMpeg2ContentSelectedAudioPID:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostMpeg2ContentSelectedAudioPID:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Resolution:</td>
 							<td class="tg-badval tg-val">720p</td>
 							<td class="tg-label"><b>Video PID:</td>
-							<td class="tg-goodval" data-property-file="snmp#OC-STB-HOST-MIB::ocStbHostMpeg2ContentSelectedVideoPID:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostMpeg2ContentSelectedVideoPID:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Audio Mute:</td>

@@ -18,7 +18,6 @@
 # limitations under the License.
 ##########################################################################
 #
-echo `date` > $logFileLocation
 echo "Content-Type: text/html"
 echo ""
 echo "value:"`/bin/date`

@@ -17,6 +17,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ##########################################################################
+
+
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
+
 if [ ! -f /etc/os-release ]; then
         export SNMPCONFPATH=/mnt/nfs/bin/target-snmp/sbin
 else
@@ -32,6 +42,13 @@ snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 TunerTableData="/tmp/.tunerTable_advanced.json"
 
 read updateType
+
+if  [[ "$updateType" != "get" ]] && [[ "$updateType" != "update" ]]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$updateType" >> $LOG_FILE
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
 
 if [ "$updateType" == "get" ]; then
    echo "Content-Type: text/html"

@@ -19,7 +19,28 @@
 ##########################################################################
 #
 . /etc/device.properties
+
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
 read FILENAME_PROP
+
+if  [[ "$FILENAME_PROP" != "/etc/rmfconfig.ini" ]] && [[ "$FILENAME_PROP" != "/tmp/dsg_flow_stats.txt" ]] \
+&& [[ "$FILENAME_PROP" != "/mnt/nfs/env/apps/ocap-excalibur/config.properties" ]] \
+&& [[ "$FILENAME_PROP" != "DEVICE_ADDRESS" ]] && [[ "$FILENAME_PROP" != "DSG_FLOW_STATS" ]] \
+&& [[ "$FILENAME_PROP" != "MPEOS_VENDOR_INFO" ]] && [[ "$FILENAME_PROP" != "/tmp/.transmissionRate.txt" ]] \
+&& [[ "$FILENAME_PROP" != "/tmp/dsgproxy_server_two_way_status.txt" ]] \
+&& [[ "$FILENAME_PROP" != "/tmp/device_address.txt" ]]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP" >> $LOG_FILE
+    echo "Content-Type: text/html"
+    echo ""
+    exit 0
+fi
+
 meshRateReadInProgress="/tmp/.meshFlag"
 deviceDetailsUpdateFlag="/tmp/.devAddFlag"
 if [ ! -f /etc/os-release ]; then
@@ -27,6 +48,7 @@ if [ ! -f /etc/os-release ]; then
 else
         export SNMPCONFPATH=/tmp
 fi
+
 export MIBS=ALL
 export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib

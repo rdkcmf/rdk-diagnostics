@@ -19,10 +19,27 @@
 ##########################################################################
 #
 
+if [ -f /etc/include.properties ]; then
+    . /etc/include.properties
+fi
+
+if [ -z "$LOG_PATH" ]; then LOG_PATH="/opt/logs" ; fi
+
+LOG_FILE="$LOG_PATH/htmlDiag.log"
+
 read FILENAME
 
 echo "Content-Type: text/html"
 echo ""
+
+
+# Report status of file existense only for which that is intended to be used from diags
+if  [[ "$FILENAME" != "/tmp/stt_received" ]] && [[ "$FILENAME" != "/tmp/si_acquired" ]] \
+&& [[ "$FILENAME" != "/tmp/ip_acquired" ]] ; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME " >> $logFile
+    exit 0
+fi
+
 if [ -f $FILENAME ]; then
     echo "value:OK\n"
 else
