@@ -32,7 +32,7 @@ read ATTRIBUTE
 if [[ "$ATTRIBUTE" != "DSGPROXY_HOST_TIME_ZONE" ]] && [[ "$ATTRIBUTE" != "DSGPROXY_CA_SYSTEM_ID" ]] \
 && [[ "$ATTRIBUTE" != "DSGPROXY_CP_SYSTEM_ID" ]] && [[ "$ATTRIBUTE" != "DSGPROXY_VCTID" ]] \
 && [[ "$ATTRIBUTE" != "DSG UCID Status" ]] && [[ "$ATTRIBUTE" != "DSGPROXY_UCID" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$ATTRIBUTE" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$ATTRIBUTE from `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0

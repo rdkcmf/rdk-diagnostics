@@ -36,7 +36,7 @@ echo "Content-Type: text/html"
 echo ""
 
 if [[ "$PROP" != "BOX_TYPE" ]] && [[ "$PROP" != "CANH" ]] ; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$PROP" >> $logFile
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$PROP from `basename $0`" >> $logFile
     exit 0
 fi
 
@@ -44,6 +44,6 @@ if [ "$PROP" == "BOX_TYPE" ];
 then
     echo "$DEVICE_NAME"
 else 
-    CANH_NO_OF_PAGES=`snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoPage | sed -e "s/=.*//g" | grep "70" | wc -l`
+    CANH_NO_OF_PAGES=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" localhost "OC-STB-HOST-MIB::ocStbHostCCAppInfoPage" | sed -e "s/=.*//g" | grep "70" | wc -l`
     echo "$CANH_NO_OF_PAGES"
 fi

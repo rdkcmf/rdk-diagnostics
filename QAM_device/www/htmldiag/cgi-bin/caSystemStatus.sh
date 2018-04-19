@@ -25,7 +25,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 OID='OC-STB-HOST-MIB::ocStbHostCardBindingStatus.0'
-VALUE=`snmpwalk -OQ -v 2c -c $snmpCommunityVal 127.0.0.1 $OID | sed -e "s/$OID.*=//g"`
+VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID" | sed -e "s/$OID.*=//g"`
 RETURN_VALUE=''
 if [[ $VALUE="^bound" ]]; then
    RETURN_VALUE="value:OK\\n"

@@ -36,7 +36,7 @@ echo ""
 # Report status of file existense only for which that is intended to be used from diags
 if  [[ "$FILENAME" != "/tmp/stt_received" ]] && [[ "$FILENAME" != "/tmp/si_acquired" ]] \
 && [[ "$FILENAME" != "/tmp/ip_acquired" ]] ; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME " >> $logFile
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME from `basename $0`" >> $logFile
     exit 0
 fi
 

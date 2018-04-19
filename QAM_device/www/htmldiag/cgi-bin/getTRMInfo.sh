@@ -29,7 +29,7 @@ logFile="/opt/logs/htmlDiag.log"
 read dataType
 
 if  [[ "$dataType" != "get" ]] && [[ "$dataType" != "update" ]] ; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType" >> $logFile
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType `basename $0`" >> $logFile
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -51,7 +51,7 @@ export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
-snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost TRM-MIB::trm > /tmp/trmHtmlDiagData
+snmpwalk -OQ -v 2c -c "$snmpCommunityVal" localhost "TRM-MIB::trm" > /tmp/trmHtmlDiagData
 
 connectedDev=`cat /tmp/trmHtmlDiagData | grep trmConnectedDevId | cut -d "=" -f2 | cut -c 2-`
 connectedDev="${connectedDev//[$'\t\r\n']}"

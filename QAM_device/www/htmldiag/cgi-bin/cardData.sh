@@ -32,7 +32,7 @@ case "$OID" in
     OC-STB-HOST-MIB::ocStbHostCCAppInfoPage.[0-9]) # Expected input format 
         ;;
     *)
-        echo "`/bin/timestamp` UNEXPECTED VALUE:$OID" >> $logFile 
+        echo "`/bin/timestamp` UNEXPECTED VALUE:$OID from `basename $0`" >> $logFile 
         echo "Content-Type: text/html"
         echo ""
         exit 0 ;;

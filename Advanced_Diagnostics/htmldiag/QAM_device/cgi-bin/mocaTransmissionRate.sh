@@ -39,7 +39,7 @@ else
 fi
 
 
-result=`snmpwalk -Osq -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaMeshTable | \
+result=`snmpwalk -Osq -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaMeshTable" | \
         sed -e "s/mocaMeshTxRate.3.//g" -e "s/\./\", \"RxNode\" : \"/g" \
 		-e "s/^/{\"TxNode\" : \"/" \
         | sed 's/\(.*\) /\1\", \"Value\" : \"/' | sed -e "s/$/\" }, /"`

@@ -44,7 +44,7 @@ read input
 
 echo "$input" | grep -q -v '[\|\;\&\ ]'
 if [ $? -ne 0 ];then
-    echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $input" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $input from `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -128,7 +128,7 @@ case $input in
 esac
 
 if [ -z "$OID" ]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$input " >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$input from `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -172,16 +172,16 @@ elif [ "$OID" = "MOCA20-MIB::mocaIfRFChannel" ] || [ "$OID" = "MOCA11-MIB::mocaI
     VALUE="value: $VALUE\n"
 elif [ "PrimaryChannelFreq" = "$OID" ]; then
     # MOCA20-MIB::mocaIfRFChannel + snmp#MOCA20-MIB:: mocaIfPrimaryChannelOffset
-    rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfRFChannel | sed -e "s|.*(||g" -e "s|).*||g"`
-    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfPrimaryChannelOffset`
+    rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfRFChannel" | sed -e "s|.*(||g" -e "s|).*||g"`
+    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfPrimaryChannelOffset"`
     VALUE=$(($rfChannel + $offset))
     VALUE="value: $VALUE\n"
 elif [ "SecondaryChannelFreq" = "$OID" ]; then
-    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfSecondaryChannelOffset`
+    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfSecondaryChannelOffset"`
     if [ $offset -eq 0 ]; then
         VALUE=0
     else
-        rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfRFChannel | sed -e "s|.*(||g" -e "s|).*||g"`
+        rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfRFChannel" | sed -e "s|.*(||g" -e "s|).*||g"`
         VALUE=$(($rfChannel + $offset))
     fi
     VALUE="value: $VALUE\n"

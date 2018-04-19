@@ -33,7 +33,7 @@ do
         # Sanity checks
         echo "$name" | grep -E "^[A-Za-z]+\." | grep -q -v '[\|\;\&\ ]'
         if [ $? -ne 0 ];then
-            echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $name" >> $LOG_FILE
+            echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $name from `basename $0`" >> $LOG_FILE
             break
         fi
 

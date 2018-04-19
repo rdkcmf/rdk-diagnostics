@@ -39,6 +39,6 @@ then
     BOX_TYPE=`cat /etc/common.properties | grep "BOX_TYPE" | cut -d "=" -f2`
     echo "$BOX_TYPE"
 else 
-    CANH_NO_OF_PAGES=`snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoPage | sed -e "s/=.*//g" | grep "70" | wc -l`
+    CANH_NO_OF_PAGES=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoPage | sed -e "s/=.*//g" | grep "70" | wc -l`
     echo "$CANH_NO_OF_PAGES"
 fi

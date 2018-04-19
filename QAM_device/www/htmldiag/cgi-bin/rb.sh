@@ -23,7 +23,7 @@ logFile="/opt/logs/htmlDiag.log"
 read arg
 
 if [ "$arg" != "wekorwpap" ]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$arg. Ignore device reboot request !!!" >> $logFile
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$arg from `basename $0`. Ignore device reboot request !!!" >> $logFile
     exit 0
 fi
 

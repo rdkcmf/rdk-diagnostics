@@ -44,7 +44,7 @@ read input
 
 echo "$input" | grep -q -v '[\|\;\&\ ]'
 if [ $? -ne 0 ];then
-    echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $input" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE: untrusted input args - $input from `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -170,7 +170,7 @@ case $input in
 esac
 
 if [ -z "$OID" ]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$input " >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$input from `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0

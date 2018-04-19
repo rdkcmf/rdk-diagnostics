@@ -44,7 +44,7 @@ TunerTableData="/tmp/.tunerTable_advanced.json"
 read updateType
 
 if  [[ "$updateType" != "get" ]] && [[ "$updateType" != "update" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$updateType" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$updateType `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -62,11 +62,11 @@ if [ -f /tmp/.tunerTable_advanced.json.pid ] && [ -d /proc/`cat /tmp/.tunerTable
 fi
 echo $$ > /tmp/.tunerTable_advanced.json.pid
 
-response=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostInBandTunerTable | tr -d ' ' \
+response=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostInBandTunerTable | tr -d ' ' \
           | grep -i "TunerTune\|Correct\|TotalTuneCount"`
 response=`echo $response | sed -e "s/ocStbHost/\", \"/g" -e "s/\",/{/1" -e "s/=/\":\"/g"`
 
-COUNTER=`snmpwalk -OQv -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostInBandTunerTotalTuneCount | wc -l`
+COUNTER=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostInBandTunerTotalTuneCount | wc -l`
 
 # Initialize array related to tuner data
 i=0
@@ -78,13 +78,13 @@ while [  $i -lt $COUNTER ]; do
     i=`expr $i + 1`
 done
 
-Mpeg2ProgramNumber=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostMpeg2ContentProgramNumber | sed -e "s/.*\.//g"`
-Mpeg2CCIValue=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostMpeg2ContentCCIValue | sed -e "s/.*\.//g"`
-Mpeg2PCRLockStatus=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostMpeg2ContentPCRLockStatus | sed -e "s/.*\.//g"`
+Mpeg2ProgramNumber=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostMpeg2ContentProgramNumber | sed -e "s/.*\.//g"`
+Mpeg2CCIValue=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostMpeg2ContentCCIValue | sed -e "s/.*\.//g"`
+Mpeg2PCRLockStatus=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostMpeg2ContentPCRLockStatus | sed -e "s/.*\.//g"`
 
-Mpeg4ProgramNumber=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostMpeg4ContentProgramNumber | sed -e "s/.*\.//g"`
-Mpeg4CCIValue=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostMpeg4ContentCCIValue | sed -e "s/.*\.//g"`
-Mpeg4PCRLockStatus=`snmpwalk -OQs -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostMpeg4ContentPCRLockStatus | sed -e "s/.*\.//g"`
+Mpeg4ProgramNumber=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostMpeg4ContentProgramNumber | sed -e "s/.*\.//g"`
+Mpeg4CCIValue=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostMpeg4ContentCCIValue | sed -e "s/.*\.//g"`
+Mpeg4PCRLockStatus=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostMpeg4ContentPCRLockStatus | sed -e "s/.*\.//g"`
 
 #Set the field separator to new line
 IFS=$'\n'

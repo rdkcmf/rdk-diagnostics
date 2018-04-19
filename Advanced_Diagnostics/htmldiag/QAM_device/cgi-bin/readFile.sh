@@ -35,7 +35,7 @@ if  [[ "$FILENAME_PROP" != "/etc/rmfconfig.ini" ]] && [[ "$FILENAME_PROP" != "/t
 && [[ "$FILENAME_PROP" != "MPEOS_VENDOR_INFO" ]] && [[ "$FILENAME_PROP" != "/tmp/.transmissionRate.txt" ]] \
 && [[ "$FILENAME_PROP" != "/tmp/dsgproxy_server_two_way_status.txt" ]] \
 && [[ "$FILENAME_PROP" != "/tmp/device_address.txt" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0

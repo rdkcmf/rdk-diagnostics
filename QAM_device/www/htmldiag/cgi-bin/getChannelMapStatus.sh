@@ -117,7 +117,7 @@ case "$PARAM" in
                       rm -f /tmp/temp.txt
                       ;;
 *)
-                      echo "`/bin/timestamp` UNEXPECTED VALUE:$PARAM" >> $logFile
+                      echo "`/bin/timestamp` UNEXPECTED VALUE:$PARAM `basename $0`" >> $logFile
                       exit 0
                       ;;
 esac

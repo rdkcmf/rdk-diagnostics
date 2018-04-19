@@ -29,7 +29,7 @@ if  [[ "$FILENAME_PROP" != "/etc/rmfconfig.ini" ]] && [[ "$FILENAME_PROP" != "/t
 && [[ "$FILENAME_PROP" != "MPEOS_VENDOR_INFO" ]] && [[ "$FILENAME_PROP" != "/tmp/.transmissionRate.txt" ]] \
 && [[ "$FILENAME_PROP" != "/tmp/dsgproxy_server_two_way_status.txt" ]] \
 && [[ "$FILENAME_PROP" != "/tmp/device_address.txt" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP" >> $logFile
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP from `basename $0`" >> $logFile
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -80,7 +80,7 @@ if [ -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] && 
     fi
 
     if [ -z "$ECM_MAC" ]; then
-       ECM_MAC=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 IF-MIB::ifPhysAddress.2 | cut -d "=" -f2  | cut -d "\"" -f2 | sed 's/ /:/g' | sed 's/://g6'`
+       ECM_MAC=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 "IF-MIB::ifPhysAddress.2" | cut -d "=" -f2  | cut -d "\"" -f2 | sed 's/ /:/g' | sed 's/://g6'`
        sed -i '/^ECM_MAC/d' /tmp/device_address.txt
        echo "ECM_MAC:$ECM_MAC" >> /tmp/device_address.txt
     fi
@@ -91,7 +91,7 @@ fi
 if [ ! -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] && [ ! -f $deviceDetailsUpdateFlag ];
 then
     touch $deviceDetailsUpdateFlag
-    VALUE=`snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost IP-MIB::ipNetToPhysicalPhysAddress.1`
+    VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" localhost "IP-MIB::ipNetToPhysicalPhysAddress.1"`
     estbIp=`echo $VALUE |  sed -e "s/IP-MIB::ipNetToPhysicalPhysAddress.1.//g" -e "s/\"//g" | cut -d '=' -f1`
     # Check for eSTB IP provisioning mode
     echo "$estbIp" | grep -i "ipv4" > /dev/null
@@ -102,10 +102,10 @@ then
         estbIp=`echo "$estbIp" | sed -e 's/:$//'`
     fi
 
-    addr_type=`snmpget -OQv -v 2c -c $snmpCommunityVal 192.168.100.1 .1.3.6.1.2.1.69.1.4.6.0`
+    addr_type=`snmpget -OQv -v 2c -c "$snmpCommunityVal" 192.168.100.1 .1.3.6.1.2.1.69.1.4.6.0`
     if [ "$addr_type" == "ipv6" ]; then
             MAX_FIELD_SEPARATOR_COUNT=7
-            VALUE=`snmpwalk -OQ -v 2c -c $snmpCommunityVal 192.168.100.1 IP-MIB::ipAddressOrigin.ipv6 | grep dhcp | cut -d "\"" -f2`
+            VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 IP-MIB::ipAddressOrigin.ipv6 | grep dhcp | cut -d "\"" -f2`
             fieldSeparatorCount=`echo $VALUE | tr -dc ':' | wc -c`
             if [ $fieldSeparatorCount -gt $MAX_FIELD_SEPARATOR_COUNT ]; then
                # Format IPV6 address in 2 octet format to standard format
@@ -113,7 +113,7 @@ then
             fi
 
     else
-            VALUE=`snmpwalk -OQ -v 2c -c $snmpCommunityVal 192.168.100.1 IP-MIB::ipAdEntAddr | grep -v '127.0.0.1\|192.168\|10.10.10.1' | cut -d "=" -f2 | sed 's/[ /t]*//'`
+            VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 IP-MIB::ipAdEntAddr | grep -v '127.0.0.1\|192.168\|10.10.10.1' | cut -d "=" -f2 | sed 's/[ /t]*//'`
     fi 
     ecmIp=$VALUE
     mocaMac=`ifconfig $MOCA_INTERFACE | grep HWaddr | tr -s ' ' | cut -d ' ' -f5`
@@ -228,7 +228,7 @@ fi
 if [ "$FILENAME" = "/tmp/.transmissionRate.txt" ]
 then
      if [ ! -f $meshRateReadInProgress ]; then
-         snmpwalk -OQ -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaMeshTable &
+         snmpwalk -OQ -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaMeshTable" &
      fi
 fi
 

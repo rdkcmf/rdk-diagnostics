@@ -31,7 +31,7 @@ cableCardData="/tmp/.htmlDiagCableCardData"
 read dataType
 
 if  [[ "$dataType" != "get" ]] && [[ "$dataType" != "update" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType from `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0

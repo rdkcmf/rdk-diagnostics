@@ -29,7 +29,7 @@ LOG_FILE="$LOG_PATH/htmlDiag.log"
 read FILENAME
 
 if [[ "$FILENAME" != '/tmp/tr69MeshOutput.txt' ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME from `basename $0`" >> $LOG_FILE
     echo "Content-Type: text/html"
     echo ""
     exit 0

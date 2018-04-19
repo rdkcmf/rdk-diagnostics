@@ -46,7 +46,7 @@ jsonSuffix="}"
 
 getPlainTextResponse() {
     index=$1
-    plainResponse=`snmpwalk -OQv -v 2c -c $snmpCommunityVal localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoPage | \
+    plainResponse=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostCCAppInfoPage | \
                sed -e 's|<[^>]*>|#|g' -e 's|&nbsp;||g' | tr -s '#'`
     echo $plainResponse
 }
@@ -70,13 +70,13 @@ else
 fi
 
 # Identify the network controller MAC Address
-thisNodeid=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaIfNodeID.3 | tr -d ' '`
-ncNodeid=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaIfNC.3 | tr -d ' '`
+thisNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNodeID.3" | tr -d ' '`
+ncNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNC.3" | tr -d ' '`
 NCMacAddress=""
 if [ $thisNodeid -eq $ncNodeid ]; then
-    NCMacAddress=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaIfMacAddress.3 | tr -d ' '`
+    NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfMacAddress.3" | tr -d ' '`
 else
-    NCMacAddress=`snmpget -OQv -Ir -v 2c -c $snmpCommunityVal localhost $MOCAMIB::mocaNodeMacAddress.3.$ncNodeid | tr -d ' '`
+    NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaNodeMacAddress.3.$ncNodeid" | tr -d ' '`
 fi
 
 data=""
