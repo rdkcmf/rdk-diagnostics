@@ -29,5 +29,7 @@ determineMocaCurrentVersion () {
 }
 
 determineMocaCurrentVersion
+echo "Content-Type: text/html"
+echo ""
 echo "$mocaVersion"
 
