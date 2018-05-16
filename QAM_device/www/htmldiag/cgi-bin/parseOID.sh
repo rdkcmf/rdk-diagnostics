@@ -31,7 +31,7 @@ fi
 
 export MIBS=ALL
 export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib:/usr/local/lib
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 
 
