@@ -21,7 +21,7 @@
 
 . /etc/device.properties
 
-rfcFile="/opt/RFC/.RFC_IPREMOTE.ini"
+rfcFile="/opt/secure/RFC/.RFC_IPREMOTE.ini"
 ctrlmTestFile="/usr/bin/ctrlmTestApp"
 ifconfig="/sbin/ifconfig"
 
