@@ -17,7 +17,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 mocaVersion=`cat /etc/device.properties | grep MOCA_VERSION | cut -d'=' -f2`
 if [ "$mocaVersion" == "" ]; then
     mocaVersion="1.1"

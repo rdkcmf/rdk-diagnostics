@@ -51,6 +51,15 @@ if [ $? -ne 0 ];then
     exit 0
 fi
 
+#Adding MoCA 2.0 Support
+mocaversion=`cat /etc/device.properties | grep MOCA_VERSION | cut -d '=' -f2`
+if [ "$mocaversion" == "2.0" ]; then
+    MOCAMIB=MOCA20-MIB
+else
+    MOCAMIB=MOCA11-MIB
+fi
+
+
 OID=""
 
 case $input in
@@ -93,23 +102,14 @@ case $input in
     ipNetToPhysicalPhysAddress)
     OID="IP-MIB::ipNetToPhysicalPhysAddress.2.ipv4"
     ;;
-    mocaIfEnablev1)
-    OID="MOCA11-MIB::mocaIfEnable"
+    mocaIfEnable)
+    OID="$MOCAMIB::mocaIfEnable"
     ;;
-    mocaIfStatusv1)
-    OID="MOCA11-MIB::mocaIfStatus"
+    mocaIfStatus)
+    OID="$MOCAMIB::mocaIfStatus"
     ;;
-    mocaIfRFChannelv1)
-    OID="MOCA11-MIB::mocaIfRFChannel"
-    ;;
-    mocaIfEnablev2)
-    OID="MOCA20-MIB::mocaIfEnable"
-    ;;
-    mocaIfStatusv2)
-    OID="MOCA20-MIB::mocaIfStatus"
-    ;;
-    mocaIfRFChannelv2)
-    OID="MOCA20-MIB::mocaIfRFChannel"
+    mocaIfRFChannel)
+    OID="$MOCAMIB::mocaIfRFChannel"
     ;;
     mocaIfTurboModeEnable)
     OID="MOCA20-MIB::mocaIfTurboModeEnable"
@@ -141,6 +141,10 @@ if [ "OC-STB-HOST-MIB::ocStbHostCardDaylightSavingsTimeDelta" = "$OID" ]; then
     VALUE=`snmpwalk -Oxv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID" \
     | sed -e "s/HEX-STRING://gI" | tr -d ' '`
     VALUE=`printf "value:%d" "0x${VALUE}"`
+elif [ "PrimaryChannelFreq" = "$OID" ] || [ "SecondaryChannelFreq" = "$OID" ] \
+     || [ $OID = "MOCA20-MIB::mocaIfRFChannel" ] || [ $OID = "MOCA11-MIB::mocaIfRFChannel" ] ; then
+   # Skip for additional processing
+   :
 else
     VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID"`
 fi    
@@ -167,6 +171,21 @@ then
 elif [ "$OID" = "MOCA20-MIB::mocaIfRFChannel" ] || [ "$OID" = "MOCA11-MIB::mocaIfRFChannel" ]; then
     VALUE=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID" | sed -e "s|.*(||g" -e "s|).*||g"`
     VALUE="value: $VALUE\n"
+elif [ "PrimaryChannelFreq" = "$OID" ]; then
+    # MOCA20-MIB::mocaIfRFChannel + snmp#MOCA20-MIB:: mocaIfPrimaryChannelOffset
+    rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfRFChannel" | sed -e "s|.*(||g" -e "s|).*||g"`
+    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfPrimaryChannelOffset"`
+    VALUE=$(($rfChannel + $offset))
+    VALUE="value: $VALUE\n"
+elif [ "SecondaryChannelFreq" = "$OID" ]; then
+    offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfSecondaryChannelOffset"`
+    if [ $offset -eq 0 ]; then
+        VALUE=0
+    else
+        rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "MOCA20-MIB::mocaIfRFChannel" | sed -e "s|.*(||g" -e "s|).*||g"`
+        VALUE=$(($rfChannel + $offset))
+    fi
+    VALUE="value: $VALUE\n"
 else
     REPLACE=`echo "$OID" |  sed -e "s/::/#/g" | cut -d '#' -f2`
     VALUE=`echo $VALUE | sed -e "s/.*$REPLACE.* =/value:/g"`
@@ -183,15 +202,17 @@ else
 
 fi
 
-#Adding MoCA 2.0 Support
-mocaversion=`cat /etc/device.properties | grep MOCA_VERSION | cut -d'=' -f2`
-if [ "$mocaversion" == "2.0" ]; then
-    MOCAMIB=MOCA20-MIB
-else
-    MOCAMIB=MOCA11-MIB
+if [ "$MOCAMIB::mocaIfEnable" = "$OID" ]
+then
+    if [ "$VALUE" = "value: true\n" ]
+    then
+        VALUE="value: Enabled\n"
+    else
+        VALUE="value: Disabled\n"
+    fi
 fi
 
-if [ "$MOCAMIB::mocaIfEnable" = "$OID" ]
+if [ "$MOCAMIB::mocaIfTurboModeEnable" = "$OID" ]
 then
     if [ "$VALUE" = "value: true\n" ]
     then

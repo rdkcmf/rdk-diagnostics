@@ -26,18 +26,6 @@
 		<script type="text/javascript" src="js/moca.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				if(getMocaVersion() === 2.0) {
-				        $('#current-moca-version').attr('data-snmp-oid', 'MOCA20-MIB::mocaIfMocaVersion.3');
-				        $('#moca-privacy').attr('data-snmp-oid', 'MOCA20-MIB::mocaIfPrivacyEnable.3');
-				        $('#frequency-band').attr('data-snmp-oid', 'MOCA20-MIB::mocaIfRFChannel.3');
-				        $('#highest-version-supported').attr('data-snmp-oid', 'MOCA20-MIB::mocaIfMocaVersion.3');
-				        $('#moca-network-status').attr('data-property-file', 'snmp#mocaIfEnablev2:::value');
-				        $('#moca-link-status').attr('data-property-file', 'snmp#mocaIfStatusv2:::value');
-				        $('#moca-device-node-id').attr('data-property-file', 'snmp#mocaIfNodeIDv2:::value');
-				        $('#total-connected-nodes').attr('data-property-file', 'snmp#mocaIfNumNodesv2:::value');
-				        $('#preferred-nc').attr('data-property-file', 'snmp#mocaIfPreferredNCv2:::value');
-				        $('#backup-nc').attr('data-property-file', 'snmp#mocaIfBackupNCv2:::value');
-				}
 			});
 		</script>
 
@@ -54,35 +42,35 @@
 					<table class="tg">
 						<tr>
 							<td class="tg-label tg-singlecol"><b>MoCA Network Status:</b></td>
-							<td class="tg-goodval" id="moca-network-status" data-property-file="snmp#mocaIfEnablev1:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfEnable:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>MoCA Link Status:</td>
-							<td class="tg-goodval" id="moca-link-status" data-property-file="snmp#mocaIfStatusv1:::value"> </td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfStatus:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Network Up-Time:</td>
-							<td class="tg-goodval">TBD</td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfLinkUpTime:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>MoCA MAC:</td>
-							<td class="tg-goodval" id="moca-mac" data-property-file="read#DEVICE_ADDRESS:::MocaMAC"> </td>
+							<td class="tg-goodval" data-property-file="read#DEVICE_ADDRESS:::MocaMAC"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>This Device's Node ID:</td>
-							<td class="tg-goodval" id="moca-device-node-id" data-property-file="snmp#mocaIfNodeIDv1:::value"></td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfNodeID:::value"> </td>
 						</tr>
 						<tr>
-							<td class="tg-label tg-singlecol"><b>Total Connected Nodes:</td>
-							<td class="tg-goodval" id="total-connected-nodes" data-property-file="snmp#mocaIfNumNodesv1:::value"></td>
+							<td class="tg-label tg-singlecol"><b>Connected Nodes:</td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfNumNodes:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Preferred NC:</td>
-							<td class="tg-goodval" id="preferred-nc" data-property-file="snmp#mocaIfPreferredNCv1:::value"></td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfPreferredNC:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Backup NC:</td>
-							<td class="tg-goodval" id="backup-nc" data-property-file="snmp#mocaIfBackupNCv1:::value"></td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfBackupNC:::value"> </td>
 						</tr>
 					</table> <br>
 				</td>
@@ -187,7 +175,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Server:</td>
-                                                        <td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreVersion.0"> </td>
+							<td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreVersion.0"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Protocol Version:</td>
@@ -220,20 +208,20 @@
 							<td>&nbsp;</td>
 						</tr>
 						<tr>
-							<td class="tg-label tg-singlecol"><b>Current MoCA Version:</td>
-							<td class="tg-goodval" id="current-moca-version" data-snmp-oid="MOCA11-MIB::mocaIfMocaVersion.3"> </td>
+							<td class="tg-label tg-singlecol"><b>Device Version:</td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfMocaVersion:::value"> </td>
 						</tr>
 						<tr>
-							<td class="tg-label tg-singlecol"><b>MoCA Privacy:</td>
-							<td class="tg-goodval" id="moca-privacy" data-snmp-oid="MOCA11-MIB::mocaIfPrivacyEnable.3">Disabled</td>
+							<td class="tg-label tg-singlecol"><b>Privacy Setting:</td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfPrivacyEnable:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Frequency Band:</td>
-							<td class="tg-goodval" id="frequency-band" data-snmp-oid="MOCA11-MIB::mocaIfRFChannel.3"> </td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfRFChannel:::value"> </td>
 						</tr>
 						<tr>
-							<td class="tg-label tg-singlecol"><b>Highest Version Supported:</td>
-							<td class="tg-goodval" id="highest-version-supported" data-snmp-oid="MOCA11-MIB::mocaIfMocaVersion.3"> </td>
+							<td class="tg-label tg-singlecol"><b>Network Version:</td>
+							<td class="tg-goodval" data-property-file="snmp#mocaIfNetworkVersion:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Bonded Channels:</td>
@@ -264,7 +252,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>VOD ID:</b></td>
-                                                        <td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreVodId.0"> </td>
+							<td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreVodId.0"> </td>
 						</tr>
 						<tr>
 							<td>&nbsp;</td>

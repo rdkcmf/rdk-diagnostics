@@ -139,6 +139,7 @@ then
 
     ESTB_MAC=`ifconfig -a $ESTB_INTERFACE | grep $ESTB_INTERFACE | tr -s ' ' | cut -d ' ' -f5 | tr -d '\r\n'`
     ECM_MAC=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 IF-MIB::ifPhysAddress.2 | cut -d "=" -f2  | cut -d "\"" -f2 | sed 's/ /:/g' | sed 's/://g6'`
+    IPControl_IP=`cat /tmp/ipMgrInterfaces.txt | grep "IPControl_IP" | cut -d ":" -f2`
 
     echo "ESTB_IP:$estbIp" > /tmp/device_address.txt
     echo "ESTB_MAC:$ESTB_MAC" >> /tmp/device_address.txt

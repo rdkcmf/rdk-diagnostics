@@ -63,20 +63,45 @@ EntitlementStatus=`echo $response | sed -e "s/.*Entitlements\:#//g" | cut -d '#'
 
 #Adding MoCA 2.0 Support
 mocaversion=`cat /etc/device.properties | grep MOCA_VERSION | cut -d'=' -f2`
+modelNum=`cat /etc/device.properties | grep MODEL_NUM | cut -d'=' -f2`
+
+#Process PaceXG1V1 with moca index of 0   
+#Process Broadcom XG with moca index of 3   
+
 if [ "$mocaversion" == "2.0" ]; then
     MOCAMIB=MOCA20-MIB
 else
     MOCAMIB=MOCA11-MIB
 fi
 
+thisNodeid=""
+if [ "$modelNum" == "PX001AN" ]; then
+    thisNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNodeID.0" | tr -d ' '`
+else
+    thisNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNodeID.3" | tr -d ' '`
+fi
+
+ncNodeid=""
+if [ "$modelNum" == "PX001AN" ]; then
+    ncNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNC.0" | tr -d ' '`
+else
+    ncNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNC.3" | tr -d ' '`
+fi
+
 # Identify the network controller MAC Address
-thisNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNodeID.0" | tr -d ' '`
-ncNodeid=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfNC.0" | tr -d ' '`
 NCMacAddress=""
 if [ $thisNodeid -eq $ncNodeid ]; then
-    NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfMacAddress.0" | tr -d ' '`
+    if [ "$modelNum" == "PX001AN" ]; then
+        NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfMacAddress.0" | tr -d ' '`
+    else
+        NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfMacAddress.3" | tr -d ' '`
+    fi
 else
-    NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaNodeMacAddress.0.$ncNodeid" | tr -d ' '`
+    if [ "$modelNum" == "PX001AN" ]; then
+        NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaNodeMacAddress.0.$ncNodeid" | tr -d ' '`
+    else
+        NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaNodeMacAddress.3.$ncNodeid" | tr -d ' '`
+    fi
 fi
 
 data=""

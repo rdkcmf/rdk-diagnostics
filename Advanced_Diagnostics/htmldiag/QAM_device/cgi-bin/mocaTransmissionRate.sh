@@ -38,9 +38,8 @@ else
 fi
 
 
-result=`snmpwalk -Osq -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaMeshTable" | \
-        sed -e "s/mocaMeshTxRate.3.//g" -e "s/\./\", \"RxNode\" : \"/g" \
-		-e "s/^/{\"TxNode\" : \"/" \
+result=`snmpwalk -Osq -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaMeshTable" | grep "mocaMeshTxRate.[03]" | \
+        sed -e "s/mocaMeshTxRate.[03].//g" -e "s/\./\", \"RxNode\" : \"/g" -e "s/^/{\"TxNode\" : \"/" \
         | sed 's/\(.*\) /\1\", \"Value\" : \"/' | sed -e "s/$/\" }, /"`
 
 result=`echo "$result" | tr -d '\n' | sed 's/\(.*\),/\1 /'`

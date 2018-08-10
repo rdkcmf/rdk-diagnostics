@@ -22,19 +22,13 @@
 		<!--#include virtual="/htmldiag2/common/html/header.html" -->
 		<!--#include file="includes/menu.html" -->
 	</head>
-	<body>	
-		<script type="text/javascript" src="js/moca.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				if(getMocaVersion() === 2.0) {
-					$('#mocaStatus').attr('data-property-file', 'snmp#mocaIfStatusv2:::value');
-					$('#this-node-id').attr('data-property-file', 'snmp#mocaIfNodeIDv2:::value');
-					$('#connected-devices').attr('data-property-file', 'snmp#mocaIfNumNodesv2:::value');
-				        $('#network-coordinator').attr('data-property-file', 'snmp#mocaIfNCv2:::value');
-				        $('#backup-nc').attr('data-property-file', 'snmp#mocaIfBackupNCv2:::value');	
-				}
-			});
-		</script>
+
+	<body>
+                <script type="text/javascript" src="js/moca.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function() {
+                    });
+                </script>
 
 		<table id="myTable" class="tg">
 			<tr>
@@ -146,19 +140,19 @@
 						</tr>
 						<tr>
 							<td class="tg-label"><b>MoCA Status:</td>
-							<td class="tg-goodval tg-val" id="mocaStatus" data-property-file="snmp#mocaIfStatusv1:::value"> </td>
+							<td class="tg-goodval tg-val" id="mocaStatus" data-property-file="snmp#mocaIfStatus:::value"> </td>
 							<td class="tg-label"><b>NC Device Type:</td>
 							<td class="tg-badval"> TBD </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>This Node's ID:</td>
-							<td class="tg-goodval tg-val" id="this-node-id" data-property-file="snmp#mocaIfNodeIDv1:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfNodeID:::value"> </td>
 							<td class="tg-label"><b>Connected Devices:</td>
-							<td class="tg-goodval tg-val" id="connected-devices" data-property-file="snmp#mocaIfNumNodesv1:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfNumNodes:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Network Coordinator:</td>
-							<td class="tg-goodval tg-val" id="network-coordinator" data-property-file="snmp#mocaIfNCv1:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfNC:::value"> </td>
 							<td class="tg-label"><b>XRE Status:</td>
 							<td class="tg-goodval tg-val" data-property-file="snmp#xreConnStatus1:::value">  </td>
 						</tr>
@@ -170,7 +164,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label"><b>Backup NC:</td>
-							<td class="tg-goodval tg-val" id="backup-nc" data-property-file="snmp#mocaIfBackupNCv1:::value">  </td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#mocaIfBackupNC:::value"> </td>
 							<td class="tg-label"><b>Connection Established:</td>
 							<td class="tg-goodval tg-val" data-property-file="snmp#xreConnEstTs:::value">  </td>
 						</tr>
@@ -225,7 +219,7 @@
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>DSG Status:</td>
-                                                        <td class="tg-goodval" data-property-file="read#/tmp/dsgproxy_server_two_way_status.txt:::value"> </td>
+							<td class="tg-goodval" data-property-file="read#/tmp/dsgproxy_server_two_way_status.txt:::value"> </td>
 						</tr>
 						<tr>
 							<td class="tg-label tg-singlecol"><b>CM Status:</td>
@@ -281,13 +275,12 @@
 							<td>&nbsp;</td>
 						</tr>
 					</table>
-                                        <table class="tg snmp-get" data-snmp-agent="ecm">
+					<table class="tg snmp-get" data-snmp-agent="ecm">
 						<tr>
 							<td class="tg-label tg-singlecol"><b>Boot File:</td>
 							<td class="tg-goodval" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerConfigFile.0"> </td>
 						</tr>
-
-                                        </table>
+					</table>
 				</td>
 				<td class="tg-vals">
 					<!--- Cable Card Summary --->
@@ -323,13 +316,13 @@
 							<td class="tg-label"><b>Certificate Check:</td>
 							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardCpCertificateCheck.0"> </td>
 							<td class="tg-label"><b>CP System ID:</td>
-                                                        <td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardCpIdList.0" > </td>
+							<td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardCpIdList.0" > </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>CP/CA Status:</td>
-                                                        <td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardBindingStatus.0"> </td>
+							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardBindingStatus.0"> </td>
 							<td class="tg-label"><b>CA System ID:</td>
-                                                        <td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCASystemIdentifier.0" >  </td>
+							<td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCASystemIdentifier.0" >  </td>
 						</tr>
 						<tr>
 							<td class="tg-label"><b>CCard ID:</td>

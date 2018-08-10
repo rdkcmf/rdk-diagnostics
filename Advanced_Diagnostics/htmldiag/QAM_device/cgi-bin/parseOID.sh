@@ -50,6 +50,16 @@ if [ $? -ne 0 ];then
     exit 0
 fi
 
+#Adding MoCA 2.0 Support
+mocaversion=`cat /etc/device.properties | grep MOCA_VERSION | cut -d'=' -f2`
+if [ "$mocaversion" == "2.0" ]; then
+    MOCAMIB=MOCA20-MIB
+else
+    MOCAMIB=MOCA11-MIB
+fi
+
+
+
 OID=""
 
 case $input in
@@ -92,56 +102,41 @@ case $input in
     ipNetToPhysicalPhysAddress)
     OID="IP-MIB::ipNetToPhysicalPhysAddress.2.ipv4"
     ;;
-    mocaIfEnablev1)
-    OID="MOCA11-MIB::mocaIfEnable"
+    mocaIfEnable)
+    OID="$MOCAMIB::mocaIfEnable"
     ;;
-    mocaIfStatusv1)
-    OID="MOCA11-MIB::mocaIfStatus"
+    mocaIfStatus)
+    OID="$MOCAMIB::mocaIfStatus"
     ;;
-    mocaIfRFChannelv1)
-    OID="MOCA11-MIB::mocaIfRFChannel"
+    mocaIfLinkUpTime)
+    OID="$MOCAMIB::mocaIfLinkUpTime"
     ;;
-    mocaIfNodeIDv1)
-    OID="MOCA11-MIB::mocaIfNodeID"
+    mocaIfRFChannel)
+    OID="$MOCAMIB::mocaIfRFChannel"
     ;;
-    mocaIfNumNodesv1)
-    OID="MOCA11-MIB::mocaIfNumNodes"
+    mocaIfNodeID)
+    OID="$MOCAMIB::mocaIfNodeID"
     ;;
-    mocaIfPreferredNCv1)
-    OID="MOCA11-MIB::mocaIfPreferredNC"
+    mocaIfNumNodes)
+    OID="$MOCAMIB::mocaIfNumNodes"
     ;;
-    mocaIfNCv1)
-    OID="MOCA11-MIB::mocaIfNC"
+    mocaIfPreferredNC)
+    OID="$MOCAMIB::mocaIfPreferredNC"
     ;;
-    mocaIfBackupNCv1)
-    OID="MOCA11-MIB::mocaIfBackupNC"
+    mocaIfNC)
+    OID="$MOCAMIB::mocaIfNC"
     ;;
-    mocaIfEnablev2)
-    OID="MOCA20-MIB::mocaIfEnable"
+    mocaIfBackupNC)
+    OID="$MOCAMIB::mocaIfBackupNC"
     ;;
-    mocaIfStatusv2)
-    OID="MOCA20-MIB::mocaIfStatus"
+    mocaIfMocaVersion)
+    OID="$MOCAMIB::mocaIfMocaVersion"
     ;;
-    mocaIfRFChannelv2)
-    OID="MOCA20-MIB::mocaIfRFChannel"
+    mocaIfPrivacyEnable)
+    OID="$MOCAMIB::mocaIfPrivacyEnable"
     ;;
-    mocaIfNodeIDv2)
-    OID="MOCA20-MIB::mocaIfNodeID"
-    ;;
-    mocaIfNumNodesv2)
-    OID="MOCA20-MIB::mocaIfNumNodes"
-    ;;
-    mocaIfPreferredNCv2)
-    OID="MOCA20-MIB::mocaIfPreferredNC"
-    ;;
-    mocaIfNCv2)
-    OID="MOCA20-MIB::mocaIfNC"
-    ;;
-    mocaIfBackupNCv2)
-    OID="MOCA20-MIB::mocaIfBackupNC"
-    ;;
-    mocaIfTurboModeEnable)
-    OID="MOCA20-MIB::mocaIfTurboModeEnable"
+    mocaIfNetworkVersion)
+    OID="$MOCAMIB::mocaIfNetworkVersion"
     ;;
     sysDescr)
     OID="SNMPv2-MIB::sysDescr.0"
@@ -227,6 +222,14 @@ elif [ "SecondaryChannelFreq" = "$OID" ]; then
         VALUE=$(($rfChannel + $offset))
     fi
     VALUE="value: $VALUE\n"
+elif [ "$MOCAMIB::$input" = "$OID" ]; then
+    if [ -z "$VALUE" ]; then
+        VALUE=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID"`
+        echo "`/bin/timestamp` $input :: $VALUE" >> $LOG_FILE
+    else
+       VALUE=`echo $VALUE | cut -d " " -f3`
+    fi
+    VALUE="value: $VALUE\n"
 else
     REPLACE=`echo "$OID" |  sed -e "s/::/#/g" | cut -d '#' -f2`
     VALUE=`echo $VALUE | sed -e "s/.*$REPLACE.* =/value:/g"`
@@ -241,14 +244,6 @@ else
     VALUE=`echo $VALUE | sed  -e "s/service<br>/service\&nbsp;/g" | sed  -e "s/<br>your/\&nbsp;your/g"`
     VALUE=`echo $VALUE\\\n`
 
-fi
-
-#Adding MoCA 2.0 Support
-mocaversion=`cat /etc/device.properties | grep MOCA_VERSION | cut -d'=' -f2`
-if [ "$mocaversion" == "2.0" ]; then
-    MOCAMIB=MOCA20-MIB
-else
-    MOCAMIB=MOCA11-MIB
 fi
 
 if [ "$MOCAMIB::mocaIfEnable" = "$OID" ]
