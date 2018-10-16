@@ -62,7 +62,7 @@ fi
 
 OID=""
 
-case $input in
+case "$input" in
     ocStbHostDVIHDMIHDCPStatus)
     OID="OC-STB-HOST-MIB::ocStbHostDVIHDMIHDCPStatus"
     ;;

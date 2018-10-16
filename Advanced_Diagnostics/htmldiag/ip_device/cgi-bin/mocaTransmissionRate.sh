@@ -26,17 +26,17 @@ RET_VALUE=""
 
 tr69ServerUrl="http://127.0.0.1:10999"
 tmpoutputFile="/tmp/tr69Output.txt"
-cat /dev/null > $tmpoutputFile
-if [ -f $txRateTempFile ];
+
+if [ -f "$txRateTempFile" ];
 then
     exit 0
 fi
 
-touch $txRateTempFile
+touch "$txRateTempFile"
 
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"}]}' "$tr69ServerUrl"
-numberOfEntries=`sed -e 's/.*value"//g' $tmpoutputFile | cut -d ':' -f2 | sed -e 's/}.*//g'`
+numberOfEntries=`sed -e 's/.*value"//g' "$tmpoutputFile" | cut -d ':' -f2 | sed -e 's/}.*//g'`
 
 hostIfQueryPrefix="{\"paramList\" : ["
 hostIfQuerySufix="]}"
@@ -45,7 +45,7 @@ hostIfrequest=""
 # Populaute the txPackets[16] with [NODEis's] = PHYTxRate &
 # rcRate[Nodeid's] = PHYRxRate
 hostIfParameters="{\"name\" : \"Device.MoCA.Interface.1.NodeID\"}"
-for (( i=1; i<=$numberOfEntries; i++ ))
+for (( i=1; i<="$numberOfEntries"; i++ ))
 do
    hostIfParameters="$hostIfParameters, {\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$i.NodeId\"}"
    hostIfParameters="$hostIfParameters, {\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$i.PHYRxRate\"}"
@@ -55,7 +55,6 @@ done
 echo "Content-Type: text/html"
 echo ""
 hostIfrequest="$hostIfQueryPrefix""$hostIfParameters""$hostIfQuerySufix"
-CURL_CMD="curl -o $tmpoutputFile -d '$hostIfrequest' $tr69ServerUrl"
-eval $CURL_CMD
-cat $tmpoutputFile
-rm -f $txRateTempFile
+curl -o "$tmpoutputFile" -d "$hostIfrequest" "$tr69ServerUrl"
+cat "$tmpoutputFile"
+rm -f "$txRateTempFile"

@@ -165,7 +165,7 @@ case $input in
 esac
 
 if [ -z "$OID" ]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$input from `basename $0`" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$input from `basename $0`" >> "$LOG_FILE"
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -178,7 +178,7 @@ if [ "OC-STB-HOST-MIB::ocStbHostCardDaylightSavingsTimeDelta" = "$OID" ]; then
     | sed -e "s/HEX-STRING://gI" | tr -d ' '`
     VALUE=`printf "value:%d" "0x${VALUE}"`
 elif [ "PrimaryChannelFreq" = "$OID" ] || [ "SecondaryChannelFreq" = "$OID" ] \
-     || [ $OID = "MOCA20-MIB::mocaIfRFChannel" ] || [ $OID = "MOCA11-MIB::mocaIfRFChannel" ] ; then
+     || [ "$OID" = "MOCA20-MIB::mocaIfRFChannel" ] || [ "$OID" = "MOCA11-MIB::mocaIfRFChannel" ] ; then
    # Skip for additional processing
    :
 else
@@ -215,7 +215,7 @@ elif [ "PrimaryChannelFreq" = "$OID" ]; then
     VALUE="value: $VALUE\n"
 elif [ "SecondaryChannelFreq" = "$OID" ]; then
     offset=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfSecondaryChannelOffset`
-    if [ $offset -eq 0 ]; then
+    if [ "$offset" -eq 0 ]; then
         VALUE=0
     else
         rfChannel=`snmpwalk -Onv -v 2c -c "$snmpCommunityVal" 127.0.0.1 MOCA20-MIB::mocaIfRFChannel | sed -e "s|.*(||g" -e "s|).*||g"`

@@ -56,7 +56,7 @@ else
     RESPONSE=`echo $RESPONSE | sed -e "s/\"//g"`
     VALUE=`echo $RESPONSE | sed -e "s/$ATTRIBUTE.*//g"`
     count=`echo $VALUE | grep -o "," | wc -l`
-    count=`expr $count + 1`
+    count=$((count + 1))
     VALUE=`echo $RESPONSE | cut -d ',' -f $count`
     VALUE=`echo $VALUE | sed -e "s/(//g"`
     VALUE=`echo $VALUE | sed -e "s/)//g"`

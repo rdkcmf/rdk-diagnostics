@@ -44,7 +44,7 @@ TunerTableData="/tmp/.tunerTable_advanced.json"
 read updateType
 
 if  [[ "$updateType" != "get" ]] && [[ "$updateType" != "update" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$updateType `basename $0`" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$updateType `basename $0`" >> "$LOG_FILE"
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -53,7 +53,7 @@ fi
 if [ "$updateType" == "get" ]; then
    echo "Content-Type: text/html"
    echo ""
-   cat  $TunerTableData
+   cat "$TunerTableData"
    exit 0
 fi
 
@@ -70,12 +70,12 @@ COUNTER=`snmpwalk -OQv -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::o
 
 # Initialize array related to tuner data
 i=0
-while [  $i -lt $COUNTER ]; do
-    eval program_$i=" "
-    eval cci_$i=" "
-    eval pcrLock_$i=" "
-    eval mpeg_$i=" "
-    i=`expr $i + 1`
+while [  "$i" -lt "$COUNTER" ]; do
+    program[i]=" "
+    cci[i]=" "
+    pcrLock[i]=" "
+    mpeg[i]=" "
+    i=$((i + 1))
 done
 
 Mpeg2ProgramNumber=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost OC-STB-HOST-MIB::ocStbHostMpeg2ContentProgramNumber | sed -e "s/.*\.//g"`
@@ -93,22 +93,22 @@ for item in $Mpeg2ProgramNumber
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "program_$((index))='$value'"
-   eval "mpeg_$((index))='Mpeg-2'"
+   program[index]="$value"
+   mpeg[index]="Mpeg-2"
 done
 
 for item in $Mpeg2CCIValue
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "cci_$((index))='$value'"
+   cci[index]="$value"
 done
 
 for item in $Mpeg2PCRLockStatus
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "pcrLock_$((index))='$value'"
+   pcrLock[index]="$value"
 done
 # End of filling mpeg-2 entries
 
@@ -117,22 +117,22 @@ for item in $Mpeg4ProgramNumber
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "program_$((index))='$value'"
-   eval "mpeg_$((index))='Mpeg-4'"
+   program[index]="$value"
+   mpeg[index]="Mpeg-4"
 done
 
 for item in $Mpeg4CCIValue
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "cci_$((index))='$value'"
+   cci[index]="$value"
 done
 
 for item in $Mpeg4PCRLockStatus
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "pcrLock_$((index))='$value'"
+   pcrLock[index]="$value"
 done
 # End of filling mpeg-4 entries
 
@@ -144,23 +144,23 @@ pcrData=""
 mpegData=""
 
 i=1
-while [  $i -le $COUNTER ]; do
-    eval tempPgm="\${program_${i}}"
-    eval tempCci="\${cci_${i}}"
-    eval tempPcr="\${pcrLock_${i}}"
-    eval tempMpeg="\${mpeg_${i}}"
+while [ "$i" -le "$COUNTER" ]; do
+    tempPgm="${program[i]}"
+    tempCci="${cci[i]}"
+    tempPcr="${pcrLock[i]}"
+    tempMpeg="${mpeg[i]}"
 
     programData="$programData \"MPEG Program.$i\" : \"$tempPgm\","
     cciData="$cciData \"CCI.$i\" : \"$tempCci\","
     pcrData="$pcrData \"PCRLockStatus.$i\" : \"$tempPcr\","
     mpegData="$mpegData \"MPEG-Type.$i\" : \"$tempMpeg\","
-    i=`expr $i + 1`
+    i=$((i + 1))
 done
 
 mpegData=`echo $mpegData | sed -e "s/,$//1"`
 
 
-echo "$response \" , $programData $cciData $pcrData $mpegData }"  > $TunerTableData
+echo "$response \" , $programData $cciData $pcrData $mpegData }" > "$TunerTableData"
 
 echo "Content-Type: text/html"
 echo ""

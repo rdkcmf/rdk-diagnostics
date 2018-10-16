@@ -22,13 +22,13 @@
 
 tr69ServerUrl="http://127.0.0.1:"$TR69_HOSTIF_PORT
 tmpoutputFile="/tmp/tr69Output.txt"
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"}]}' "$tr69ServerUrl"
-numberOfEntries=`sed -e 's/.*value"//g' $tmpoutputFile | cut -d ':' -f2 | sed -e 's/}.*//g'`
+numberOfEntries=`sed -e 's/.*value"//g' "$tmpoutputFile" | cut -d ':' -f2 | sed -e 's/}.*//g'`
 
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.NodeID"}]}' "$tr69ServerUrl"
-selfNodeId=`sed -e 's/.*value"//g' $tmpoutputFile | cut -d ':' -f2 | sed -e 's/}.*//g'`
+selfNodeId=`sed -e 's/.*value"//g' "$tmpoutputFile" | cut -d ':' -f2 | sed -e 's/}.*//g'`
 
 hostIfQueryPrefix="{\"paramList\" : ["
 hostIfQuerySufix="]}"
@@ -37,14 +37,14 @@ hostIfParameters=""
 set_flag=0
 echo "Content-Type: text/html"
 echo ""
-for (( i=1; i<=$numberOfEntries; i++ ))
+for (( i=1; i<="$numberOfEntries"; i++ ))
 do
-   cat /dev/null > $tmpoutputFile
-   curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDevice.'$i'.NodeID"}]}' "$tr69ServerUrl"
-   nodeId=`sed -e 's/.*value"//g' $tmpoutputFile | cut -d ':' -f2 | sed -e 's/}.*//g'`
-   if [ $selfNodeId -ne $nodeId ];
+   cat /dev/null > "$tmpoutputFile"
+   curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDevice.'"$i"'.NodeID"}]}' "$tr69ServerUrl"
+   nodeId=`sed -e 's/.*value"//g' "$tmpoutputFile" | cut -d ':' -f2 | sed -e 's/}.*//g'`
+   if [ "$selfNodeId" -ne "$nodeId" ];
    then
-       if [ $set_flag -eq '0' ]; then
+       if [ "$set_flag" -eq '0' ]; then
            hostIfParameters="$hostIfParameters {\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$i.MACAddress\"}"
            hostIfParameters="$hostIfParameters, {\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$i.NodeId\"}"
            set_flag=1
@@ -54,8 +54,7 @@ do
        fi
    fi
 done
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 hostIfrequest="$hostIfQueryPrefix""$hostIfParameters""$hostIfQuerySufix"
-CURL_CMD="curl -o $tmpoutputFile -d '$hostIfrequest' $tr69ServerUrl"
-eval $CURL_CMD
-cat $tmpoutputFile
+curl -o "$tmpoutputFile" -d "$hostIfrequest" "$tr69ServerUrl"
+cat "$tmpoutputFile"

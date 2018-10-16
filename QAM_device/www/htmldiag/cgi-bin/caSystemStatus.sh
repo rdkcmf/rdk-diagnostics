@@ -27,7 +27,7 @@ snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 OID='OC-STB-HOST-MIB::ocStbHostCardBindingStatus.0'
 VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID" | sed -e "s/$OID.*=//g"`
 RETURN_VALUE=''
-if [[ $VALUE="^bound" ]]; then
+if [[ "$VALUE"="^bound" ]]; then
    RETURN_VALUE="value:OK\\n"
 else
    RETURN_VALUE="value:NOT OK\\n"

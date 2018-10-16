@@ -31,24 +31,24 @@ outputFile="/tmp/tr69MeshOutput.txt"
 tmpoutputFile="/tmp/tr69Output.txt"
 running_status=0
 
-if [ ! -f $outputFile ]; then
-   cat /dev/null > $outputFile
+if [ ! -f "$outputFile" ]; then
+   cat /dev/null > "$outputFile"
 fi
 
 if [ -f /tmp/mocaTransmissionRate.pid ]
 then
    pid=`cat /tmp/mocaTransmissionRate.pid`
-   if [ -d /proc/$pid ]
+   if [ -d "/proc/$pid" ]
    then
       running_status=1;
    fi
 fi
 
-if [ $running_status -eq 0 ]; then
+if [ "$running_status" -eq 0 ]; then
 echo "$$" > /tmp/mocaTransmissionRate.pid
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.X_RDKCENTRAL-COM_MeshTableNumberOfEntries"}]}' "$tr69ServerUrl"
-numberOfEntries=`sed -e 's/.*value"//g' $tmpoutputFile | cut -d ':' -f2 | sed -e 's/}.*//g'`
+numberOfEntries=`sed -e 's/.*value"//g' "$tmpoutputFile" | cut -d ':' -f2 | sed -e 's/}.*//g'`
 
 hostIfQueryPrefix="{\"paramList\" : ["
 hostIfQuerySufix="]}"
@@ -57,9 +57,9 @@ hostIfrequest=""
 # Populaute the txPackets[16] with [NODEis's] = PHYTxRate &
 # rcRate[Nodeid's] = PHYRxRate
 hostIfParameters=""
-for (( i=1; i<=$numberOfEntries; i++ ))
+for (( i=1; i<="$numberOfEntries"; i++ ))
 do
-   if [ $i -eq 1 ]; then
+   if [ "$i" -eq 1 ]; then
        hostIfParameters="$hostIfParameters {\"name\" : \"Device.MoCA.Interface.1.X_RDKCENTRAL-COM_MeshTable.$i.MeshTxNodeId\"}"
    else
        hostIfParameters="$hostIfParameters, {\"name\" : \"Device.MoCA.Interface.1.X_RDKCENTRAL-COM_MeshTable.$i.MeshTxNodeId\"}"
@@ -69,11 +69,10 @@ do
    hostIfParameters="$hostIfParameters, {\"name\" : \"Device.MoCA.Interface.1.X_RDKCENTRAL-COM_MeshTable.$i.MeshPHYTxRate\"}"
 done
 
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 
 hostIfrequest="$hostIfQueryPrefix""$hostIfParameters""$hostIfQuerySufix"
-CURL_CMD="curl -o $tmpoutputFile -d '$hostIfrequest' $tr69ServerUrl"
-eval $CURL_CMD
-cp $tmpoutputFile $outputFile
+curl -o "$tmpoutputFile" -d "$hostIfrequest" "$tr69ServerUrl"
+cp "$tmpoutputFile" "$outputFile"
 rm /tmp/mocaTransmissionRate.pid
 fi

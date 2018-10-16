@@ -31,9 +31,9 @@ export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
 OID='OC-STB-HOST-MIB::ocStbHostCardCpAuthKeyStatus.0'
-VALUE=`snmpget -OQ -v 2c -c public 127.0.0.1 $OID | sed -e "s/$OID.*=//g"`
+VALUE=`snmpget -OQ -v 2c -c public 127.0.0.1 "$OID" | sed -e "s/$OID.*=//g"`
 RETURN_VALUE=''
-if [[ $VALUE="^ready" ]]; then
+if [[ "$VALUE"="^ready" ]]; then
    RETURN_VALUE="value:OK\\n"
 else
    RETURN_VALUE="value:NOT OK\\n"

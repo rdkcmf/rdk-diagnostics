@@ -27,7 +27,7 @@ snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 OID='OC-STB-HOST-MIB::ocStbHostCardCpAuthKeyStatus.0'
 VALUE=`snmpget -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID"`
 RETURN_VALUE=''
-if [[ $VALUE="^ready" ]]; then
+if [[ "$VALUE"="^ready" ]]; then
    RETURN_VALUE="value:OK\\n"
 else
    RETURN_VALUE="value:NOT OK\\n"

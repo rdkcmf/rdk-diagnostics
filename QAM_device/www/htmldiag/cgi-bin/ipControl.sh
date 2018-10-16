@@ -34,19 +34,19 @@ if [ -f $rfcFile ]; then
     fi
 fi
 
-if [ -f $tr181TestFile ]; then
+if [ -f "$tr181TestFile" ]; then
     if $tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable 2>&1 > /dev/null|grep -qi "true"; then
         enabled="True"
     fi
 fi
 
-if [ -f $tr181TestFile ]; then
+if [ -f "$tr181TestFile" ]; then
     ip=$($tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.IPAddr 2>&1 > /dev/null)
-fi 
+fi
 
-if [ -f $tr181TestFile ]; then                                      
+if [ -f "$tr181TestFile" ]; then
     mac=$($tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.MACAddr 2>&1 > /dev/null)
-fi 
+fi
 
 echo "Content-Type: text/html"
 echo ""

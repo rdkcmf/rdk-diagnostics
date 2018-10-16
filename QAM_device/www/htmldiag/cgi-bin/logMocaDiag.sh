@@ -19,7 +19,7 @@
 #
 
 logFile="/opt/logs/mocalog.txt"
-echo "`/bin/timestamp` Access MoCA Diagnostics" >> $logFile
+echo "`/bin/timestamp` Access MoCA Diagnostics" >> "$logFile"
 echo "Content-Type: text/html"
 echo ""
 echo "True"

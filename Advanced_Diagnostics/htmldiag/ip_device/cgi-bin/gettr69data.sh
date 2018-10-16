@@ -19,8 +19,6 @@
 ##########################################################################
 tr69ServerUrl="http://127.0.0.1:10999"
 tmpoutputFile="/tmp/tr69Output.txt"
-cat /dev/null > $tmpoutputFile
-
 
 hostIfQueryPrefix="{\"paramList\" : ["
 hostIfQuerySufix="]}"
@@ -37,7 +35,7 @@ do
             break
         fi
 
-        if [ $set_flag -eq '0' ]; then
+        if [ "$set_flag" -eq '0' ]; then
            hostIfParameters="$hostIfParameters {\"name\" : \"$name\"}"
            set_flag=1
         else
@@ -49,10 +47,9 @@ done
 echo "Content-Type: text/html"
 echo ""
 
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 if [ ! -z "$hostIfParameters" ]; then
     hostIfrequest="$hostIfQueryPrefix""$hostIfParameters""$hostIfQuerySufix"
-    CURL_CMD="curl -o $tmpoutputFile -d '$hostIfrequest' $tr69ServerUrl"
-    eval $CURL_CMD
+    curl -o "$tmpoutputFile" -d "$hostIfrequest" "$tr69ServerUrl"
 fi
-cat $tmpoutputFile
+cat "$tmpoutputFile"

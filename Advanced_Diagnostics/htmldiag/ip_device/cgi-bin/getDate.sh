@@ -18,11 +18,11 @@
 # limitations under the License.
 ##########################################################################
 DATE_FILE=/tmp/.firmwareDate.txt
-if [ -f $DATE_FILE ]; then
-    RESULT=`cat $DATE_FILE`
+if [ -f "$DATE_FILE" ]; then
+    RESULT=`cat "$DATE_FILE"`
 else
     RESULT=`date -r /version.txt`
-    echo $RESULT > $DATE_FILE
+    echo $RESULT > "$DATE_FILE"
 fi
 
 echo "Content-Type: text/html"

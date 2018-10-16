@@ -22,7 +22,7 @@ export LD_LIBRARY_PATH=/usr/local/lib:/lib:$LD_LIBRARY_PATH
 
 tr69ServerUrl="http://127.0.0.1:10999"
 
-NC_value=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.NetworkCoordinator"}]}' $tr69ServerUrl`
+NC_value=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.NetworkCoordinator"}]}' "$tr69ServerUrl"`
 NC_value=`echo "$NC_value" | cut -d ":" -f4 | tr -d '{[:alnum:]}'` 
 
 phyTxRate=""
@@ -31,7 +31,7 @@ echo "Content-Type: text/html"
 echo ""
 
 if [ "$NC_value" != "" ]; then
-        phyTxRate=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDevice.$NC_value.PHYTxRate"}]}' $tr69ServerUrl | cut -d ":" -f4 | tr -d '{[:alnum:]}'`
+        phyTxRate=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDevice.$NC_value.PHYTxRate"}]}' "$tr69ServerUrl" | cut -d ":" -f4 | tr -d '{[:alnum:]}'`
 fi
 
 echo $phyTxRate

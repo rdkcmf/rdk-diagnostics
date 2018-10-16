@@ -33,7 +33,7 @@ if  [[ "$FILENAME" != "/tmp/stt_received" ]] && [[ "$FILENAME" != "/tmp/si_acqui
     exit 0
 fi
 
-if [ -f $FILENAME ]; then
+if [ -f "$FILENAME" ]; then
     echo "value:OK\n"
 else
     echo "value:NOT OK\n"

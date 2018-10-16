@@ -47,7 +47,7 @@ fi
 if [ "$updateType" == "get" ]; then
     echo "Content-Type: text/html"
     echo ""
-    cat  $TunerTableData
+    cat "$TunerTableData"
     exit 0
 fi
 
@@ -68,12 +68,12 @@ COUNTER=`echo $totalTuneCount | tr ' ' '\n' | wc -l`
 
 # Initialize array related to tuner data
 i=0
-while [  $i -lt $COUNTER ]; do
-    eval program_$i=" "
-    eval cci_$i=" "
-    eval pcrLock_$i=" "
-    eval mpeg_$i=" "
-    i=`expr $i + 1`
+while [  "$i" -lt "$COUNTER" ]; do
+    program[i]=" "
+    cci[i]=" "
+    pcrLock[i]=" "
+    mpeg[i]=" "
+    i=$((i + 1))
 done
 
 Mpeg2ProgramNumber=`snmpwalk -OQs -v 2c -c "$snmpCommunityVal" localhost "OC-STB-HOST-MIB::ocStbHostMpeg2ContentProgramNumber" | sed -e "s/.*\.//g"`
@@ -91,14 +91,14 @@ for item in $Mpeg2ProgramNumber
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "program_$((index))='$value'"
+   program[index]="$value"
 done
 
 for item in $Mpeg2CCIValue
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "cci_$((index))='$value'"
+   cci[index]="$value"
 done
 
 for item in $Mpeg2PCRLockStatus
@@ -107,8 +107,8 @@ do
    value=`echo $item | cut -d '=' -f2`
    echo "$value" | grep -i 'locked' > /dev/null
    if [ $? -eq 0 ]; then
-       eval "pcrLock_$((index))='$value'"
-       eval "mpeg_$((index))='Mpeg-2'"
+       pcrLock[index]="$value"
+       mpeg[index]="Mpeg-2"
    fi
 done
 # End of filling mpeg-2 entries
@@ -118,10 +118,10 @@ done
 for item in $Mpeg4ProgramNumber
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
-   eval tempPgm="\${program_${index}}"
+   tempPgm="${program[index]}"
    if [ "x$tempPgm" == "x " ]; then
        value=`echo $item | cut -d '=' -f2`
-       eval "program_$((index))='$value'"
+       program[index]="$value"
    fi
 done
 
@@ -129,7 +129,7 @@ for item in $Mpeg4CCIValue
 do
    index=`echo $item | cut -d '=' -f1 | tr -d ' '`
    value=`echo $item | cut -d '=' -f2`
-   eval "cci_$((index))='$value'"
+   cci[index]="$value"
 done
 
 for item in $Mpeg4PCRLockStatus
@@ -138,8 +138,8 @@ do
    value=`echo $item | cut -d '=' -f2`
    echo "$value" | grep -i 'locked' > /dev/null
    if [ $? -eq 0 ]; then
-       eval "pcrLock_$((index))='$value'"
-       eval "mpeg_$((index))='Mpeg-4'"
+       pcrLock[index]="$value"
+       mpeg[index]="Mpeg-4"
    fi
 done
 # End of filling mpeg-4 entries
@@ -155,17 +155,17 @@ pcrData=""
 mpegData=""
 
 i=1
-while [  $i -le $COUNTER ]; do
-    eval tempPgm="\${program_${i}}"
-    eval tempCci="\${cci_${i}}"
-    eval tempPcr="\${pcrLock_${i}}"
-    eval tempMpeg="\${mpeg_${i}}"
+while [ "$i" -le "$COUNTER" ]; do
+    tempPgm="${program[i]}"
+    tempCci="${cci[i]}"
+    tempPcr="${pcrLock[i]}"
+    tempMpeg="${mpeg[i]}"
 
     programData="$programData \"$tempPgm\","
     cciData="$cciData \"$tempCci\","
     pcrData="$pcrData \"$tempPcr\","
     mpegData="$mpegData \"$tempMpeg\","
-    i=`expr $i + 1`
+    i=$((i + 1))
 done
 
 programData=`echo $programData | sed -e "s/,$//1"`
@@ -183,7 +183,7 @@ data="$data \"mpegProgram\" : [$programData],"
 data="$data \"CCI\" : [$cciData]," 
 data="$data \"mpeg\" : [$mpegData]}" 
 
-echo  "$data" > $TunerTableData
+echo "$data" > "$TunerTableData"
 echo "Content-Type: text/html"
 echo ""
 echo "Complete"

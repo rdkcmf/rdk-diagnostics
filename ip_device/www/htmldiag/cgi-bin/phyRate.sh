@@ -24,13 +24,13 @@ export LD_LIBRARY_PATH=/usr/local/lib:/lib:$LD_LIBRARY_PATH
 
 tr69ServerUrl="http://127.0.0.1:"$TR69_HOSTIF_PORT
 tmpoutputFile="/tmp/mocaParams.txt"
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"}]}' "$tr69ServerUrl"
-numberOfEntries=`sed -e 's/.*value"//g' $tmpoutputFile | cut -d ':' -f2 | sed -e 's/}.*//g'`
+numberOfEntries=`sed -e 's/.*value"//g' "$tmpoutputFile" | cut -d ':' -f2 | sed -e 's/}.*//g'`
 
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 
-NC_value=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.NetworkCoordinator"}]}' $tr69ServerUrl`
+NC_value=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.NetworkCoordinator"}]}' "$tr69ServerUrl"`
 NC_value=`echo "$NC_value" | cut -d ":" -f4 | tr -d '{[]}'` 
 
 echo "Content-Type: text/html"
@@ -38,19 +38,19 @@ echo ""
 
 if [ "$NC_value" != "" ]; then
 	ncAssociatedIndex=17 # Initializing to invalid Moca Index (MoCA supports max 16 nodes)
-        for (( index=1; index<=$numberOfEntries; index++ ))
+        for (( index=1; index<="$numberOfEntries"; index++ ))
         do
             value=`curl -d "{\"paramList\" : [\
-{\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$index.NodeID\"}]}" $tr69ServerUrl`
+{\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$index.NodeID\"}]}" "$tr69ServerUrl"`
             value=`echo "$value" | cut -d ":" -f4 | tr -d '{[]}'`
-            if [ $value -eq $NC_value ]; then
-                ncAssociatedIndex=$index
+            if [ "$value" -eq "$NC_value" ]; then
+                ncAssociatedIndex="$index"
                 break
             fi
        done
 fi        
 phyTxRate=""
-if [ $ncAssociatedIndex -ne 17 ]; then
-	phyTxRate=`curl -d "{\"paramList\" : [{\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$ncAssociatedIndex.PHYTxRate\"}]}" $tr69ServerUrl | cut -d ":" -f4 | tr -d '{[]}'`
+if [ "$ncAssociatedIndex" -ne 17 ]; then
+	phyTxRate=`curl -d "{\"paramList\" : [{\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$ncAssociatedIndex.PHYTxRate\"}]}" "$tr69ServerUrl" | cut -d ":" -f4 | tr -d '{[]}'`
 fi
 echo $phyTxRate

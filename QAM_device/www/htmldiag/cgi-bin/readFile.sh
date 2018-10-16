@@ -29,7 +29,7 @@ if  [[ "$FILENAME_PROP" != "/etc/rmfconfig.ini" ]] && [[ "$FILENAME_PROP" != "/t
 && [[ "$FILENAME_PROP" != "MPEOS_VENDOR_INFO" ]] && [[ "$FILENAME_PROP" != "/tmp/.transmissionRate.txt" ]] \
 && [[ "$FILENAME_PROP" != "/tmp/dsgproxy_server_two_way_status.txt" ]] \
 && [[ "$FILENAME_PROP" != "/tmp/device_address.txt" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP from `basename $0`" >> $logFile
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$FILENAME_PROP from `basename $0`" >> "$logFile"
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -49,14 +49,14 @@ export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
 
-if [ -f $FILENAME_PROP ]
+if [ -f "$FILENAME_PROP" ]
 then 
     FILENAME="$FILENAME_PROP"
 else
-    FILENAME=`cat /opt/www/htmldiag/fileLocation.properties | grep $FILENAME_PROP | cut -d "=" -f2`
+    FILENAME=`cat /opt/www/htmldiag/fileLocation.properties | grep "$FILENAME_PROP" | cut -d "=" -f2`
 fi
 
-if [ ! -f $deviceDetailsUpdateFlag ]; then
+if [ ! -f "$deviceDetailsUpdateFlag" ]; then
     if [ -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] ; then
         ESTB_IP=`cat /tmp/device_address.txt | grep "ESTB_IP" | cut -d ':' -f2`
         ECM_IP=`cat /tmp/device_address.txt | grep "ECM_IP" | cut -d ':' -f2`
@@ -69,12 +69,12 @@ if [ ! -f $deviceDetailsUpdateFlag ]; then
 fi
 
 
-if [ -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] && [ ! -f $deviceDetailsUpdateFlag ]; then
-    touch $deviceDetailsUpdateFlag
+if [ -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] && [ ! -f "$deviceDetailsUpdateFlag" ]; then
+    touch "$deviceDetailsUpdateFlag"
     ESTB_MAC=`cat /tmp/device_address.txt | grep "ESTB_MAC" | cut -d ':' -f2`
     ECM_MAC=`cat /tmp/device_address.txt | grep "ECM_MAC" | cut -d ':' -f2`
     if [ -z "$ESTB_MAC" ]; then
-       ESTB_MAC=`ifconfig -a $ESTB_INTERFACE | grep $ESTB_INTERFACE | tr -s ' ' | cut -d ' ' -f5 | tr -d '\r\n'`
+       ESTB_MAC=`ifconfig -a "$ESTB_INTERFACE" | grep "$ESTB_INTERFACE" | tr -s ' ' | cut -d ' ' -f5 | tr -d '\r\n'`
        sed -i '/^ESTB_MAC/d' /tmp/device_address.txt
        echo "ESTB_MAC:$ESTB_MAC" >> /tmp/device_address.txt
     fi
@@ -84,13 +84,13 @@ if [ -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] && 
        sed -i '/^ECM_MAC/d' /tmp/device_address.txt
        echo "ECM_MAC:$ECM_MAC" >> /tmp/device_address.txt
     fi
-    rm -f $deviceDetailsUpdateFlag
+    rm -f "$deviceDetailsUpdateFlag"
 
 fi
 
-if [ ! -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] && [ ! -f $deviceDetailsUpdateFlag ];
+if [ ! -f /tmp/device_address.txt ] && [ "$FILENAME" != "/etc/rmfconfig.ini" ] && [ ! -f "$deviceDetailsUpdateFlag" ];
 then
-    touch $deviceDetailsUpdateFlag
+    touch "$deviceDetailsUpdateFlag"
     VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" localhost "IP-MIB::ipNetToPhysicalPhysAddress.1"`
     estbIp=`echo $VALUE |  sed -e "s/IP-MIB::ipNetToPhysicalPhysAddress.1.//g" -e "s/\"//g" | cut -d '=' -f1`
     # Check for eSTB IP provisioning mode
@@ -107,7 +107,7 @@ then
             MAX_FIELD_SEPARATOR_COUNT=7
             VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 IP-MIB::ipAddressOrigin.ipv6 | grep dhcp | cut -d "\"" -f2`
             fieldSeparatorCount=`echo $VALUE | tr -dc ':' | wc -c`
-            if [ $fieldSeparatorCount -gt $MAX_FIELD_SEPARATOR_COUNT ]; then
+            if [ "$fieldSeparatorCount" -gt "$MAX_FIELD_SEPARATOR_COUNT" ]; then
                # Format IPV6 address in 2 octet format to standard format
                VALUE=`echo $VALUE | sed -e 's/://g' -e 's/..../&:/g' -e 's/:$//'`
             fi
@@ -115,16 +115,16 @@ then
     else
             VALUE=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 IP-MIB::ipAdEntAddr | grep -v '127.0.0.1\|192.168\|10.10.10.1' | cut -d "=" -f2 | sed 's/[ /t]*//'`
     fi 
-    ecmIp=$VALUE
-    mocaMac=`ifconfig $MOCA_INTERFACE | grep HWaddr | tr -s ' ' | cut -d ' ' -f5`
+    ecmIp="$VALUE"
+    mocaMac=`ifconfig "$MOCA_INTERFACE" | grep HWaddr | tr -s ' ' | cut -d ' ' -f5`
     if [ -f /tmp/estb_ipv4 ]; then
-        mocaIp=`ifconfig $MOCA_INTERFACE | grep inet | tr -s ' ' | cut -d ' ' -f3 | sed -e 's/addr://g'`
+        mocaIp=`ifconfig "$MOCA_INTERFACE" | grep inet | tr -s ' ' | cut -d ' ' -f3 | sed -e 's/addr://g'`
     else
         # Convert MoCA IP to zero padded format
-        MOCA_IP=`ifconfig $MOCA_INTERFACE | grep 'Scope:Global' | tr -s ' ' | cut -d ' ' -f4 \
+        MOCA_IP=`ifconfig "$MOCA_INTERFACE" | grep 'Scope:Global' | tr -s ' ' | cut -d ' ' -f4 \
             | cut -d '/' -f1 | sed -e 's/::/:0:0:/g' -e 's/:/ /g'`
         tempIpv6Addr=""
-        for unpaddedAddr in $MOCA_IP
+        for unpaddedAddr in "$MOCA_IP"
         do
             zeroPaddedAddr=`printf "%04x" 0x${unpaddedAddr}`
             if [ "$tempIpv6Addr" ]; then
@@ -137,7 +137,7 @@ then
         mocaIp=`echo $tempIpv6Addr`
     fi
 
-    ESTB_MAC=`ifconfig -a $ESTB_INTERFACE | grep $ESTB_INTERFACE | tr -s ' ' | cut -d ' ' -f5 | tr -d '\r\n'`
+    ESTB_MAC=`ifconfig -a "$ESTB_INTERFACE" | grep "$ESTB_INTERFACE" | tr -s ' ' | cut -d ' ' -f5 | tr -d '\r\n'`
     ECM_MAC=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 192.168.100.1 IF-MIB::ifPhysAddress.2 | cut -d "=" -f2  | cut -d "\"" -f2 | sed 's/ /:/g' | sed 's/://g6'`
     IPControl_IP=`cat /tmp/ipMgrInterfaces.txt | grep "IPControl_IP" | cut -d ":" -f2`
 
@@ -147,7 +147,7 @@ then
     echo "ECM_MAC:$ECM_MAC" >> /tmp/device_address.txt
     echo "MocaMAC:$mocaMac" >> /tmp/device_address.txt
     echo "MocaIP:$mocaIp" >> /tmp/device_address.txt
-    rm -f $deviceDetailsUpdateFlag
+    rm -f "$deviceDetailsUpdateFlag"
 fi
 
 RESULT=""
@@ -177,10 +177,10 @@ i=0
 if [ "$FILENAME" = "/etc/rmfconfig.ini" ]; then
     RESULT=`cat /etc/rmfconfig.ini | grep "dvr.info.tsb.maxDuration" | sed -e 's/=/:/g'`
 else
-    touch $meshRateReadInProgress
+    touch "$meshRateReadInProgress"
     while read LINE
     do
-        i=`expr $i + 1`
+        i=$((i + 1))
         if [ "$FILENAME" = "/tmp/dsg_flow_stats.txt" ]
         then
             TEMP=`echo $LINE | grep "Selected"`
@@ -197,13 +197,13 @@ else
         fi
         RESULT="$RESULT$LINE\n"
 
-    done < $FILENAME
-    rm -f $meshRateReadInProgress
+    done < "$FILENAME"
+    rm -f "$meshRateReadInProgress"
 fi
 
 echo "Content-Type: text/html"
 echo ""
-if [ $i -eq 1 ]; then
+if [ "$i" -eq 1 ]; then
     echo "value:$RESULT"
 else
     echo "$RESULT"
@@ -219,7 +219,7 @@ fi
 
 if [ "$FILENAME" = "/tmp/.transmissionRate.txt" ]
 then
-     if [ ! -f $meshRateReadInProgress ]; then
+     if [ ! -f "$meshRateReadInProgress" ]; then
          snmpwalk -OQ -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaMeshTable" &
      fi
 fi

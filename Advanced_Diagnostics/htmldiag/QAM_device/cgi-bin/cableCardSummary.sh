@@ -90,7 +90,7 @@ fi
 
 # Identify the network controller MAC Address
 NCMacAddress=""
-if [ $thisNodeid -eq $ncNodeid ]; then
+if [ "$thisNodeid" -eq "$ncNodeid" ]; then
     if [ "$modelNum" == "PX001AN" ]; then
         NCMacAddress=`snmpget -OQv -Ir -v 2c -c "$snmpCommunityVal" localhost "$MOCAMIB::mocaIfMacAddress.0" | tr -d ' '`
     else
@@ -115,7 +115,7 @@ data="$data \"CCId\":\"$CCId\" ,"
 data="$data \"NCMac\":\"$NCMacAddress\" ,"
 data="$data \"EntitlementStatus\":\"$EntitlementStatus\"  $jsonSuffix"
 
-echo $data > $cableCardData
+echo $data > "$cableCardData"
 
 echo "Content-Type: text/html"
 echo ""

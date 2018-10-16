@@ -41,7 +41,7 @@ do
         TEMP=`echo "$TEMP" | sed -e 's/Path://g' |  sed -e 's/Packets://g'`
         RESULT="$RESULT$TEMP\n"
     fi
-done < $FILENAME
+done < "$FILENAME"
 
 echo "Content-Type: text/html"
 echo ""

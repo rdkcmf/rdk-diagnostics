@@ -23,11 +23,11 @@ logFile="/opt/logs/htmlDiag.log"
 read arg
 
 if [ "$arg" != "wekorwpap" ]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$arg. Ignore ctrlm reboot request !!!" >> $logFile
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$arg. Ignore ctrlm reboot request !!!" >> "$logFile"
     exit 0
 fi
 
-echo "CtrlmRebootReason: ($0) Restarting ctrlm from HTML diagnostics ..!" >> $logFile
+echo "CtrlmRebootReason: ($0) Restarting ctrlm from HTML diagnostics ..!" >> "$logFile"
 
 if [ -f /usr/bin/ctrlmTestApp ]; then
     /usr/bin/ctrlmTestApp -r

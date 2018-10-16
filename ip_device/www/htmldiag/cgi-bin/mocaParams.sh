@@ -26,30 +26,30 @@ tmpoutputFile="/tmp/mocaParams.txt"
 
 tr69ServerUrl="http://127.0.0.1:"$TR69_HOSTIF_PORT
 
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 curl -o "$tmpoutputFile" -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.AssociatedDeviceNumberOfEntries"}]}' "$tr69ServerUrl"
-numberOfEntries=`sed -e 's/.*value"//g' $tmpoutputFile | cut -d ':' -f2 | sed -e 's/}.*//g'`
+numberOfEntries=`sed -e 's/.*value"//g' "$tmpoutputFile" | cut -d ':' -f2 | sed -e 's/}.*//g'`
 
-cat /dev/null > $tmpoutputFile
+cat /dev/null > "$tmpoutputFile"
 
 if [ ! -f /tmp/.mocaParams ]; then
-    NC_value=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.NetworkCoordinator"}]}' $tr69ServerUrl`
+    NC_value=`curl -d '{"paramList" : [{"name" : "Device.MoCA.Interface.1.NetworkCoordinator"}]}' "$tr69ServerUrl"`
     NC_value=`echo "$NC_value" | cut -d ":" -f4 | tr -d '{[]}'` 
 
     if [ "$NC_value" != "" ]; then
         ncAssociatedIndex=17 # Initializing to invalid Moca Index (MoCA supports max 16 nodes)
-        for (( index=1; index<=$numberOfEntries; index++ ))
+        for (( index=1; index<="$numberOfEntries"; index++ ))
         do
             value=`curl -d "{\"paramList\" : [\
-{\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$index.NodeID\"}]}" $tr69ServerUrl`
+{\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$index.NodeID\"}]}" "$tr69ServerUrl"`
             value=`echo "$value" | cut -d ":" -f4 | tr -d '{[]}'` 
-            if [ $value -eq $NC_value ]; then
-                ncAssociatedIndex=$index
+            if [ "$value" -eq "$NC_value" ]; then
+                ncAssociatedIndex="$index"
                 break
             fi
        done
 
-       if [ $ncAssociatedIndex -ne 17 ]; then
+       if [ "$ncAssociatedIndex" -ne 17 ]; then
            curl -o "$tmpoutputFile" -d  "{\"paramList\" : [\
 {\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$ncAssociatedIndex.RxPowerLevel\"},\
 {\"name\" : \"Device.MoCA.Interface.1.AssociatedDevice.$ncAssociatedIndex.TxPowerControlReduction\"},\
@@ -62,6 +62,6 @@ fi
 
 echo "Content-Type: text/html"
 echo ""
-cat $tmpoutputFile
+cat "$tmpoutputFile"
 
 #rm -f /tmp/.mocaParams

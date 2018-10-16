@@ -31,7 +31,7 @@ cableCardData="/tmp/.htmlDiagCableCardData"
 read dataType
 
 if  [[ "$dataType" != "get" ]] && [[ "$dataType" != "update" ]]; then
-    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType from `basename $0`" >> $LOG_FILE
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$dataType from `basename $0`" >> "$LOG_FILE"
     echo "Content-Type: text/html"
     echo ""
     exit 0
@@ -42,7 +42,7 @@ if [ "$dataType" == "get" ]; then
     if [ -f $cableCardData ]; then
         echo "Content-Type: text/html"
         echo ""
-        cat $cableCardData
+        cat "$cableCardData"
         exit 0
     fi
 fi
@@ -74,7 +74,7 @@ data=""
 isFirst=true
 for menu in $subMenuNames
 do
-    if $isFirst ; then
+    if "$isFirst" ; then
         data="{\"header\":\"$menu\","
         isFirst=false
     else 
@@ -94,7 +94,7 @@ do
   
     data="$data \"value\":\"$VALUE\"}"
     
-    index=`expr $index + 1`
+    index=$((index + 1))
 done
 
 echo "$jsonPrefix $data $jsonSuffix" > $cableCardData

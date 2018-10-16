@@ -40,28 +40,28 @@ fi
 
 case "$PARAM" in
 "SI State")           if [ -f /tmp/si_acquired ]
-                      then 
+                      then
                           echo "value:Acquired\\n"
-                      else 
+                      else
                           echo "value:Not Acquired\\n"
                       fi
                       ;;
-"SI Cache")           isSiCacheEnabled=`cat $MPEV_FILE_LOCATION | grep SITP.SI.CACHE.ENABLED=TRUE`  
-                      if [ "SITP.SI.CACHE.ENABLED=TRUE" = $isSiCacheEnabled ]
-                      then 
+"SI Cache")           isSiCacheEnabled=`cat "$MPEV_FILE_LOCATION" | grep SITP.SI.CACHE.ENABLED=TRUE`
+                      if [ "SITP.SI.CACHE.ENABLED=TRUE" = "$isSiCacheEnabled" ]
+                      then
                           echo "value:Enabled\\n"
                       else
-                          echo "value:Disabled\\n" 
+                          echo "value:Disabled\\n"
                       fi
                       ;;
 "Cache Status")       siCacheEnabledValue=''
-		      if [ -f $MPEV_FILE_LOCATION ]
-		      then 
-			  siCacheEnabledValue=`cat $MPEV_FILE_LOCATION | grep SITP.SI.CACHE.ENABLED=TRUE`
+		      if [ -f "$MPEV_FILE_LOCATION" ]
+		      then
+			  siCacheEnabledValue=`cat "$MPEV_FILE_LOCATION" | grep SITP.SI.CACHE.ENABLED=TRUE`
 		      fi
 
-                      if [[ "SITP.SI.CACHE.ENABLED=TRUE" == $siCacheEnabledValue ]] \
-                         && [ -f $PERSISTENT_DIR/si/SICache ] && [ -f $PERSISTENT_DIR/si/SISNSCache ]
+                      if [[ "SITP.SI.CACHE.ENABLED=TRUE" == "$siCacheEnabledValue" ]] \
+                         && [ -f "$PERSISTENT_DIR/si/SICache" ] && [ -f "$PERSISTENT_DIR/si/SISNSCache" ]
                       then
                           echo "value:Cached\\n"
                       else
@@ -76,37 +76,37 @@ case "$PARAM" in
                           echo "value:Not Received\\n"
                       fi
                       ;;
-"Min Frequency")      
+"Min Frequency")
                       MIN=0
                       INIT_FLAG=0
                       while read LINE
                       do
                           if [ ! -z "$LINE" -a "$LINE" != " " ];
                           then
-                              temp=$LINE
-                              if [ $INIT_FLAG -eq 0 ];
+                              temp="$LINE"
+                              if [ "$INIT_FLAG" -eq 0 ];
                               then
-                                  MIN=$temp
+                                  MIN="$temp"
                                   INIT_FLAG=1
                               fi
-                              if [ $temp -lt $MIN ]
+                              if [ "$temp" -lt "$MIN" ]
                               then
-                                  MIN=$temp
+                                  MIN="$temp"
                               fi
                           fi
                       done < /tmp/temp.txt
                       echo "value:$MIN\\n"
                       ;;
-"Max Frequency")      
+"Max Frequency")
                       MAX=0
                       while read LINE
                       do
                           if [ ! -z "$LINE" -a "$LINE" != " " ];
                           then
-                              temp=$LINE
-                              if [ $temp -gt $MAX ]
+                              temp="$LINE"
+                              if [ "$temp" -gt "$MAX" ]
                               then
-                                  MAX=$temp
+                                  MAX="$temp"
                               fi
                           fi
                       done < /tmp/temp.txt
@@ -117,7 +117,7 @@ case "$PARAM" in
                       rm -f /tmp/temp.txt
                       ;;
 *)
-                      echo "`/bin/timestamp` UNEXPECTED VALUE:$PARAM `basename $0`" >> $logFile
+                      echo "`/bin/timestamp` UNEXPECTED VALUE:$PARAM `basename $0`" >> "$logFile"
                       exit 0
                       ;;
 esac
