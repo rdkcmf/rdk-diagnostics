@@ -36,10 +36,9 @@ fi
 
 if [ -f $tr181TestFile ]; then
     if $tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable 2>&1 > /dev/null|grep -qi "true"; then
-        enabled="True"
-    fi
+        enabled="True"                                                                                                   
+    fi                                                                                                                   
 fi
-
 if [ -f $tr181TestFile ]; then
     ip=$($tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.IPAddr 2>&1 > /dev/null)
 fi 

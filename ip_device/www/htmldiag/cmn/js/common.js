@@ -146,6 +146,8 @@ comcast.page = function() {
                    $('.nav-other').unbind();
                 } else if ( "nav-wifi-details" == thisClass ) {
                    $('.nav-wifi').unbind();
+                } else if ( "nav-remotes-ip" == thisClass || "nav-remotes-reboot" == thisClass ) {
+                   $('.nav-remotes').unbind();
                 }
                 var navFocusedLink = $(this).children('a').attr('href');
                 var refLink = $("#nav li." + navElementId + " a").attr("href");

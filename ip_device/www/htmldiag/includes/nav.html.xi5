@@ -85,6 +85,13 @@ $(function() {
             <li id="moca-disabled" class="nav-moca-disable" style="display:none"><a href="moca_disabled.html">MoCA</a></li>
         </ul>
      </li>
+    <li class="nav-remotes">
+        <a class="top-level" href="remotes_ip.html">Remote Controls</a>
+        <ul>
+            <li class="nav-remotes-ip"><a href="remotes_ip.html">IP Control</a></li>
+            <li class="nav-remotes-reboot"><a href="remotes_reboot.html">Reboot Ctrlm</a></li>
+        </ul>
+    </li>
     <li class="nav-other">
         <a class="top-level" href="summary_other.html">Other</a>
         <ul>

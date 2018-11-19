@@ -21,33 +21,21 @@
 
 . /etc/device.properties
 
-rfcFile="/opt/secure/RFC/.RFC_IPREMOTE.ini"
-tr181TestFile="/usr/bin/tr181Set"
+tr181Set="/usr/bin/tr181Set"
 
-enabled="False"
-ip="Unknown"
-mac="Unknown"
-
-if [ -f $rfcFile ]; then
-    if grep -q 'RFC_ENABLE_IPREMOTE=true' $rfcFile; then
-        enabled="True"
-    fi
+if $tr181Set  Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable 2>&1 > /dev/null|grep -q "true"; then
+    $tr181Set -s -v false Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable > /dev/null 2>&1
+else
+    $tr181Set -s -v true Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable > /dev/null 2>&1
 fi
 
-if [ -f $tr181TestFile ]; then
-    if $tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable 2>&1 > /dev/null|grep -qi "true"; then
-        enabled="True"
-    fi
+echo "RebootReason: ($0) Restarting STB from HTML diagnostics ..!" >> /opt/logs/rebootInfo.log
+
+if [ -f /rebootNow.sh ] ; then
+    sh /rebootNow.sh -s htmlDiagnostics
 fi
-
-if [ -f $tr181TestFile ]; then
-    ip=$($tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.IPAddr 2>&1 > /dev/null)
-fi 
-
-if [ -f $tr181TestFile ]; then                                      
-    mac=$($tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.MACAddr 2>&1 > /dev/null)
-fi 
 
 echo "Content-Type: text/html"
 echo ""
-echo "{\"enabled\":\"$enabled\",\"ip\":\"$ip\",\"mac\":\"$mac\"}"
+echo "Success!"
+echo "\\n"

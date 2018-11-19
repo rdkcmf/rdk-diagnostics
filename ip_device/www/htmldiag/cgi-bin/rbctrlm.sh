@@ -19,35 +19,21 @@
 ##########################################################################
 #
 
-. /etc/device.properties
+logFile="/opt/logs/htmlDiag.log"
+read arg
 
-rfcFile="/opt/secure/RFC/.RFC_IPREMOTE.ini"
-tr181TestFile="/usr/bin/tr181Set"
-
-enabled="False"
-ip="Unknown"
-mac="Unknown"
-
-if [ -f $rfcFile ]; then
-    if grep -q 'RFC_ENABLE_IPREMOTE=true' $rfcFile; then
-        enabled="True"
-    fi
+if [ "$arg" != "wekorwpap" ]; then
+    echo "`/bin/timestamp` UNEXPECTED VALUE:$arg. Ignore ctrlm reboot request !!!" >> $logFile
+    exit 0
 fi
 
-if [ -f $tr181TestFile ]; then
-    if $tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable 2>&1 > /dev/null|grep -qi "true"; then
-        enabled="True"
-    fi
+echo "CtrlmRebootReason: ($0) Restarting ctrlm from HTML diagnostics ..!" >> $logFile
+
+if [ -f /usr/bin/ctrlmTestApp ]; then
+    /usr/bin/ctrlmTestApp -r
 fi
-
-if [ -f $tr181TestFile ]; then
-    ip=$($tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.IPAddr 2>&1 > /dev/null)
-fi 
-
-if [ -f $tr181TestFile ]; then                                      
-    mac=$($tr181TestFile Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.MACAddr 2>&1 > /dev/null)
-fi 
 
 echo "Content-Type: text/html"
 echo ""
-echo "{\"enabled\":\"$enabled\",\"ip\":\"$ip\",\"mac\":\"$mac\"}"
+echo "   Rebooting ... "
+echo "\\n"
