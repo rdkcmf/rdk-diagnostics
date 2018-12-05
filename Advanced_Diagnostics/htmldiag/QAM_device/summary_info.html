@@ -1,0 +1,595 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!doctype html>
+<html>
+	<head>
+		<!--#include virtual="/htmldiag2/common/html/header.html" -->
+		<!--#include file="includes/menu.html" -->
+	</head>
+	<body>	
+		<script type="text/javascript" src="js/moca.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				if(getMocaVersion() === 2.0) {
+					$('#mocaStatus').attr('data-property-file', 'snmp#mocaIfStatusv2:::value');
+					$('#this-node-id').attr('data-property-file', 'snmp#mocaIfNodeIDv2:::value');
+					$('#connected-devices').attr('data-property-file', 'snmp#mocaIfNumNodesv2:::value');
+				        $('#network-coordinator').attr('data-property-file', 'snmp#mocaIfNCv2:::value');
+				        $('#backup-nc').attr('data-property-file', 'snmp#mocaIfBackupNCv2:::value');	
+				}
+			});
+		</script>
+
+		<table id="myTable" class="tg">
+			<tr>
+				<th class="tg-xodn">Local Device Status</th>
+				<th class="tg-xodn">Network Connections</th>
+				<th class="tg-xodn">DOCSIS Levels</th>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- Local Device Status --->
+					<table class="tg snmp-get">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>eSTB MAC:</td>
+							<td class="tg-goodval"   colspan="2" data-property-file="read#DEVICE_ADDRESS:::ESTB_MAC" ></td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>MoCA MAC:</td>
+							<td class="tg-goodval"   colspan="2" data-property-file="read#DEVICE_ADDRESS:::MocaMAC" > </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>eCM MAC:</td>
+							<td class="tg-goodval"  colspan="2" data-property-file="read#DEVICE_ADDRESS:::ECM_MAC">  </td>
+						</tr>
+						<tr>
+							<td class="tg-label" ><b>CC MAC Address:</td>
+							<td class="tg-goodval"   colspan="2" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardMacAddress.0"> </td>
+							<td class="tg-goodval"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>eSTB IP:</td>
+							<td class="tg-goodval"  colspan="2" data-property-file="read#DEVICE_ADDRESS:::ESTB_IP"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>eCM IP:</td>
+							<td class="tg-goodval"  colspan="2" data-property-file="read#DEVICE_ADDRESS:::ECM_IP"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>LAN/DHCP IP:</td>
+							<td class="tg-badval"  colspan="2"> TBD </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Model:</td>
+							<td class="tg-goodval tg-val" data-property-file="read#MPEOS_VENDOR_INFO:::Model Name"> </td>
+							<td class="tg-label" ><b>DAC ID:</td>
+							<td class="tg-goodval" data-snmp-oid="PROXYMIB::controllerID.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Make:</td>
+							<td class="tg-goodval" data-property-file="read#DEVICE_ADDRESS:::Make"> </td>
+							<td class="tg-label"><b>Serial Number:</td>
+							<td class="tg-goodval" data-property-file="read#MPEOS_VENDOR_INFO:::Serial Number">  </td>
+						</tr>
+						<tr>
+
+							<td class="tg-label"><b>Receiver ID:</td>
+							<td class="tg-badval tg-val">  TBD P0103729937</td>
+							<td class="tg-label"><b>HW Rev:</td>
+							<td class="tg-goodval" data-property-file="snmp#sysDescr:::HW_REV"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Vendor ID:</td>
+							<td class="tg-goodval tg-val" data-property-file="read#MPEOS_VENDOR_INFO:::Vendor ID"> </td>
+							<td class="tg-label"><b>Channel Map ID:</td>
+							<td class="tg-goodval" data-snmp-oid="PROXYMIB::chMapId.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Session Last Mod:</td>
+							<td class="tg-badval tg-val"> TBD </td>
+							<td class="tg-label"><b>Create Date:</td>
+							<td class="tg-goodval" data-property-file="read#MPEOS_VENDOR_INFO:::Manufacturing Date"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Power Status:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostPowerStatus.0">  </td>
+							<td class="tg-label"><b>DOCSIS Downstream:</td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>DSG Tunnels Acquired:</td>
+							<td class="tg-goodval tg-val"> TBD </td>
+							<td class="tg-label"><b>DOCSIS Upstream:</td>
+							<td class="tg-goodval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Provisioning Status:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardCpAuthKeyStatus.0"> </td>
+							<td class="tg-label"><b>Friendly Name:</td>
+							<td class="tg-goodval"> TBD </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- Local/Remote Connections --->
+					<table class="tg snmp-get">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>MoCA Status:</td>
+							<td class="tg-goodval tg-val" id="mocaStatus" data-property-file="snmp#mocaIfStatusv1:::value"> </td>
+							<td class="tg-label"><b>NC Device Type:</td>
+							<td class="tg-badval"> TBD </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>This Node's ID:</td>
+							<td class="tg-goodval tg-val" id="this-node-id" data-property-file="snmp#mocaIfNodeIDv1:::value">  </td>
+							<td class="tg-label"><b>Connected Devices:</td>
+							<td class="tg-goodval tg-val" id="connected-devices" data-property-file="snmp#mocaIfNumNodesv1:::value">  </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Network Coordinator:</td>
+							<td class="tg-goodval tg-val" id="network-coordinator" data-property-file="snmp#mocaIfNCv1:::value">  </td>
+							<td class="tg-label"><b>XRE Status:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#xreConnStatus1:::value">  </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>NC MAC Address:</td>
+							<td class="tg-nullval tg-val" id="NCMac"> </td>
+							<td class="tg-label"><b>XRE Version:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreVersion.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Backup NC:</td>
+							<td class="tg-goodval tg-val" id="backup-nc" data-property-file="snmp#mocaIfBackupNCv1:::value">  </td>
+							<td class="tg-label"><b>Connection Established:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#xreConnEstTs:::value">  </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Controller ID:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreControllerId.0"> </td>
+							<td class="tg-label"><b>Auto Discovery:</td>
+							<td class="tg-badval">TBD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>VOD ID:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreVodId.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Mesh Tx/Rx Health:</td>
+							<td class="tg-badval tg-val"> TBD Signal poor between Nodes 1& 2</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- DOCSIS Levels --->
+					<table class="tg snmp-get" data-snmp-agent="ecm">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream Center Frequency:</td>
+							<td class="tg-goodval" data-snmp-oid="DOCS-IF-MIB::docsIfDownChannelFrequency.3"> the Units MHz</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream Rcvd Power:</td>
+							<td class="tg-goodval" id="signalLevel" data-snmp-oid="DOCS-IF-MIB::docsIfDownChannelPower.3" > </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream Carrier Lock:</td>
+							<td class="tg-goodval" data-snmp-oid="DOCS-IF3-MIB::docsIf3CmStatusValue.2">  </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Downstream SNR:</td>
+							<td class="tg-goodval" data-snmp-oid="DOCS-IF-MIB::docsIfSigQSignalNoise.3"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label  tg-singlecol"><b>Upstream Center Frequency:</td>
+							<td class="tg-goodval" data-snmp-oid="DOCS-IF-MIB::docsIfUpChannelFrequency.4"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Upstream Power:</td>
+							<td class="tg-goodval" data-snmp-oid="DOCS-IF-MIB::docsIfCmStatusTxPower.2"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>DSG Status:</td>
+                                                        <td class="tg-goodval" data-property-file="read#/tmp/dsgproxy_server_two_way_status.txt:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>CM Status:</td>
+							<td class="tg-goodval" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerBootState.0"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="tg-xodn">Firmware</td>
+				<td class="tg-xodn">Cable Card(tm) Summary</td>
+				<td class="tg-xodn">Tuner Status</td>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- Firmware --->
+					<table class="tg snmp-get">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Running:</td>
+							<td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostSoftwareFirmwareVersion.0" > </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Applied Date/Time:</td>
+							<td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostSoftwareFirmwareReleaseDate.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Last Downloaded Version:</td>
+							<td class="tg-goodval" data-snmp-oid="FWDNLDMIB::swUpdateDownloadVersion.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Download Status:</td>
+							<td class="tg-goodval" data-snmp-oid="FWDNLDMIB::swUpdateStatus.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Last Xconf Check:</td>
+							<td class="tg-goodval" data-snmp-oid="FWDNLDMIB::swUpdateLastRun.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>FW Image Name:</td>
+							<td class="tg-goodval" data-snmp-oid="FWDNLDMIB::swUpdateCurrentFile.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>BOOTR:</td>
+							<td class="tg-goodval" data-property-file="snmp#sysDescr:::BOOTR"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+                                        <table class="tg snmp-get" data-snmp-agent="ecm">
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Boot File:</td>
+							<td class="tg-goodval" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerConfigFile.0"> </td>
+						</tr>
+
+                                        </table>
+				</td>
+				<td class="tg-vals">
+					<!--- Cable Card Summary --->
+					<table class="tg snmp-get">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Card Status:</td>
+							<td class="tg-badval tg-val"> TBD Operational, Paired</td>
+							<td class="tg-label"><b>CC Download Status:</td>
+							<td class="tg-badval" id="DownloadState"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Entitlement Status:</td>
+							<td class="tg-badval tg-val" id="EntitlementStatus"> </td>
+							<td class="tg-label"><b>Card FW Version:</td>
+							<td class="tg-badval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardVersion.0">TBD 6.25</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Pairing Status:</td>
+							<td class="tg-badval tg-val"> TBD Paired/Activated</td>
+							<td class="tg-label"><b>Hardware:</td>
+							<td class="tg-badval" id="Hardware"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Manufacturer:</td>
+							<td class="tg-goodval tg-val" id="Manufacturer"> </td>
+							<td class="tg-label"><b>UpTime:</td>
+							<td class="tg-goodval">TBD 00000 07:19</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Certificate Check:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardCpCertificateCheck.0"> </td>
+							<td class="tg-label"><b>CP System ID:</td>
+                                                        <td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardCpIdList.0" > </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>CP/CA Status:</td>
+                                                        <td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardBindingStatus.0"> </td>
+							<td class="tg-label"><b>CA System ID:</td>
+                                                        <td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCASystemIdentifier.0" >  </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>CCard ID:</td>
+							<td class="tg-goodval" id="CCId"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Host ID:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardId.0" > </td>
+							<td class="tg-label"><b>OOB Mode:</td>
+							<td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostOobMessageMode.0" > </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Unit Address:</td>
+							<td class="tg-goodval tg-val" id="UnitAddress"></td>
+							<td class="tg-label"><b>Time Zone Offset:</td>
+							<td class="tg-goodval" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardTimeZoneOffset.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>VCT ID:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardVctId.0"> </td>
+							<td class="tg-label"><b>Last Error:</td>
+							<td class="tg-goodval" id="LastError"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- Tuner/TRM Status --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Active Connections:</td>
+							<td class="tg-goodval tg-val">2</td>
+							<td class="tg-label"><b>TRM Device Type/s:</td>
+							<td class="tg-goodval">Arris XG1, Pace XG1</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Tuner Status:</td>
+							<td class="tg-goodval tg-val">Active / Sharing</td>
+						</tr>
+						<tr>
+							<td class="tg-label">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>TRM Client 1:</td>
+							<td class="tg-goodval tg-val">Den</td>
+							<td class="tg-label"><b>TRM Client 2:</td>
+							<td class="tg-goodval">Living Room</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>eSTB MAC:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ifPhysAddress1:::value"> </td>
+							<td class="tg-label"><b>eSTB IP:</td>
+							<td class="tg-goodval" data-property-file="read#DEVICE_ADDRESS:::ESTB_IP"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Tuner in Use:</td>
+							<td class="tg-goodval tg-val">#2</td>
+							<td class="tg-label"><b>Tuner in Use:</td>
+							<td class="tg-goodval">#3</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Channel#:</td>
+							<td class="tg-goodval tg-val">300</td>
+							<td class="tg-label"><b>Channel#:</td>
+							<td class="tg-goodval">850</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Channel Name:</td>
+							<td class="tg-goodval tg-val">HBOHD</td>
+							<td class="tg-label"><b>Channel Name:</td>
+							<td class="tg-goodval">ESPNHD</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Allocation:</td>
+							<td class="tg-goodval tg-val">Rec, Live</td>
+							<td class="tg-label"><b>Allocation:</td>
+							<td class="tg-goodval">Live</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="tg-xodn">Memory Status</td>
+				<td class="tg-xodn">A/V Summary</td>
+				<td class="tg-xodn">Init History</td>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- Memory Status --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Internal HDD:</td>
+							<td class="tg-goodval tg-val">True</td>
+							<td class="tg-label"><b>Available:</td>
+							<td class="tg-goodval">378,077,184</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Format Enable Status:</td>
+							<td class="tg-goodval tg-val">True</td>
+							<td class="tg-label"><b>Used:</td>
+							<td class="tg-goodval">85,783,624</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>SMART Health:</td>
+							<td class="tg-goodval tg-val">Good</td>
+							<td class="tg-label"><b>Total:</td>
+							<td class="tg-goodval">463,860,808</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Bad Sector Count:</td>
+							<td class="tg-goodval tg-val">3</td>
+							<td class="tg-label"><b>TSB Enable:</td>
+							<td class="tg-goodval">True</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Sector Count/Time:</td>
+							<td class="tg-goodval tg-val">+1/16 Days</td>
+							<td class="tg-label"><b>Max Duration:</td>
+							<td class="tg-goodval">60 Min</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>rom:</td>
+							<td class="tg-goodval tg-val">4096 kb</td>
+							<td class="tg-label"><b>External HDD:</td>
+							<td class="tg-nullval">Not Supported</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>dram:</td>
+							<td class="tg-goodval tg-val">1048576 kb</td>
+							<td class="tg-label"><b>Available:</td>
+							<td class="tg-nullval">Not Supported</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>TSB:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="XcaliburClientMIB::xreHeartbeatEnabled.0"> </td>
+							<td class="tg-label"><b>flash:</td>
+							<td class="tg-badval">131072 kb</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>TSB Capacity:</td>
+							<td class="tg-badval tg-val">30 Minutes HD, 60 Minutes SD</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- A/V Summary --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>HDMI:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIConnectionStatus:::value"> </td>
+							<td class="tg-label"><b>HDCP:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIHostDeviceHDCPStatus:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>HDMI Audio:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIAudioFormat:::value">Surround</td>
+							<td class="tg-label"><b>HDMI Device:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIAttachedDeviceType:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Aspect Ratio:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIAspectRatio:::value"> </td>
+							<td class="tg-label"><b>Audio PID:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostMpeg2ContentSelectedAudioPID:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Resolution:</td>
+							<td class="tg-badval tg-val">720p</td>
+							<td class="tg-label"><b>Video PID:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostMpeg2ContentSelectedVideoPID:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Audio Mute:</td>
+							<td class="tg-badval tg-val">TBD</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- Init History --->
+					<table class="tg data snmp-table" data-snmp-oid="INIT-HISTORY-MIB::initHistoryTable" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Timestamp</b></td>
+							<td class="tg-mesh1"><b>Type<b></td>
+							<td class="tg-mesh1"><b>Status</b></td>
+						</tr>
+						<tbody>
+							<tr class="snmp-row-template" >
+								<td data-snmp-oid-row="INIT-HISTORY-MIB::initTime"></td>
+								<td data-snmp-oid-row="INIT-HISTORY-MIB::initType"></td>
+								<td data-snmp-oid-row="INIT-HISTORY-MIB::initStatus"></td>
+							</tr>
+						</tbody>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="tg-xodn" colspan="3">XRE Connection Table</td>
+			</tr>
+			<tr>
+				<td class="tg-vals" colspan="3" width="99%">
+					<!--- XRE Connection table --->
+					<table class="tg data snmp-table" data-snmp-oid="XcaliburClientMIB::xreConnTable" cellpadding="0" cellspacing="0" style="width:99%">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>URL</b></td>
+							<td class="tg-mesh1"><b>Status<b></td>
+							<td class="tg-mesh1"><b>Interface</b></td>
+							<td class="tg-mesh1"><b>Connection Established</b></td>
+							<td class="tg-mesh1"><b>Retry Attempts</b></td>
+						</tr>
+						<tbody>
+							<tr class="snmp-row-template" >
+								<td data-snmp-oid-row="XcaliburClientMIB::xreConnURL.1"></td>
+								<td data-snmp-oid-row="XcaliburClientMIB::xreConnStatus.1"></td>
+								<td data-snmp-oid-row="XcaliburClientMIB::xreConnIfName.1"></td>
+								<td data-snmp-oid-row="XcaliburClientMIB::xreConnEstTs.1"></td>
+								<td data-snmp-oid-row="XcaliburClientMIB::xreConnRetryAttempts.1"></td>
+							</tr>
+						</tbody>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			var link=document.getElementById("nav-0");
+			link.href="javascript:void()";
+		</script>
+		<script type="text/javascript" src="js/summary_Qam.js"></script>
+                <script type="text/javascript" src="js/TunerData.js"></script>
+		<!--#include virtual="/htmldiag2/common/html/footer.html" -->
+	</body>
+</html>

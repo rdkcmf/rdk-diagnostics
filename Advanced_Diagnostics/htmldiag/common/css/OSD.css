@@ -1,0 +1,283 @@
+/*
+ * If not stated otherwise in this file or this component's Licenses.txt file the
+ * following copyright and licenses apply:
+ *
+ * Copyright 2016 RDK Management
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+body {
+	background: #111111;
+	font-family: "XfinitySansLight", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	 height:640px;
+	width:1160px;
+	margin:40px 40px;
+}
+
+.tg {
+	table-layout: fixed;
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 100%;
+	background-color: #efefef;
+}
+
+.tg td {
+	padding: 0px 2px 0px 2px;
+	-webkit-font-smoothing: antialiased;
+	border-style: solid;
+	border-width: 0px;
+	overflow: visible;
+	word-break: normal;
+	border-color: #000000
+}
+
+.tg th {
+	-webkit-font-smoothing: antialiased;
+}
+
+.tg .tg-xodn {
+	font-size: large;
+	font-weight: bold;
+	background-color: #00CCFF;
+	color: #111111;
+	border-style: solid #000000;
+	border-width: 1px;
+	text-align: center;
+	vertical-align:middle;
+}
+
+.tg .tg-i0og {
+	color: #111111
+}
+
+.tg .tg-vals {
+	border-style: solid #000000;
+	border-width: 1px;
+	vertical-align: text-top;
+}
+
+.tg .tg-label {
+	padding: 2px 1px 1px 1px;
+	font-weight: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: black;
+	text-align: right;
+	vertical-align: middle;
+}
+
+.tg .tg-goodval {
+	font-style: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: black;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.tg .tg-badval {
+	font-style: normal;
+	color: red;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.tg .tg-nullval {
+	font-style: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: #696969;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.tg .tg-mesh1 {
+	padding: 0px;
+	font-weight: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: black;
+	border-style: solid #708090;
+	border-width: 1px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tg .tg-mesh2 {
+	padding: 0px;
+	font-style: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: black;
+	border-style: solid #708090;
+	border-width: 1px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tg .tg-meshbad {
+	padding: 0px;
+	font-style: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: red;
+	border-style: solid #708090;
+	border-width: 1px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tg .tg-meshnull {
+	padding: 0px;
+	font-style: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: #696969;
+	border-style: solid #708090;
+	border-width: 1px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+.tg .tg-sub {
+	font-weight: normal;
+	font-size: small;
+	background-color: #efefef;
+	color: #000000;
+	table-layout: fixed;
+	border-width: 0px;
+	border-style: solid #efefef;
+	overflow: hidden;
+	word-break: normal;
+	border-spacing: 0;
+	text-align: left;
+	vertical-align: text-top;
+	padding: 0px;
+}
+
+.menuNav {
+	table-layout: fixed;
+	border: thin solid #111111;
+	border-spacing: 0;
+	width: 100%;
+	font-family: "XfinitySansLight", Helvetica, Arial, sans-serif;
+	line-height: normal;
+	font-size: x-large;
+	font-color: #ffffff;
+	padding: 40px 20px 40px 20px;
+	-webkit-font-smoothing: antialiased;
+	overflow: hidden;
+	word-break: normal;
+}
+
+ul.m {
+	list-style-type: none;
+	margin: 0;
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+}
+
+li.m2 {
+	float: left;
+	width: 20%;
+	padding: 20px 0px 20px 0px;
+	font-size: x-large;
+	font-family: "XfinitySansLight", Helvetica, Arial, sans-serif;
+	line-height: normal;
+}
+
+ul.val1 {
+	list-style-type: none;
+	margin: 0;
+	width: 100%;
+	padding: 0;
+	overflow: hidden;
+}
+
+li.val2 {
+	float: left;
+	width: 20%;
+	padding: 20px 0px 20px 0px;
+	font-size: x-large;
+	font-family: "XfinitySansLight", Helvetica, Arial, sans-serif;
+	line-height: normal;
+}
+
+a.this:link {
+	color: #00CCFF;
+	border-top: thin solid #111111;
+	border-bottom: thin solid #111111;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+a.this:visited {
+	color: #00CCFF;
+	border-top: thin solid #000000;
+	border-bottom: thin solid #000000;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+a.this:hover {
+	color: #FFFFFF;
+	background-color: #111111;
+	border-top: thin solid #FFFFFF;
+	border-bottom: thin solid #FFFFFF;
+	text-decoration: none;
+}
+
+a.this:active {
+	text-decoration: none;
+}
+
+a:link {
+	border-top: thin solid #111111;
+	border-bottom: thin solid #111111;
+	display: block;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+}
+
+a:visited {
+	color: #FFFFFF;
+	border-top: thin solid #111111;
+	border-bottom: thin solid #111111;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #00CCFF;
+	background-color: #111111;
+	border-top: thin solid #ffffff;
+	border-bottom: thin solid #ffffff;
+	text-decoration: none;
+}
+
+a:active {
+	color: #00CCFF;
+	text-decoration: none;
+}
+
+p {
+	font-style: normal;
+	color: #00CCFF;
+}

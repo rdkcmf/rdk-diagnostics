@@ -1,0 +1,248 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!doctype html>
+<html>
+	<head>
+		<!--#include virtual="/htmldiag2/common/html/header.html" -->
+		<!--#include file="includes/menu.html" -->
+	</head>
+	<body>
+		<table  id="myTable" class="tg snmp-get" data-snmp-agent="ecm" data-snmp-grp="public">
+			<tr>
+				<th class="tg-xodn">Operational Status</th>
+				<th class="tg-xodn">Service Status</th>
+				<th class="tg-xodn">Flow Status</th>
+			</tr>
+			<tr>
+				<td class="tg-vals" width="33%">
+					<!--- Operational Status ---> <br>
+					<table class="tg">
+						<tr>
+							<td class="tg-mesh1"><b>Param </td>
+							<td class="tg-mesh1"><b>Status </td>
+							<td class="tg-mesh1"><b>Value </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>eSTB IP </td>
+							<td class="tg-mesh2">OK</td>
+							<td class="tg-mesh2 tg-val" data-property-file="read#DEVICE_ADDRESS:::ESTB_IP"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>eCM IP </td>
+							<td class="tg-mesh2">OK</td>
+							<td class="tg-mesh2 tg-val" data-property-file="read#DEVICE_ADDRESS:::ECM_IP"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Card Return Path </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/cardReturnPathStatus.sh# :::value"> </td>
+							<td class="tg-mesh2 tg-val"  data-property-file="snmp#ipNetToPhysicalPhysAddress:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Time Zone </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/isFilePresent.sh#/tmp/stt_received:::value"> </td>
+							<td class="tg-mesh2 tg-val"  data-property-file="cgi-bin/parseDsgProxyAttr.sh#DSGPROXY_HOST_TIME_ZONE:::DSGPROXY_HOST_TIME_ZONE"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Local Time </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/isFilePresent.sh#/tmp/stt_received:::value"> </td>
+							<td class="tg-mesh2 tg-val" data-property-file="cgi-bin/getTime.sh# :::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>CA System</td> 
+							<td class="tg-mesh2" data-property-file="cgi-bin/caSystemStatus.sh#caStatus:::value"> </td>
+							<td class="tg-mesh2 tg-val" data-property-file="cgi-bin/parseDsgProxyAttr.sh#DSGPROXY_CA_SYSTEM_ID:::DSGPROXY_CA_SYSTEM_ID"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>CP System </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/cpSystemStatus.sh#cpStatus:::value"> </td>
+							<td class="tg-mesh2 tg-val" data-property-file="cgi-bin/parseDsgProxyAttr.sh#DSGPROXY_CP_SYSTEM_ID:::DSGPROXY_CP_SYSTEM_ID"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>DSG/Card VCT-ID </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/isFilePresent.sh#/tmp/si_acquired:::value"> </td>
+							<td class="tg-mesh2 tg-val" data-property-file="cgi-bin/parseDsgProxyAttr.sh#DSGPROXY_VCTID:::DSGPROXY_VCTID"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>DSG UCID </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/parseDsgProxyAttr.sh#DSG UCID Status:::DSG UCID Status"> </td>
+							<td class="tg-mesh2 tg-val" data-property-file="cgi-bin/parseDsgProxyAttr.sh#DSGPROXY_UCID:::DSGPROXY_UCID"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>DSG Status</td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/isFilePresent.sh#/tmp/ip_acquired:::value"> </td>
+							<td class="tg-mesh2 tg-val" data-property-file="read#/tmp/dsgproxy_server_two_way_status.txt:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>CM Status </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/isFilePresent.sh#/tmp/ip_acquired:::value"> </td>
+							<td class="tg-mesh2 tg-val" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerBootState.0"> </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Channel Map </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/isFilePresent.sh#/tmp/si_acquired:::value"> </td>
+							<td class="tg-mesh2 tg-val" data-property-file="cgi-bin/getChannelMapStatus.sh#Number Of Services:::value"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals" width="33%">
+					<!--- Service Status ---> <br>
+					<table class="tg" id="serviceData" >
+						<tr>
+							<td class="tg-mesh1"><b>Type </td>
+							<td class="tg-mesh1"><b>ID</td> 
+							<td class="tg-mesh1"><b>Path </td>
+							<td class="tg-mesh1"><b>Count </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table> <br>
+				</td>
+				<td class="tg-vals" width="33%">
+					<!--- Flow Status ---> <br>
+					<table class="tg">
+						<tr>
+							<td class="tg-mesh1"><b>Type </td>
+							<td class="tg-mesh1"><b>Counts </td>
+						</tr>
+                                                <tr>
+                                                        <td class="tg-mesh1"><b>MPEG </td>
+                                                        <td class="tg-mesh2" data-property-file="read#DSG_FLOW_STATS:::MPEG"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="tg-mesh1"><b>IP_U </td>
+                                                        <td class="tg-mesh2" data-property-file="read#DSG_FLOW_STATS:::IP_U"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="tg-mesh1"><b>IP_M </td>
+                                                        <td class="tg-mesh2" data-property-file="read#DSG_FLOW_STATS:::IP_M"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="tg-mesh1"><b>DSG </td>
+                                                        <td class="tg-mesh2" data-property-file="read#DSG_FLOW_STATS:::DSG"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="tg-mesh1"><b>Socket</td>
+                                                        <td class="tg-mesh2" data-property-file="read#DSG_FLOW_STATS:::SOCKET"></td>
+                                                </tr>
+                                                <tr>
+                                                        <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="tg-mesh1"><b>Vct-ID </td>
+                                                        <td class="tg-mesh1"><b>Counts </td>
+                                                </tr>
+                                                <tr>
+                                                        <td class="tg-mesh1" data-property-file="read#DSG_FLOW_STATS:::VCT_ID"> </td>
+                                                        <td class="tg-mesh2" data-property-file="read#DSG_FLOW_STATS:::VCT_COUNTS"> </td>
+                                                </tr>
+
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table> <br>
+				</td>
+			</tr>
+			<tr>
+				<td class="tg-xodn">Channel Map Status</td>
+				<td class="tg-xodn" colspan="2">Storage Info</td>
+			</tr>
+			<tr>
+				<td class="tg-vals" width="33%">
+					<!--- Channel Map Status ---> <br>
+					<table class="tg">
+						<tr>
+							<td class="tg-mesh1"><b>Param </td>
+							<td class="tg-mesh1"><b>Status </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>SI State</td> 
+							<td class="tg-mesh2" data-property-file="cgi-bin/getChannelMapStatus.sh#SI State:::value"></td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>SI Cache </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/getChannelMapStatus.sh#SI Cache:::value"></td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Cache Status</td> 
+							<td class="tg-mesh2" data-property-file="cgi-bin/getChannelMapStatus.sh#Cache Status:::value"></td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>STT Status </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/getChannelMapStatus.sh#STT Status:::value"></td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Min Frequency </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/getChannelMapStatus.sh#Min Frequency:::value"></td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Max Frequency </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/getChannelMapStatus.sh#Max Frequency:::value"></td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Number of Services </td>
+							<td class="tg-mesh2" data-property-file="cgi-bin/getChannelMapStatus.sh#Number Of Services:::value"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table> <br>
+				</td>
+				<td class="tg-vals" colspan="2" width="66%">
+					<!--- Storage Info ---> <br>
+					<table class="tg">
+						<tr>
+							<td class="tg-mesh1"><b>&nbsp; </td>
+							<td class="tg-mesh1"><b>Format Enable Status </td>
+							<td class="tg-mesh1"><b>Used </td>
+							<td class="tg-mesh1"><b>Available</td> 
+							<td class="tg-mesh1"><b>Total </td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Internal HDD - Hard-Coded Data </td>
+							<td class="tg-mesh2">Model A</td>
+							<td class="tg-mesh2">1000000</td>
+							<td class="tg-mesh2">4000000</td>
+							<td class="tg-mesh2">5000000</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>External HDD - Hard-Coded Data </td>
+							<td class="tg-mesh2">Model B</td>
+							<td class="tg-mesh2">5000000</td>
+							<td class="tg-mesh2">5000000</td>
+							<td class="tg-mesh2">10000000</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table> <br>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			var link=document.getElementById("nav-4");
+			link.href="javascript:void()";
+		</script>
+                <script type="text/javascript" src="js/AdvancedDiag_Qam.js"></script>
+		<!--#include virtual="/htmldiag2/common/html/footer.html" -->
+	</body>
+</html>

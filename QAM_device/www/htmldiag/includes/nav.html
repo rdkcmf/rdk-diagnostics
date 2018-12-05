@@ -1,0 +1,120 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!-- $Id: nav.usg.html 3155 2010-01-06 19:36:01Z slemoine $ -->
+
+<!--Nav-->
+
+<div id="nav">
+<ul>
+    <li class="nav-gateway">
+        <a class="top-level" href="first.html">Summary</a>
+        <ul>
+            <li class="nav-summary-info"><a href="first.html">Info</a></li>
+            <li class="nav-inband-network"><a href="inband_network.html">In-Band Network</a></li>
+            <li class="nav-summary-error"><a href="summary_error.html">Error</a></li>
+        </ul>        
+    </li>
+    <li class="nav-connected-devices">
+        <a class="top-level" href="mfg_hdmi.html">Manufacturer</a>
+        <ul>
+            <!--li class="nav-mfg-cdl"><a href="mfg_common_download_host.html">Common Download</a>
+                <ul>
+                    <li class="nav-mfg-cdl-host"><a href="mfg_common_download_host.html">Host</a></li>
+                </ul>
+            </li-->
+            <li class="nav-mfg-hdmi"><a href="mfg_hdmi.html">HDMI</a></li>
+            <li class="nav-mfg-mcard"><a href="mfg_mcard.html">M-Card</a></li>
+            <li class="nav-mfg-sys-descr-host"><a href="mfg_sys_descr_host.html">Host</a></li>
+        </ul>
+    </li>
+    <li class="nav-parental-control">
+        <a class="top-level" href="system_inband_network.html">System</a>
+        <ul>
+            <li class="nav-sys-ib-network"><a href="system_inband_network.html">In-Band Network</a></li>
+            <li class="nav-sys-docsis"><a href="system_docsis.html">DOCSIS</a></li>
+            <li class="nav-sys-device-addrs"><a href="system_device_addresses.html">Device Addresses</a></li>
+            <li class="nav-sys-mem-table"><a href="system_memory_table.html">Memory Table</a></li>
+            <li class="nav-sys-hdmi-info"><a href="system_hdmi_info.html">HDMI Info</a></li>
+        </ul>
+    </li>
+	<li class="nav-addins">
+        <a class="top-level" href="card_info.html">Card</a>
+        <!-- FIXME: The sub-menus need to be displayed only when the 'Card' menu item is clicked. 
+             This needs to be fixed -->
+	        <table id="card_info" class="data snmp-table" 
+                   data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCCApplicationName"
+                   cellpadding="0" cellspacing="0" >
+	              <tbody>
+        	        <tr class="snmp-loading"><td colspan="9">Loading menus...</td></tr>
+                	        <tr class="snmp-menu-row-template">
+                        	    <td data-snmp-oid-row="OC-STB-HOST-MIB::ocStbHostCCApplicationName"></td>
+          	              </tr>
+          	     </tbody>
+           </table>
+    </li>
+	
+    <li class="nav-dvr">
+        <a class="top-level" href="dvr_info.html">DVR Info</a>
+        <ul>
+            <li class="nav-dvr-storage"><a href="dvr_info.html">Storage Info</a></li>
+            <li class="nav-dvr-tsb"><a href="dvr_tsb_info.html">TSB Info</a></li>
+        </ul>
+    </li>
+
+    <li class="nav-reboot">
+        <a class="top-level" href="reboot_stb.html">Reboot STB</a>
+        <ul>
+            <li class="nav-reboot-stb"><a href="reboot_stb.html">Reboot STB</a></li>
+        </ul>
+    </li>
+
+    <li class="nav-osd-diag">
+        <a class="top-level" href="osd_diag1.html">OSD Diagnostics</a>
+        <ul>
+            <li class="nav-osd-diag1"><a href="osd_diag1.html">Diag Details Page 1/2</a></li>
+            <li class="nav-osd-diag2"><a href="osd_diag2.html">Diag Details Page 2/2</a></li>
+            <li class="nav-init-history"><a href="init_history.html">Init History</a></li>
+        </ul>
+    </li>
+
+    <li class="nav-sys-debug">
+        <a class="top-level" href="oper_stat.html">System Debug</a>
+        <ul>
+            <li class="nav-oper-stat"><a href="oper_stat.html">Operational Status</a></li>
+            <li class="nav-serv-stat"><a href="serv_stat.html">Service Status</a></li>
+            <li class="nav-flow-stat"><a href="flow_stat.html">Flow Status</a></li>
+            <li class="nav-chan-map-stat"><a href="chan_map_stat.html">Channel Map Status</a></li>
+        </ul>
+    </li>
+    <li class="nav-moca">
+        <a class="top-level" href="moca_diag.html">MoCA Diagnostics</a>
+        <ul>
+            <li class="nav-moca-diag"><a href="moca_diag.html">MoCA Diagnostics Details</a></li>
+            <li class="nav-moca-mesh"><a href="moca_mesh_txrates.html">MoCA Mesh Transmission Rates </a></li>
+        </ul>
+    </li>
+    <li class="nav-remotes">
+        <a class="top-level" href="remotes_ip.html">Remote Controls</a>
+        <ul>
+            <li class="nav-remotes-ip"><a href="remotes_ip.html">IP Control</a></li>
+            <li class="nav-remotes-reboot"><a href="remotes_reboot.html">Reboot Ctrlm</a></li>
+        </ul>
+    </li>
+</ul>
+</div>

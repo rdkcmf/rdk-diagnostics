@@ -1,0 +1,102 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!-- $Id: nav.usg.html 3155 2010-01-06 19:36:01Z slemoine $ -->
+
+<script type="text/javascript">
+$(function() {
+    if(getMocaStatus() === false) {
+        $("#moca-1").hide();
+        $("#moca-2").hide();
+        $("#moca-3").hide();
+        $("#moca-4").hide();
+        $("#moca-disabled").show();
+        document.getElementById("moca").href="moca_disabled.html";
+    }
+});
+</script>
+
+<!--Nav-->
+
+<div id="nav">
+<ul>
+    <li class="nav-gateway">
+        <a class="top-level" href="summary_info.html">Summary</a>
+        <ul>
+            <li class="nav-summary-info"><a href="summary_info.html">Info</a></li>
+        </ul>        
+    </li>
+    <li class="nav-manufacturer">
+        <a class="top-level" href="mfg_hdcp.html">Manufacturer</a>
+        <ul>
+            <li class="nav-manufacturer-info"><a href="mfg_hdcp.html">HDMI</a></li>
+        </ul>        
+    </li>
+    <li class="nav-parental-control">
+        <a class="top-level" href="mfg_sys_descr.html">System Descriptor</a>
+        <ul>
+            <li class="nav-sys-desc-info"><a href="mfg_sys_descr.html">Host</a></li>
+        </ul>
+    </li>
+    <li class="nav-system">
+        <a class="top-level" href="system_addr.html">System</a>
+        <ul>
+            <li class="nav-sys-addr"><a href="system_addr.html">Device Address</a></li>
+            <!--li class="nav-sys-mem-table"><a href="system_memory_table.html">Memory Table</a></li-->
+            <li class="nav-sys-hdmi-info"><a href="system_hdmi_info.html">HDMI Info</a></li>
+        </ul>
+    </li>
+
+    <li class="nav-osd-diag">
+        <a class="top-level" href="osd_diag.html">OSD Diagnostics</a>
+        <ul>
+            <li class="nav-osd-diag1"><a href="osd_diag.html">Diag Details Page 1</a></li>
+        </ul>
+    </li>
+
+    <li class="nav-sys-debug">
+        <a class="top-level" href="oper_stat.html">System Debug</a>
+        <ul>
+            <li class="nav-oper-stat"><a href="oper_stat.html">Operational Status</a></li>
+        </ul>
+    </li>
+    <li class="nav-connected-devices">
+        <a class="top-level" id="moca" href="moca.html">Moca</a>
+        <ul>
+            <li id="moca-1" class="nav-moca"><a href="moca.html">MoCA Status</a></li>
+            <li id="moca-2" class="nav-moca1"><a href="moca1.html">MoCA Internet Usage</a></li>
+            <li id="moca-3" class="nav-moca-connected"><a href="moca_connected_devices.html">MoCA Connected Devices</a></li>
+            <li id="moca-4" class="nav-moca-mesh"><a href="moca_mesh_txrates.html">MoCA Mesh Transmission Rates </a></li>
+            <li id="moca-disabled" class="nav-moca-disable" style="display:none"><a href="moca_disabled.html">MoCA</a></li>
+        </ul>
+     </li>
+    <li class="nav-other">
+        <a class="top-level" href="summary_other.html">Other</a>
+        <ul>
+            <li class="nav-summary-other"><a href="summary_other.html">Other</a></li>
+        </ul>
+    </li>
+    <li class="nav-wifi">
+        <a class="top-level" href="wifi_details.html">WiFi Details</a>
+        <ul>
+            <li class="nav-wifi-details"><a href="wifi_details.html">WiFi Details</a></li>
+        </ul>
+    </li>
+
+</ul>
+</div>

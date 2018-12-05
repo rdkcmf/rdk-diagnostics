@@ -1,0 +1,196 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+
+<!--#include file="includes/header.html" -->
+
+<!-- $Id: at_a_glance.html 2943 2009-08-25 20:58:43Z slemoine $ -->
+<div id="sub-header">
+</div><!-- end #sub-header -->
+
+<!--#include file="includes/nav.html" -->
+
+<div id="content">
+    <h1>WiFi Details</h1>
+    <div class="snmp-get" >
+   <div class="module forms" id="home-netw">
+            <h2>WiFi Details</h2>
+       <div class="form-row odd">
+                <span class="readonlyLabel">Connection Status:</span>
+                <span class="value" id="connection_status"> </span>
+            </div>
+       <div class="form-row">
+                <span class="readonlyLabel">Pairing Status:</span>
+                <span class="value" id="pairing_status"> </span>
+            </div>
+       <div class="form-row odd">
+                <span class="readonlyLabel">Hardware Status:</span>
+                <span class="value" data_donor_id="Device.WiFi.SSID.1.Status"> </span>
+            </div>
+       <div class="form-row">
+                <span class="readonlyLabel">SSID:</span>
+                <span class="value" data_donor_id="Device.WiFi.SSID.1.SSID"> </span>
+            </div>
+<!--
+       <div class="form-row odd">
+                <span class="readonlyLabel">Type:</span>
+                <span class="value">5Ghz Band</span>
+            </div>
+       <div class="form-row">
+                <span class="readonlyLabel">Security:</span>
+                <span class="value">WPA</span>
+            </div>
+       <div class="form-row odd">
+                <span class="readonlyLabel">Signal Strength:</span>
+                <span class="value" data_donor_id=""> </span>
+            </div>
+       <div class="form-row">
+                <span class="readonlyLabel">Signal Frequency:</span>
+                <span class="value" data_donor_id=""> </span>
+            </div>
+-->
+       <div class="form-row odd">
+                <span class="readonlyLabel">WiFi MAC:</span>
+                <span class="value" data_donor_id="Device.WiFi.SSID.1.MACAddress"> </span>
+            </div>
+       <div class="form-row">
+                <span class="readonlyLabel">Signal Frequency:</span>
+                <span class="value" data_donor_id="Device.WiFi.Radio.1.OperatingFrequencyBand"> </span>
+            </div>
+       <div class="form-row odd">
+                <span class="readonlyLabel">Signal Strength:</span>
+                <span class="value" id="signal_strength"> </span><!--data_donor_id="Device.WiFi.EndPoint.1.Stats.SignalStrength"-->
+            </div>
+       <div class="form-row">
+                <span class="readonlyLabel">WiFi Protection</span>
+                <span class="value" data_donor_id="Device.WiFi.EndPoint.1.Security.ModesEnabled"> </span>
+            </div>
+        </div>
+    </div> <!-- end class="snmp-get" -->
+</div><!-- end #content -->
+
+<!--#include file="includes/footer.html" -->
+
+<!-- this code needs excuted after the page is loaded -->
+<script type="text/javascript">
+$(function() {
+    loadScripts("Wifi > Details", "nav-wifi-details");
+});
+
+function getSignalStrength()
+{
+   //is async?
+   if (ServiceManager.version)
+   {
+      //async
+      ServiceManager.getServiceForJavaScript("org.rdk.wifiManager_2", function(wifiManagerService) 
+      {
+         if(typeof(wifiManagerService) == "object")
+         {
+            wifiManagerService.getConnectedSSID( function(connected_ssid_info) 
+            {
+               if(typeof(connected_ssid_info) != "undefined" && typeof(connected_ssid_info.SSID) != "undefined" && typeof(connected_ssid_info.SSID.signalStrength) != "undefined")
+                  $("#signal_strength").html(connected_ssid_info.SSID.signalStrength);
+               else
+                  console.log("getSignalStrength: async wifiManagerService.signalStrength doesn't exist - '"
+                  + typeof(connected_ssid_info) + "' - '"
+                  + (typeof(connected_ssid_info) != "undefined" ? typeof(connected_ssid_info.SSID) : "...") + "' - '"
+                  + (typeof(connected_ssid_info) != "undefined" && typeof(connected_ssid_info.SSID) != "undefined" ? typeof(connected_ssid_info.SSID.signalStrength) : "...") + "'");
+            });
+         }
+         else
+            console.log("getSignalStrength: async org.rdk.wifiManager doesn't exist - '" + typeof(wifiManagerService) + "'");
+         });
+   }
+   else
+   {
+      //not async
+      wifiManagerService = ServiceManager.getServiceForJavaScript("org.rdk.wifiManager");
+      
+      if(typeof(wifiManagerService) == "object")
+      {
+         var connected_ssid_info = wifiManagerService.getConnectedSSID();
+
+         console.log(JSON.stringify(connected_ssid_info));
+
+         if(typeof(connected_ssid_info) != "undefined" && typeof(connected_ssid_info.signalStrength) != "undefined")
+            $("#signal_strength").html(connected_ssid_info.signalStrength);
+         else
+            console.log("getSignalStrength: wifiManagerService.signalStrength doesn't exist - '" + typeof(connected_ssid_info.signalStrength) + "'");
+      }
+      else
+         console.log("getSignalStrength: org.rdk.wifiManager doesn't exist - '" + typeof(wifiManagerService) + "'");
+   }
+}
+
+// Retrieve  wifi connection status and pairing status
+function getWifiStatus() {
+   getSignalStrength();
+   
+   $.ajax({
+       async: true,
+       url: "cgi-bin/gettr69data.sh",
+       timeout: 25000,
+       cache: true,
+       context: document.body,
+       data: "Device.WiFi.SSID.1.Status\nDevice.WiFi.SSID.1.Enable\n",
+       dataType: "html",
+       type: "POST",
+       success: function(response, text_status)
+       {
+           if (response.length) {
+               var output = eval("(" + response + ")" );
+               var paramList = output.paramList ;
+
+               if(paramList[0].value == "UP") {
+                   $("#connection_status").html("Connected");
+               } else {
+                   $("#connection_status").html("Not Connected");
+               }
+
+               if(paramList[1].value == true) {
+                   $("#pairing_status").html("Paired");
+               } else {
+                   $("#pairing_status").html("Not Paired");
+               }
+           }
+       }
+   });
+}
+
+function snmp_make_blue(str, oid, $element) {
+        $element.css("color", "green");
+        $element.css("margin-left", "140px");
+        str += " : "+oid.oid;
+        return str;
+}
+
+// To enable page navigation cycling redirect to last page on up arrow key press
+$(document).keydown(function(event){
+   if ( event.which == 40) { // 40 is the key code for down arrow key event
+       $(".nav-summary-info").focus();
+   }
+});
+
+//getting wifi status
+getWifiStatus();
+
+//updating wifi status
+setInterval(getWifiStatus, 5000);
+
+</script>

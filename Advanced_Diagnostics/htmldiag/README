@@ -1,0 +1,94 @@
+/*
+ * If not stated otherwise in this file or this component's Licenses.txt file the
+ * following copyright and licenses apply:
+ *
+ * Copyright 2016 RDK Management
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+*/
+
+/**************************************************************************/
+/********* HTML Based Application for onscreen diagnostics ***************/
+/*************************************************************************/
+This source contains generic HTML onscreen diagnostic application targeted for both QAM and mediaclient based devices.
+During build time contents only from either of QAM_device or ip_device will be included in the final image.
+Souce files available in 'common' will be included in both devices.
+
+Sample folder layout of artifacts in the final image for a QAM based device is given below
+
+/htmldiag2/
+... snmp
+.   ... snmp.json
+... js
+.   ... summary_Qam.js
+.   ... script.js
+.   ... jquery.snmp-1.0.js
+.   ... jquery.property-file-1.0.js
+.   ... jquery.json-2.3.min.js
+.   ... InHomeNet.js
+.   ... fetch_data.js
+.   ... common.js
+... includes
+.   ... menu.html
+... common
+.   ... js
+.   .   ... lazy_script_loader.js
+.   .   ... jquery-1.4.4.min.js
+.   ... images
+.   .   ... rightarrow.png
+.   .   ... rewind.png
+.   .   ... PgUp_text_short.png
+.   .   ... PgUp.png
+.   .   ... PgDwn.png
+.   .   ... PgDown_text_short.png
+.   .   ... OK_button.png
+.   .   ... leftarrow.png
+.   .   ... fastforward.png
+.   ... html
+.   .   ... header.html
+.   .   ... footer.html
+.   ... css
+.       ... OSD.css
+.       ... common.css
+... cgi-bin
+.   ... diagnostics
+.   .   ... snmp2json.sh
+.   .   ... snmp2json
+.   ... servStat.sh
+.   ... reboot-stb.sh
+.   ... readFile.sh
+.   ... phyRate.sh
+.   ... parseOID.sh
+.   ... parseDsgProxyAttr.sh
+.   ... mocaTransmissionRate.sh
+.   ... isFilePresent.sh
+.   ... gettr69data.sh
+.   ... getTime.sh
+.   ... getsinglevalue
+.   ... getNodedetails.sh
+.   ... getDeviceType.sh
+.   ... getDate.sh
+.   ... getCurrentTime.sh
+.   ... getChannelMapStatus.sh
+.   ... cpSystemStatus.sh
+.   ... caSystemStatus.sh
+.   ... cardReturnPathStatus.sh
+.   ... cardData.sh
+... TunerStatus.html
+... summary_info.html
+... InHomeNet.html
+... fileLocation.properties
+... CableCard.html
+... AVStatus.html
+... AdvancedDiags.html
+

@@ -1,0 +1,140 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!--#include file="includes/header.html" -->
+
+<!-- $Id: at_a_glance.html 2943 2009-08-25 20:58:43Z slemoine $ -->
+
+<div id="sub-header">
+</div><!-- end #sub-header -->
+
+<!--#include file="includes/nav.html" -->
+
+<script type="text/javascript">
+$(function() {
+    loadScripts("Moca > moca", "nav-moca");
+    var intervalId = setInterval ( function () {
+     $.ajax({
+	   async: true,
+	   url: "cgi-bin/phyRate.sh",
+	   timeout: 25000,
+	   cache: true,
+	   context: document.body,
+	   data: " " + "\n",
+	   dataType: "html",
+	   type: "POST",
+	   success: function(data, text_status)
+	   {
+	     if ( typeof data !== "undefined" ) {
+	        $("#phyRate").html(data);
+		clearInterval(intervalId);
+	     }
+	   }
+    });
+}, 1000);
+});
+
+function snmp_make_blue(str, oid, $element) {
+	$element.css("color", "green");
+	$element.css("margin-left", "140px");
+	str += " : "+oid.oid;
+	return str;
+}
+</script>
+
+
+<div id="content">
+	<h1>Moca Status And Stats</h1>
+
+<noscript>
+JavaScript is required
+</noscript>
+            
+    <div class="snmp-get" >
+
+	<div class="module forms" id="home-netw">
+	<h2>Main</h2>
+
+	<div class="form-row odd">
+            <span class="readonlyLabel">Enable:</span>
+            <span class="value" data_donor_id="Device.MoCA.Interface.1.Enable"> </span>
+        </div>
+        
+	<div class="form-row">
+            <span class="readonlyLabel">Status:</span>
+            <span class="value" data_donor_id="Device.MoCA.Interface.1.Status"> </span>
+        </div>
+        
+	<div class="form-row odd">
+            <span class="readonlyLabel">TX Broadcast rate:</span>
+            <span class="value" data_donor_id="Device.MoCA.Interface.1.TxBcastRate"> </span>
+        </div>
+        <div class="form-row">
+            <span class="readonlyLabel">Current Phy Rate:</span>
+            <span class="value" id="phyRate"> </span>
+        </div>
+	<div class="form-row odd">
+            <span class="readonlyLabel">MoCA Node Id:</span>
+            <span class="value" data_donor_id="Device.MoCA.Interface.1.NodeID"> </span>
+        </div>
+	<div class="form-row">
+            <span class="readonlyLabel">MoCA NC:</span>
+            <span class="value" data_donor_id="Device.MoCA.Interface.1.NetworkCoordinator"> </span>
+        </div>
+	<div class="form-row odd">
+            <span class="readonlyLabel">MoCA Data Gateway Device Node ID:</span>
+            <span class="value" data_donor_id="Device.MoCA.Interface.1.NetworkCoordinator"> </span>
+        </div>
+
+        <h2>MAC Address</h2>
+		
+	<div class="form-row">
+            <span class="on-off">On</span>
+            <span class="readonlyLabel">MoCA Interface MAC:</span>
+            <span class="value"  data_donor_id="Device.MoCA.Interface.1.MACAddress"> </span> 
+        </div>
+	<div class="form-row odd">
+            <span class="readonlyLabel">MoCA Interface IP:</span>
+            <span class="value"  data_donor_id="Device.DeviceInfo.X_COMCAST-COM_STB_IP"> </span> 
+        </div>
+	<div class="form-row">
+            <span class="readonlyLabel">MoCA Device Mac:</span>
+            <span class="value"  data_donor_id="Device.DeviceInfo.X_COMCAST-COM_STB_MAC"></span> 
+        </div>
+	<div class="form-row odd">
+            <span class="readonlyLabel">Connected Device IP:</span>
+            <span class="value"  data_donor_id="Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewayMoCAIP"> </span> 
+        </div>
+	<div class="form-row">
+            <span class="readonlyLabel">Gateway Device Friendly Name:</span>
+            <span class="value"  data_donor_id="Device.X_COMCAST-COM_Xcalibur.TRM.trmGatewayDeviceFriendlyName"> </span> 
+        </div>
+	<div class="form-row odd">
+            <span class="readonlyLabel">Network Established:</span>
+            <span class="value"  data_donor_id="Device.MoCA.Interface.1.Enable"> </span> 
+        </div>
+	<div class="form-row">
+            <span class="readonlyLabel">Network Uptime:</span>
+            <span class="value"  data_donor_id="Device.MoCA.Interface.1.LastChange"> </span> 
+        </div>
+        </div>
+        
+    </div> <!-- end class="snmp-get" -->
+</div><!-- end #content -->
+
+<!--#include file="includes/footer.html" -->

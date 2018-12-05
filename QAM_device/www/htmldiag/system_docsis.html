@@ -1,0 +1,111 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!--#include file="includes/header.html" -->
+
+<!-- $Id: at_a_glance.html 2943 2009-08-25 20:58:43Z slemoine $ -->
+
+<div id="sub-header">
+	<!--#include file="includes/userbar.html" -->
+</div><!-- end #sub-header -->
+
+<!--#include file="includes/nav.html" -->
+
+<script type="text/javascript">
+$(document).ready(function() {
+    loadScripts("System > DOCSIS", "nav-sys-docsis");
+    
+});
+</script>
+
+<div class='snmp-table' data-snmp-oid="DOCS-IF-MIB::docsIfMib"  data-snmp-agent="ecm" data-snmp-grp="public"></div>
+<div id="content" class="snmp-get" data-snmp-agent="ecm" data-snmp-grp="public">
+	<h1>System > DOCSIS</h1>
+<div class="module forms data" >
+	<h2>Downstream</h2>
+    <div class="form-row odd">
+        <span class="readonlyLabel">Downstream Center Frequency:</span>
+        <span class="value" data-snmp-oid="DOCS-IF-MIB::docsIfDownChannelFrequency.3"> </span>
+    </div>
+    <div class="form-row">
+        <span class="readonlyLabel">Downstream Received Power:</span>
+        <span class="value" data-snmp-oid="DOCS-IF-MIB::docsIfDownChannelPower.3"> </span>
+    </div>
+    <div class="form-row odd">
+        <span class="readonlyLabel">Downstream Carrier Lock:</span>
+        <span class="value" data-snmp-oid="DOCS-IF3-MIB::docsIf3CmStatusValue.2"> </span>
+    </div>
+    <div class="form-row">
+        <span class="readonlyLabel">Downstream SNR:</span>
+        <span class="value" data-snmp-oid="DOCS-IF-MIB::docsIfSigQSignalNoise.3"> </span>
+    </div>
+</div> <!-- end .module -->
+
+<div class="module forms data">
+	<h2>Upstream</h2>
+    <div class="form-row odd">
+        <span class="readonlyLabel">Upstream Center Frequency:</span>
+        <span class="value" data-snmp-oid="DOCS-IF-MIB::docsIfUpChannelFrequency.4"> </span>
+    </div>
+    <div class="form-row">
+        <span class="readonlyLabel">Upstream Power:</span>
+        <span class="value" data-snmp-oid="DOCS-IF-MIB::docsIfCmStatusTxPower.2"> </span>
+    </div>
+</div> <!-- end .module -->
+
+<div class="module forms data">
+	<h2>eCM</h2>
+    <div class="form-row odd">
+        <span class="readonlyLabel">eCM Serial Number:</span>
+        <span class="value" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevSerialNumber.0"> </span>
+    </div>
+    <div class="form-row">
+        <span class="readonlyLabel">eCM Version:</span>
+        <span class="value" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevSwCurrentVers.0"> </span>
+    </div>
+    <div class="form-row odd">
+        <span class="readonlyLabel">eCM Boot Status:</span>
+        <span class="value" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerBootState.0"> </span>
+    </div>
+    <div class="form-row">
+        <span class="readonlyLabel">eCM Boot File:</span>
+        <span class="value" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerConfigFile.0"> </span>
+    </div>
+</div> <!-- end .module -->
+
+<!-- DSG status does not seem to map directly to any MIB. May need further investigation -->
+
+<!-- div class="module forms data">
+	<h2>DSG</h2>
+    <div class="form-row odd">
+        <span class="readonlyLabel">DSG Status:</span>
+        <span class="value" data-snmp-oid="???">{{DOCSIS DSG Status}}</span>
+    </div>
+</div --> <!-- end .module -->
+
+<div class="module forms data">
+	<h2>CM</h2>
+    <div class="form-row odd">
+        <span class="readonlyLabel">CM Status:</span>
+        <span class="value" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerBootState.0"> </span>
+    </div>
+</div> <!-- end .module -->
+
+</div><!-- end #content -->
+
+<!--#include file="includes/footer.html" -->

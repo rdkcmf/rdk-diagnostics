@@ -1,0 +1,190 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!--#include file="includes/header.html" -->
+
+<!-- $Id: network_storage.html 3159 2010-01-11 20:10:58Z slemoine $ -->
+
+<script type="text/javascript">
+var debug       = false;
+var KEY_A_COUNT = 0;
+var KEY_A       = 405;
+var KEY_4       = 52;
+var KEY_7       = 55;
+
+var COMBO  = 0x00;
+
+function toggle_ip() {
+    $("#status").text("IP Control Toggled! Rebooting...");
+    $.ajax({                                                          
+    async: true,                                                   
+    url: "cgi-bin/toggleIpControl.sh",                                   
+    timeout: 5000,                                                 
+    type: "GET",                                    
+    success: function(data)                         
+    {                                                              
+       $("#status").append(" " + data);
+    }                                                              
+    });
+}
+
+function combo_set(num) {
+   if(debug == true) {
+      $("#status").append(" " + num);
+   }
+   COMBO = num;
+}
+
+function combo_reset() {
+  combo_set(0x00);
+  KEY_A_COUNT = 0;
+}
+
+$(document).keyup(function(event){
+    switch(event.which) {
+        case KEY_A:
+            KEY_A_COUNT += 1;
+                switch(COMBO) {
+                    case 0x00:
+                        if(KEY_A_COUNT >= 5) {
+                            combo_set(0x10);
+                        }
+                        break;
+                    case 0x1E:
+                        if(KEY_A_COUNT >= 5) {
+                            combo_set(0x1F);
+                        }
+                        break;
+                    default:
+                        if(KEY_A_COUNT < 5) {
+                            combo_reset();
+                        }
+                        break;
+            }
+            break;
+        case KEY_4:
+            if(COMBO == 0x10) { combo_set(0x18); KEY_A_COUNT = 0;}
+            else { combo_reset(); }
+            break;
+        case KEY_7:
+            switch(COMBO) {
+                case 0x18:
+                    combo_set(0x1C);
+                    KEY_A_COUNT = 0;
+                    break;
+                case 0x1C:
+                    combo_set(0x1E);
+                    KEY_A_COUNT = 0;
+                    break;
+                default:
+                    combo_reset();
+                    break;
+            }
+            break;
+        default:
+            combo_reset();
+            break;
+    }
+    if(COMBO == 0x1F) {toggle_ip(); combo_reset();}
+});
+
+
+function getData() {
+$.ajax({
+   async: true,
+   url: "cgi-bin/ipControl.sh",
+   timeout: 5000,
+   cache: false,
+   context: document.body,
+   dataType: "html",
+   type: "GET",
+   success: function(data)
+   {
+      if (data.length) {
+          var obj = JSON.parse(data);
+          $('#enabled').text(obj.enabled)
+          $('#ctrlmenabled').text(obj.ctrlmenabled)
+          $('#ethernetip').text(obj.ethernetip)
+      }
+   }
+});
+}
+
+function getData2() {                                                   
+$.ajax({                                                                 
+   async: true,                                                          
+   url: "cgi-bin/ipControl.sh",                                          
+   timeout: 5000,                                                        
+   type: "GET",                                                          
+   success: function(data)                                               
+   {                                                                     
+      if (data.length) {                                                 
+          var obj = JSON.parse(data);                                  
+          $('#enabled').text(obj.enabled)                        
+          $('#ctrlmenabled').text(obj.ctrlmenabled)                    
+          $('#ethernetip').text(obj.ethernetip)                        
+      }                                                                
+   }                                                                   
+});                                                               
+}               
+
+$(document).ready(function() {                                           
+    loadScripts("Remote Controls > IP Control", "nav-remotes-ip");       
+    getData2();
+});
+
+</script>
+
+<div id="sub-header">
+	<!--#include file="includes/userbar.html" -->
+</div><!-- end #sub-header -->
+
+<!--#include file="includes/nav.html" -->
+
+<div id="content" class='snmp-get' >
+	<h1>Remote Controls > IP Control</h1>
+  
+<div class="module forms data">
+	<h2>Configuration</h2>
+<table class="data snmp-get" cellpadding="0" cellspacing="0">
+	<thead>
+		<tr>
+			<th scope="col">Key</th>
+			<th scope="col">Value</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="odd">
+			<td><span class="value">Enabled</span></td>
+			<td><span class="value" id="enabled"></span></td>
+		</tr>
+		<tr>
+			<td><span class="value">Ctrlm Enabled</span></td>
+                        <td><span class="value" id="ctrlmenabled"></span></td>
+		</tr>
+		<tr class="odd">
+			<td><span class="value">Ethernet IP Address</span></td>
+			<td><span class="value" id="ethernetip"></span></td>
+		</tr>
+	</tbody>
+</table>
+</div> <!-- end .module -->
+<div id="status"></div>
+</div><!-- end #content -->
+
+<!--#include file="includes/footer.html" -->

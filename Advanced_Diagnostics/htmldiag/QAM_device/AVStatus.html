@@ -1,0 +1,265 @@
+<!--
+ If not stated otherwise in this file or this component's Licenses.txt file the
+ following copyright and licenses apply:
+
+ Copyright 2016 RDK Management
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+ http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+-->
+<!doctype html>
+<html>
+	<head>
+		<!--#include virtual="/htmldiag2/common/html/header.html" -->
+		<!--#include file="includes/menu.html" -->
+	</head>
+	<body>
+		<table  id="myTable" class="tg">
+			<tr>
+				<th class="tg-xodn">HDMI Output</th>
+				<th class="tg-xodn">IEEE 1394</th>
+				<th class="tg-xodn">Audio Output</th>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- HDMI Output --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>HDMI Connected:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIConnectionStatus:::value"> </td>
+							<td class="tg-label"><b>HDCP Status:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIHostDeviceHDCPStatus:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Device Type:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIAttachedDeviceType:::value"> </td>
+							<td class="tg-label"><b>Horizontal Lines:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIOutputFormat:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Frame Rate:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIFrameRate:::value"> </td>
+							<td class="tg-label"><b>Vertical Lines:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIOutputFormat:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Aspect Ratio:</td>
+							<td class="tg-goodval tg-val" data-property-file="snmp#ocStbHostDVIHDMIAspectRatio:::value"> </td>
+							<td class="tg-label"><b>Scanning Format:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIOutputFormat:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Audio:</td>
+							<td class="tg-badval tg-val">Surround</td>
+							<td class="tg-label"><b>Audio PID:</td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostMpeg2ContentSelectedAudioPID:::value"> </td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Channel Modulation:</td>
+							<td class="tg-goodval tg-val" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostInBandTunerModulationMode.1"> </td>
+							<td class="tg-label"><b>Video PID:</td>
+							<td class="tg-badval" data-property-file="snmp#ocStbHostMpeg2ContentSelectedVideoPID:::value"> </td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- IEEE 1394 --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Key Info:</td>
+							<td class="tg-badval tg-val">Not Available</td>
+                                                        <td class="tg-label"><b>Certification Available:</td>
+                                                        <td class="tg-goodval" data-snmp-oid="VIVIDLOGIC-MIB::VividlogicMcardbCertAvailable.1"></td>
+						</tr>
+						<tr>
+                                                        <td class="tg-label"><b>Certification Valid:</td>
+                                                        <td class="tg-goodval tg-val" data-snmp-oid="VIVIDLOGIC-MIB::VividlogicMcardbCertValid.1"></td>
+                                                        <td class="tg-label"><b>Production Key:</td>
+                                                        <td class="tg-goodval" data-snmp-oid="VIVIDLOGIC-MIB::VividlogicMcardbIsProduction.1"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1">&nbsp;</td>
+							<td class="tg-mesh1"><b>Port 1</td>
+							<td class="tg-mesh1"><b>Port 2</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Port Connection Status</td>
+							<td class="tg-meshnull">Not Available</td>
+							<td class="tg-meshnull">Not Available</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Loop Status</td>
+							<td class="tg-meshnull">Not Available</td>
+							<td class="tg-meshnull">Not Available</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Root Status</td>
+							<td class="tg-meshnull">Not Available</td>
+							<td class="tg-meshnull">Not Available</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>Cycle Master Status</td>
+							<td class="tg-meshnull">Not Available</td>
+							<td class="tg-meshnull">Not Available</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>SubUnit Type</td>
+							<td class="tg-meshnull">Not Available</td>
+							<td class="tg-meshnull">Not Available</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>EUI 64</td>
+							<td class="tg-meshnull">Not Available</td>
+							<td class="tg-meshnull">Not Available</td>
+						</tr>
+						<tr>
+							<td class="tg-mesh1"><b>A/O Source Selection Status</td>
+							<td class="tg-meshnull">Not Available</td>
+							<td class="tg-meshnull">Not Available</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<!--- Audio Output --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>SPDIF:</b></td>
+							<td class="tg-nullval">Not Connected</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Composite Audio:</b></td>
+							<td class="tg-nullval">Not Connected</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Audio Stream:</b></td>
+							<td class="tg-goodval">Dolby Digital</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Audio Status:</b></td>
+							<td class="tg-goodval">Stereo</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td class="tg-xodn">Video Resolutions</td>
+				<td class="tg-xodn">EDID Information</td>
+				<td class="tg-xodn">A/V Channel Status</td>
+			</tr>
+			<tr>
+				<td class="tg-vals">
+					<!--- Supported Resolutions --->
+					<table class="tg">
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Supported:</b></td>
+							<td class="tg-goodval">480i, 720i, 720p, 1080i, 1080p</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Current Resolution:</b></td>
+							<td class="tg-goodval">1080p</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Aspect Ratio:</b></td>
+							<td class="tg-goodval" data-property-file="snmp#ocStbHostDVIHDMIAspectRatio:::value"></td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Override:</b></td>
+							<td class="tg-nullval">Off</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<table class="tg">
+						<!--- EDID Information --->
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Status:</b></td>
+							<td class="tg-goodval tg-val">HDMI Connected</td>
+							<td class="tg-label"><b>Manufacturer:</b></td>
+							<td class="tg-goodval">Sony</td>
+						</tr>
+						<tr>
+							<td class="tg-label"><b>Serial Number:</b></td>
+							<td class="tg-goodval tg-val">S123456</td>
+							<td class="tg-label"><b>CEC Supported:</b></td>
+							<td class="tg-goodval">Yes</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+				<td class="tg-vals">
+					<table class="tg">
+						<!--- A/V Channel Status --->
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Native Resolution:</b></td>
+							<td class="tg-goodval">1080p 16:9</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Audio Stream:</b></td>
+							<td class="tg-goodval">Dolby Digital 5.1 Surround</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Secondary Audio:</b></td>
+							<td class="tg-goodval">Spanish</td>
+						</tr>
+						<tr>
+							<td class="tg-label tg-singlecol"><b>Descriptive Audio:</b></td>
+							<td class="tg-nullval">Not Supported</td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<script type="text/javascript">
+			var link=document.getElementById("nav-3");
+			link.href="javascript:void()";
+		</script>
+		<!--#include virtual="/htmldiag2/common/html/footer.html" -->
+	</body>
+</html>
