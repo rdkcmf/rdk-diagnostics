@@ -29,7 +29,16 @@
 var timerObj = {} ;
 
 $(document).ready(function() {
-    getServiceManager()
+    var language = "";
+    if ( location.search.substring(1) != "" ) {
+        language = location.search.substring(1).split("=")[1].trim();
+    }
+    if ( language == "" ){
+        getServiceManager();
+        language=window.glob;
+    } else {
+        processLanguageTexts(language);
+    }
     var TABLE_REFRESH_INTERVAL = 5000;
     loadScripts("MoCA Diagnostics > MoCA Mesh Transmission Rates", "nav-moca-mesh");
     function updatePage() {

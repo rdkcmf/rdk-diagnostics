@@ -162,10 +162,12 @@ function updatePage(id) {
 
 
 $(document).ready(function(){
-    getServiceManager()
 var url_arg = window.location.search.substring(1);
 var cardOID = url_arg.split("=")[1].trim();
 var temp_id = cardOID.split(".")[1].trim();
+window.glob = url_arg.split("=")[2].trim();
+document.getElementById("container").style.display = "";
+
 id = 0;
 focusId = id;
 var SUB_MENU_LOAD_PERIOD = 10;
@@ -209,7 +211,7 @@ updatePage(temp_id);
     <div class="module forms enable">
     </div> <!-- end .module -->
     </div><!-- end #content -->
-    <div id="nav-help" style="visibility:hidden"><b class="readonlyText"> Press [RIGHT/LEFT] for Next/Previous Page </b></div>
+    <div id="nav-help" style="visibility:hidden"><b class="readonlyText">Press [RIGHT/LEFT] for Next/Previous Page</b></div>
 
 </div><!-- end #sub-header -->
 

@@ -3,9 +3,10 @@ var userPreferencesService = null;
 var lang_locale = "";
 var cached_lang_id = null;
 
-function processLanguageTexts()
+function processLanguageTexts(cached_lang_id)
 {
     console.log("Language Preference:" + cached_lang_id);
+    window.glob = cached_lang_id;
     if ( cached_lang_id != "US_es" && cached_lang_id != "CA_fr" && cached_lang_id != "CA_en" ) {
         document.getElementById("container").style.display = "";
         $(".selected:first").focus();
@@ -54,13 +55,13 @@ function getLanguageId()
         userPreferencesService.getUILanguage(function(obj)
         {
             cached_lang_id = obj.ui_language;
-            processLanguageTexts()
+            processLanguageTexts(cached_lang_id)
         });
     }
     else
     {
         cached_lang_id = userPreferencesService.getUILanguage();
-        processLanguageTexts()
+        processLanguageTexts(cached_lang_id)
     }
 }
 

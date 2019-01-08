@@ -273,7 +273,7 @@ function Snmp(snmpdefaults) {
                                                     $.each(data.oid_values, function(i, oid) {
                                                         if(oid.oid.indexOf("4491.2.3.1.1.4.4.5.1.1.1.3") > -1){
                                                             label = mysnmp.fixString(oid, i);
-                                                            val = val + '<a class="snmp-temp-card" href="card_submenu.html?page='+i+'">'+label+'</a>';                                         
+                                                            val = val + '<a class="snmp-temp-card" href="card_submenu.html?page='+i+'&language='+window.glob+'">'+label+'</a>';
                                                             i++;                                                                       
                                                         }
                                                     });

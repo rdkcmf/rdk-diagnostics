@@ -28,12 +28,26 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    getServiceManager()
+    var language = "";
+    if ( location.search.substring(1) != "" ) { 
+        language = location.search.substring(1).split("=")[1].trim();
+    }
+    if ( language == "" ){
+        getServiceManager(true);
+        language=window.glob;
+    } else {
+        processLanguageTexts(language);
+        loadLanguageInfo(language);
+    }
 });
 
-$(function() {
+function loadLanguageInfo(language) {
     loadScripts("Summary > Info", "nav-gateway");
-});
+    navFocusedLink=$('#nav li:has(.selected) > a.top-level').attr('href');
+    navFocusedLink=navFocusedLink + "?language=" + language
+    console.log("navFocusedLink:" + navFocusedLink);
+    $('#nav li:has(.selected) > a.top-level').attr('href',navFocusedLink);
+}
 
 function snmp_make_blue(str, oid, $element) {
 //	return '<h1 style="color:blue">' + str + '</h1>';

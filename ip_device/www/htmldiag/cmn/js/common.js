@@ -154,6 +154,9 @@ comcast.page = function() {
 
                 if ( navFocusedLink != refLink ) {
                    clearTimeout(redirectionId);
+                   if ( navFocusedLink.includes("?language=") == false ) {
+                       navFocusedLink=navFocusedLink + "?language=" + window.glob
+                   } 
                    redirectionId = setTimeout(function(){window.location = navFocusedLink},750);
                 }
             });
