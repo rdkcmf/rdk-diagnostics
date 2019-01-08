@@ -28,13 +28,21 @@
 <script type="text/javascript" src="cmn/js/moca.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    getServiceManager()
-
     $('#moca20').hide();
+    var language = "";
+    if ( location.search.substring(1) != "" ) {
+        language = location.search.substring(1).split("=")[1].trim();
+    }
+    if ( language == "" ){
+        getServiceManager();
+        language=window.glob;
+    } else {
+        processLanguageTexts(language);
+    }
     if(getMocaVersion() === 2.0) {
-
         $('#moca-turbo-enable').attr('data-property-file', 'snmp#mocaIfTurboModeEnable:::value');
         $('#moca20').show();
+
     }
 
     loadScripts("MoCA Info > MoCA Diagnostic Details", "nav-moca-diag");

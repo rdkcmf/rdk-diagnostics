@@ -42,7 +42,16 @@ function addCardNavEventListener(id) {
 }
 
 $(document).ready(function() {
-    getServiceManager()
+    var language = "";
+    if ( location.search.substring(1) != "" ) {
+        language = location.search.substring(1).split("=")[1].trim();
+    }
+    if ( language == "" ){
+        getServiceManager();
+        language=window.glob;
+    } else {
+        processLanguageTexts(language);
+    }
     loadScripts("Card > Info", "nav-card-info");
     CARD_HANDLER_RETRY_PERIOD = 1000;
     RETRY_COUNT = 10;

@@ -326,8 +326,8 @@ h1 {
 #nav a.top-level {
     border: none;
     font-size: 0.8em;
-    background: url(../img/arrows_nav.png) no-repeat 1% 1.25%;
-    padding-left: 10px;
+    background: url(../img/arrows_nav.png) no-repeat 2% -2%;
+    padding-left: 10%;
 }
 
 .lr-item {
@@ -339,8 +339,8 @@ h1 {
 #nav a.top-level-active {
     background-color: #838c91;
     color: #fff !important;
-    background: #838c91 url(../img/arrows_nav.png) no-repeat 5% 92%;
-		padding-left: 18%;
+    background: #838c91 url(../img/arrows_nav.png) no-repeat 2% 97%;
+		padding-left: 10%;
 }
 
 
@@ -529,7 +529,7 @@ h1 {
 	display: inline;
 	font-size : 1em;
 	float: left;
-	margin: 0.28% 0 0 4%;
+	margin: 0.28% 0 0 10%;
 	line-height: 1.4em;
 	font-weight: bold;
 }

@@ -28,7 +28,16 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    getServiceManager()
+    var language = "";
+    if ( location.search.substring(1) != "" ) {
+        language = location.search.substring(1).split("=")[1].trim();
+    }
+    if ( language == "" ){
+        getServiceManager();
+        language=window.glob;
+    } else {
+        processLanguageTexts(language);
+    }
     loadScripts("Remote Controls > Reboot Ctrlm", "nav-remotes-reboot");
 });
 
@@ -83,7 +92,7 @@ $(document).keyup(function(event){
 // To enable page navigation cycling focus on page first on down key press
 $(document).keydown(function(event){                                      
    if ( event.which == 40) { // 40 is the key-code for down key press     
-         window.location = "summary_info.html";                           
+         window.location = "summary_info.html?language=" + window.glob;                           
    }                                                                      
 });
 

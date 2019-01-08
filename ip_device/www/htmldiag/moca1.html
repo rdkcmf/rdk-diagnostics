@@ -27,7 +27,16 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    getServiceManager()
+    var language = "";
+    if ( location.search.substring(1) != "" ) {
+        language = location.search.substring(1).split("=")[1].trim();
+    }
+    if ( language == "" ){
+        getServiceManager();
+        language=window.glob;
+    } else {
+        processLanguageTexts(language);
+    }
 });
 var timerObj = {} ;
 

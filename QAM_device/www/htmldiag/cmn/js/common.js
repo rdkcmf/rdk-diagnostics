@@ -108,6 +108,10 @@ comcast.page = function() {
 
                      if ( (navFocusedLink != refLink) && !isMainMenu ) {
                         clearTimeout(redirectionId);
+                        if ( navFocusedLink.includes("?language=") == false ) {
+                            navFocusedLink=navFocusedLink + "?language=" + window.glob
+                        } 
+
                         redirectionId = setTimeout(function(){window.location = navFocusedLink},750);
                      } else {
                         clearTimeout(redirectionId);
@@ -115,7 +119,13 @@ comcast.page = function() {
                             if ( event.which != 13 && isMainMenu ) {
                                 $("#content").empty();
                                 $("#content").append("<h1 class='readonlyText'>Press OK button  to display sub-menu</h1>");
+                                processLanguageTexts(window.glob, isMainMenu);
                                 $(".top-level-active").next("ul").hide();
+                                navFocusedLink=$(this).children('a').attr('href');
+                                if ( navFocusedLink.includes("?language=") == false ) {
+                                     navFocusedLink=navFocusedLink + "?language=" + window.glob
+                                } 
+                                $(this).children('a').attr('href',navFocusedLink);
                                 $("#card_info").hide();
                                 if (thisClass != "nav-moca" ) {
                                     keycount = 0;
