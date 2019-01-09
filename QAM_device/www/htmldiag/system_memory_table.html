@@ -22,6 +22,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("System > Memory Table", "nav-sys-mem-table");
 });
 </script>
@@ -33,20 +34,20 @@ $(document).ready(function() {
 <!--#include file="includes/nav.html" -->
 
 <div id="content" class='snmp-get' >
-	<h1>System > Memory Table</h1>
+	<h1 class="readonlyText">System > Memory Table</h1>
 <div class="module forms data">
-	<h2>Memory Table</h2>
+	<h2 class="readonlyText">Memory Table</h2>
 <table class="data snmp-table" 
         	data-snmp-oid="OC-STB-HOST-MIB::ocStbHostSystemMemoryReportTable"
-        	" cellpadding="0" cellspacing="0">
+        	 cellpadding="0" cellspacing="0">
 	<thead>
 		<tr>
-			<th scope="col">Type</th>
-			<th scope="col">Size (KB)</th>
+			<th scope="col" class="readonlyText">Type</th>
+			<th scope="col" class="readonlyText">Size (KB)</th>
 		</tr>
 	</thead>
 	<tbody>
-		<tr class="snmp-loading"><td colspan="9">Loading...</td></tr>
+		<tr class="snmp-loading"><td colspan="9" class="readonlyText">Loading...</td></tr>
 		<tr class="snmp-row-template" >
 			<td class="row-label" data-snmp-oid-row="OC-STB-HOST-MIB::ocStbHostSystemMemoryReportMemoryType"></td>
 			<td data-snmp-oid-row="OC-STB-HOST-MIB::ocStbHostSystemMemoryReportMemorySize"></td>

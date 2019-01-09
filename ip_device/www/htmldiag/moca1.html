@@ -26,6 +26,9 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 var timerObj = {} ;
 
 function updateMocaParams() {
@@ -87,7 +90,7 @@ $(window).unload(function() {
 
 
 <div id="content">
-	<h1>Moca > Internet Usage Statistics</h1>
+	<h1 class="readonlyText">Moca > Internet Usage Statistics</h1>
 
 <noscript>
 JavaScript is required
@@ -95,7 +98,7 @@ JavaScript is required
             
     <div class="snmp-get" >
 	<div id="home-netw" class="module forms">
-	<h2>Internet Usage</h2>
+	<h2 class="readonlyText">Internet Usage</h2>
 		
 	<div class="form-row">
             <span class="readonlyLabel">Packets Sent:</span>

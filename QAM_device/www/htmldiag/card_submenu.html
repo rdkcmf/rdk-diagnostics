@@ -54,7 +54,7 @@ function addCardNavEventListener(id) {
                         if (thisClass != "nav-reboot-stb" ) {
                             if ( event.which != 13 && isMainMenu ) {
                                 $("#content").empty();
-                                $("#content").append("<h1>Press OK button  to display sub-menu</h1>");
+                                $("#content").append("<h1 class='readonlyText'>Press OK button  to display sub-menu</h1>");
                             }
                         }
                      }
@@ -126,8 +126,8 @@ function right(id) {
 function updatePage(id) {
      var cardOID = 'OC-STB-HOST-MIB::ocStbHostCCAppInfoPage.' + id;
      $(".module.forms.enable").empty();
-     var element = '<div><span id\=\"card_value\" class\=\"value\"' +
-                   '> Loading ... </span></div>';
+     var element = '<div><span id\=\"card_value\" class\=\"value readonlyText\"' +
+                   '>Loading ...</span></div>';
      $(".module.forms.enable").append(element);
      if (typeof tableValue != 'undefined' && tableValue.length ) {
          tableValue.length = 0 ;
@@ -162,14 +162,15 @@ function updatePage(id) {
 
 
 $(document).ready(function(){
+    getServiceManager()
 var url_arg = window.location.search.substring(1);
 var cardOID = url_arg.split("=")[1].trim();
 var temp_id = cardOID.split(".")[1].trim();
 id = 0;
 focusId = id;
 var SUB_MENU_LOAD_PERIOD = 10;
-var element = '<div><span id\=\"card_value\" class\=\"value\"'  + 
-              '> Loading ... </span></div>';
+var element = '<div><span id\=\"card_value\" class\=\"value readonlyText\"'  + 
+              '>Loading ...</span></div>';
 $(".module.forms.enable").append(element);
 
 loadScripts("Card > Info", "nav-card-info");
@@ -203,12 +204,12 @@ updatePage(temp_id);
 
 <div id="content" class='snmp-get' >
 
-        <h1>Card > Info</h1>
+        <h1 class="readonlyText">Card > Info</h1>
         
     <div class="module forms enable">
     </div> <!-- end .module -->
     </div><!-- end #content -->
-    <div id="nav-help" style="visibility:hidden"><b> Press [RIGHT/LEFT] for Next/Previous Page </b></div>
+    <div id="nav-help" style="visibility:hidden"><b class="readonlyText"> Press [RIGHT/LEFT] for Next/Previous Page </b></div>
 
 </div><!-- end #sub-header -->
 

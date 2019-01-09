@@ -28,14 +28,15 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("Manufacturer >  Host", "nav-mfg-sys-descr-host");
 });
 </script>
 
 <div id="content" class='snmp-get' >
-	<h1>Manufacturer > System Descriptor > Host</h1>
+	<h1 class="readonlyText">Manufacturer > System Descriptor > Host</h1>
 <div class="module forms data">
-	<h2>tru2way</h2>
+	<h2 class="readonlyText">tru2way</h2>
     <div class="form-row odd">
         <span class="readonlyLabel">Hardware Revision:</span>
         <span class="value" data-property-file="snmp#sysDescr:::HW_REV"></span>
@@ -59,7 +60,7 @@ $(document).ready(function() {
 </div> <!-- end .module -->
 
 <div class="module forms data">
-	<h2>Host Properties</h2>
+	<h2 class="readonlyText">Host Properties</h2>
 <table class="data" cellpadding="0" cellspacing="0">
     <div class="form-row odd">
         <span class="readonlyLabel">Host ID:</span>

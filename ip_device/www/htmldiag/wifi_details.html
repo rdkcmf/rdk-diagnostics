@@ -26,10 +26,10 @@
 <!--#include file="includes/nav.html" -->
 
 <div id="content">
-    <h1>WiFi Details</h1>
+    <h1 class="readonlyText">WiFi Details</h1>
     <div class="snmp-get" >
    <div class="module forms" id="home-netw">
-            <h2>WiFi Details</h2>
+            <h2 class="readonlyText">WiFi Details</h2>
        <div class="form-row odd">
                 <span class="readonlyLabel">Connection Status:</span>
                 <span class="value" id="connection_status"> </span>
@@ -88,6 +88,9 @@
 
 <!-- this code needs excuted after the page is loaded -->
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 $(function() {
     loadScripts("Wifi > Details", "nav-wifi-details");
 });

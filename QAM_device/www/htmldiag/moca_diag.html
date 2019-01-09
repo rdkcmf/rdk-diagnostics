@@ -28,7 +28,7 @@
 <script type="text/javascript" src="cmn/js/moca.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-
+    getServiceManager()
 
     $('#moca20').hide();
     if(getMocaVersion() === 2.0) {
@@ -44,10 +44,10 @@ $(document).ready(function() {
 
 
 <div id="content" class='snmp-get' >
-	<h1>MOCA Info > Diagnostic details</h1>
+	<h1 class="readonlyText">MOCA Info > Diagnostic details</h1>
 
 	<div class="module forms enable">
-        <h2>Diagnostic details</h2>
+        <h2 class="readonlyText">Diagnostic details</h2>
     <div class="form-row odd">
             <span class="readonlyLabel">MoCA Network Status:</span>
             <span class="value" id="moca-network-status" data-property-file="snmp#mocaIfEnable:::value"></span>

@@ -26,6 +26,9 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 $(function() {
     loadScripts("Summary > Info", "nav-summary-info");
     // Retry to get firmare date value in an interval 0f 2 seconds
@@ -69,14 +72,14 @@ $(document).keydown(function(event){
 
 
 <div id="content">
-	<h1>Summary > Info</h1>
+	<h1 class="readonlyText">Summary > Info</h1>
 <noscript>
 JavaScript is required
 </noscript>
             
     <div class="snmp-get" >
 	<div class="module forms" id="home-network">
-		<h2>System</h2>
+		<h2 class="readonlyText">System</h2>
 		
 	<div class="form-row">
             <span class="on-off" style="display: none">On</span>
@@ -93,7 +96,7 @@ JavaScript is required
         </div>
         
 	<div id="internet-usage" class="module forms">
-		<h2>Firmware</h2>
+		<h2 class="readonlyText">Firmware</h2>
 		
 	<div class="form-row">
             <span class="readonlyLabel">Version:</span>

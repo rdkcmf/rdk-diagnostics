@@ -28,17 +28,18 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("OSD Diagnostics", "nav-osd-diag2");
 });
 </script>
 
 
 <div id="content" class='snmp-get' >
-	<h1>OSD Diagnostics</h1>
+	<h1 class="readonlyText">OSD Diagnostics</h1>
 
 
     <div class="module forms enable">
-	<h2>OSD Diagnostics Details   -  Page 2 of 2</h2>
+	<h2 class="readonlyText">OSD Diagnostics Details   -  Page 2 of 2</h2>
         <div class="form-row odd">
             <span class="readonlyLabel">S/W Ver:</span>
             <span class="value" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostSoftwareFirmwareVersion.0"></span>

@@ -21,6 +21,9 @@
 <!-- $Id: network_storage.html 3159 2010-01-11 20:10:58Z slemoine $ -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 $(function() {
     loadScripts("System > In-Band Network", "nav-sys-ib-network");
 });
@@ -33,26 +36,26 @@ $(function() {
 <!--#include file="includes/nav.html" -->
 
 <div id="content" class='snmp-get' >
-	<h1>System > In-Band Network</h1>
+	<h1 class="readonlyText">System > In-Band Network</h1>
     <div class="module forms data">
-	    <h2>In-Band Network</h2>
+	    <h2 class="readonlyText">In-Band Network</h2>
         <table class="data" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col">Tuner</th>
-                    <th scope="col">Success Tune Count</th>
-                    <th scope="col">Failed Tune Count</th>
-                    <th scope="col">Last Failed Freq</th>
-                    <th scope="col">Correctable</th>
-                    <th scope="col">Uncorrectable</th>
-                    <th scope="col">MPEG PCR Lock</th>
-                    <th scope="col">MPEG Program</th>
-                    <th scope="col">MPEG CCI</th>
-                    <th scope="col">MPEG Type</th>
+                    <th scope="col" class="readonlyText">Tuner</th>
+                    <th scope="col" class="readonlyText">Success Tune Count</th>
+                    <th scope="col" class="readonlyText">Failed Tune Count</th>
+                    <th scope="col" class="readonlyText">Last Failed Freq</th>
+                    <th scope="col" class="readonlyText">Correctable</th>
+                    <th scope="col" class="readonlyText">Uncorrectable</th>
+                    <th scope="col" class="readonlyText">MPEG PCR Lock</th>
+                    <th scope="col" class="readonlyText">MPEG Program</th>
+                    <th scope="col" class="readonlyText">MPEG CCI</th>
+                    <th scope="col" class="readonlyText">MPEG Type</th>
                 </tr>
             </thead>
             <tbody id="tunertable"> <!-- TODO even/odd -->
-            	<tr class="snmp-loading"><td colspan="9">Loading tuners...</td></tr>
+            	<tr class="snmp-loading"><td colspan="9" class="readonlyText">Loading tuners...</td></tr>
             </tbody>
         </table>
      </div> <!-- end .module -->

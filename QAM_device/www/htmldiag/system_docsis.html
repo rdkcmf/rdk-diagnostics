@@ -28,6 +28,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("System > DOCSIS", "nav-sys-docsis");
     
 });
@@ -35,9 +36,9 @@ $(document).ready(function() {
 
 <div class='snmp-table' data-snmp-oid="DOCS-IF-MIB::docsIfMib"  data-snmp-agent="ecm" data-snmp-grp="public"></div>
 <div id="content" class="snmp-get" data-snmp-agent="ecm" data-snmp-grp="public">
-	<h1>System > DOCSIS</h1>
+	<h1 class="readonlyText">System > DOCSIS</h1>
 <div class="module forms data" >
-	<h2>Downstream</h2>
+	<h2 class="readonlyText">Downstream</h2>
     <div class="form-row odd">
         <span class="readonlyLabel">Downstream Center Frequency:</span>
         <span class="value" data-snmp-oid="DOCS-IF-MIB::docsIfDownChannelFrequency.3"> </span>
@@ -57,7 +58,7 @@ $(document).ready(function() {
 </div> <!-- end .module -->
 
 <div class="module forms data">
-	<h2>Upstream</h2>
+	<h2 class="readonlyText">Upstream</h2>
     <div class="form-row odd">
         <span class="readonlyLabel">Upstream Center Frequency:</span>
         <span class="value" data-snmp-oid="DOCS-IF-MIB::docsIfUpChannelFrequency.4"> </span>
@@ -69,7 +70,7 @@ $(document).ready(function() {
 </div> <!-- end .module -->
 
 <div class="module forms data">
-	<h2>eCM</h2>
+	<h2 class="readonlyText">eCM</h2>
     <div class="form-row odd">
         <span class="readonlyLabel">eCM Serial Number:</span>
         <span class="value" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevSerialNumber.0"> </span>
@@ -99,7 +100,7 @@ $(document).ready(function() {
 </div --> <!-- end .module -->
 
 <div class="module forms data">
-	<h2>CM</h2>
+	<h2 class="readonlyText">CM</h2>
     <div class="form-row odd">
         <span class="readonlyLabel">CM Status:</span>
         <span class="value" data-snmp-oid="DOCS-CABLE-DEVICE-MIB::docsDevServerBootState.0"> </span>

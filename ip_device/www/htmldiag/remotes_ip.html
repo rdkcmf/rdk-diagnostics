@@ -123,6 +123,7 @@ $.ajax({
 }               
 
 $(document).ready(function() {                                           
+    getServiceManager()
     loadScripts("Remote Controls > IP Control", "nav-remotes-ip");       
     getData();
 });
@@ -136,28 +137,28 @@ $(document).ready(function() {
 <!--#include file="includes/nav.html" -->
 
 <div id="content" class='snmp-get' >
-	<h1>Remote Controls > IP Control</h1>
+	<h1 class="readonlyText">Remote Controls > IP Control</h1>
   
 <div class="module forms data">
-	<h2>Configuration</h2>
+	<h2 class="readonlyText">Configuration</h2>
 <table class="data snmp-get" cellpadding="0" cellspacing="0">
 	<thead>
 		<tr>
-			<th scope="col">Key</th>
-			<th scope="col">Value</th>
+			<th scope="col" class="readonlyText">Key</th>
+			<th scope="col" class="readonlyText">Value</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr class="odd">
-			<td><span class="value">Enabled</span></td>
+			<td><span class="value readonlyLabel">Enabled</span></td>
 			<td><span class="value" id="enabled"></span></td>
 		</tr>
 		<tr>
-			<td><span class="value">Mac Address</span></td>
+			<td><span class="value readonlyLabel">Mac Address</span></td>
                         <td><span class="value" id="mac"></span></td>
 		</tr>
 		<tr class="odd">
-			<td><span class="value">IP Address</span></td>
+			<td><span class="value readonlyLabel">IP Address</span></td>
 			<td><span class="value" id="ip"></span></td>
 		</tr>
 	</tbody>

@@ -26,6 +26,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     var TABLE_REFRESH_INTERVAL = 5000;
     loadScripts("MoCA Diagnostics > MoCA Mesh Transmission Rates", "nav-moca-mesh");
     function updateMeshRate () {
@@ -99,11 +100,11 @@ $(document).ready(function() {
 
 
 <div id="content" >
-	<h1>MoCA Diagnostics</h1>
+	<h1 class="readonlyText">MoCA Diagnostics</h1>
 
     <div class="module">
-        <h2>MoCA Mesh Transmission Rate</h2>
-        <span id="progress">        Updating ... </span>
+        <h2 class="readonlyText">MoCA Mesh Transmission Rate</h2>
+        <span id="progress" class="readonlyText">Updating ...</span>
         <table class="data" cellpadding="0" cellspacing="0">
 
         </table>

@@ -25,6 +25,9 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 $(function() {
     loadScripts("System > HDMI Info", "nav-sys-hdmi-info");
     
@@ -39,10 +42,10 @@ function snmp_make_blue(str, oid, $element) {
 </script>
 
 <div id="content">
-    <h1>System > HDMI Info</h1>
+    <h1 class="readonlyText">System > HDMI Info</h1>
     <div class="snmp-get" >
 	<div class="module forms" id="home-netw">
-            <h2>HDMI Info</h2>
+            <h2 class="readonlyText">HDMI Info</h2>
 	    <div class="form-row odd">
                <span class="readonlyLabel">Connection Status:</span>
                 <span class="value" data_donor_id="Device.Services.STBService.1.Components.HDMI.1.Status"> </span>

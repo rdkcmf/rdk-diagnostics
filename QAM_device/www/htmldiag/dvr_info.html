@@ -28,6 +28,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("DVR Info > Storage Info", "nav-dvr-storage");
     $.ajax({
            async: false,
@@ -43,7 +44,7 @@ $(document).ready(function() {
               if (data.length) {
                   if( data == "RNG150\n") {
                       $(".data").empty();
-                      $(".data").append("<span><b>DVR Info Not Applicable</b></span>");
+                      $(".data").append("<span><b class='readonlyText'>DVR Info Not Applicable</b></span>");
                   }
               }
           }
@@ -54,35 +55,35 @@ $(document).ready(function() {
 
 
 <div id="content" class='snmp-get' >
-	<h1>DVR Info > Storage Info</h1>
+	<h1 class="readonlyText">DVR Info > Storage Info</h1>
 
 	<div class="module">
-		<h2>Storage Info > HDD Information</h2>
+		<h2 class="readonlyText">Storage Info > HDD Information</h2>
 
                 <table class="data" cellpadding="0" cellspacing="0">
                     <tr>
                         <th></th>
-                        <th>Model</th>
-                        <th>Format Enable Status</th>
-                        <th>Used</th>
-                        <th>Available</th>
-                        <th>Total</th>
+                        <th class="readonlyText">Model</th>
+                        <th class="readonlyText">Format Enable Status</th>
+                        <th class="readonlyText">Used</th>
+                        <th class="readonlyText">Available</th>
+                        <th class="readonlyText">Total</th>
                     </tr>
                     <tr class='odd'>
-                        <td>Internal HDD - Hard-Coded Data</td>
-				<td>Model A</td>
-				<td>True</td>
-				<td>1000000</td>
-				<td>4000000</td>
-				<td>5000000</td>
+                        <td class="readonlyLabel">Internal HDD - Hard-Coded Data</td>
+				<td class="readonlyText">Model A</td>
+				<td class="readonlyText">True</td>
+				<td class="readonlyText">1000000</td>
+				<td class="readonlyText">4000000</td>
+				<td class="readonlyText">5000000</td>
                     </tr>
                     <tr>
-                        <td>External HDD - Hard-Coded Data</td>
-				<td>Model B</td>
-				<td>True</td>
-				<td>5000000</td>
-				<td>5000000</td>
-				<td>10000000</td>
+                        <td class="readonlyLabel">External HDD - Hard-Coded Data</td>
+				<td class="readonlyText">Model B</td>
+				<td class="readonlyText">True</td>
+				<td class="readonlyText">5000000</td>
+				<td class="readonlyText">5000000</td>
+				<td class="readonlyText">10000000</td>
                     </tr>
                 </table>
 	</div> <!-- end .module -->

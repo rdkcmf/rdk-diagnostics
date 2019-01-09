@@ -27,6 +27,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     var TABLE_REFRESH_INTERVAL = 5000;
     loadScripts("MoCA Diagnostics > MoCA Connected Devices", "nav-moca-connected");
     setInterval( function() {
@@ -47,7 +48,7 @@ $(document).ready(function() {
                   var connectedNodes = data.paramList;
                   $(".data").empty();
                   var numberOfRows = connectedNodes.length;
-                  var tableHeader = "<tr><th>MoCA Node Id</th> <th>MoCA Mac Address</th> <th>MoCA IP</th></tr>"
+                  var tableHeader = "<tr><th class='readonlyText'>MoCA Node Id</th> <th class='readonlyText'>MoCA Mac Address</th> <th class='readonlyText'>MoCA IP</th></tr>"
                   $(".data").append(tableHeader);
                   for ( var row = 0 ; row < numberOfRows; row = row + 2 ) {
                       var rowOffset = row;
@@ -57,7 +58,7 @@ $(document).ready(function() {
                       var nodeId = connectedNodes[rowOffset].value;
                       tableData = tableData + "<td>" + nodeId + "</td>";
                       tableData = tableData + "<td>" + macAddress + "</td>";
-                      tableData = tableData + "<td>" + "Value Unavailable" + "</td></tr>";
+                      tableData = tableData + "<td class='readonlyText'>" + "Value Unavailable" + "</td></tr>";
                       $(".data").append(tableData);
                   }
               }
@@ -70,11 +71,11 @@ $(document).ready(function() {
 
 
 <div id="content" >
-	<h1>MoCA Diagnostics</h1>
+	<h1 class="readonlyText">MoCA Diagnostics</h1>
 
     <div class="module">
-        <h2>MoCA Connected Devices</h2>
-        <span id="progress">        Updating ... </span>
+        <h2 class="readonlyText">MoCA Connected Devices</h2>
+        <span id="progress" class="readonlyText">Updating ...</span>
         <table class="data" cellpadding="0" cellspacing="0">
 
         </table>

@@ -26,6 +26,9 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 $(function() {
     loadScripts("Moca > moca", "nav-moca");
     var intervalId = setInterval ( function () {
@@ -59,7 +62,7 @@ function snmp_make_blue(str, oid, $element) {
 
 
 <div id="content">
-	<h1>Moca Status And Stats</h1>
+	<h1 class="readonlyText">Moca Status And Stats</h1>
 
 <noscript>
 JavaScript is required
@@ -68,7 +71,7 @@ JavaScript is required
     <div class="snmp-get" >
 
 	<div class="module forms" id="home-netw">
-	<h2>Main</h2>
+	<h2 class="readonlyText">Main</h2>
 
 	<div class="form-row odd">
             <span class="readonlyLabel">Enable:</span>
@@ -101,7 +104,7 @@ JavaScript is required
             <span class="value" data_donor_id="Device.MoCA.Interface.1.NetworkCoordinator"> </span>
         </div>
 
-        <h2>MAC Address</h2>
+        <h2 class="readonlyText">MAC Address</h2>
 		
 	<div class="form-row">
             <span class="on-off">On</span>

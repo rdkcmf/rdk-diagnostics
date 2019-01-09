@@ -25,6 +25,9 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 $(function() {
     loadScripts("System > Memory Table", "nav-sys-mem-table");
     
@@ -40,10 +43,10 @@ function snmp_make_blue(str, oid, $element) {
 
 
 <div id="content">
-    <h1>System > Memory Table</h1>
+    <h1 class="readonlyText">System > Memory Table</h1>
     <div class="snmp-get" >
 	<div class="module forms" id="home-netw">
-            <h2>Memory Table</h2>
+            <h2 class="readonlyText">Memory Table</h2>
 	    <div class="form-row odd">
                 <span class="readonlyLabel">ROM:</span>
                 <span class="value" data_donor_="xxx.xxx.xxx">Value Unavailable</span>

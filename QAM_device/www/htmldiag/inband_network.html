@@ -22,6 +22,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("Summary > In-Band Network", "nav-inband-network");
 });
 </script>
@@ -34,25 +35,25 @@ $(document).ready(function() {
 
 
 <div id="content" class='snmp-get' >
-    <h1>Summary > In-Band Network</h1>
+    <h1 class="readonlyText">Summary > In-Band Network</h1>
     <div class="module forms data">
-        <h2>In-Band Network</h2>
+        <h2 class="readonlyText">In-Band Network</h2>
         <table id="tunerTable" class="data snmp-table" 
         	data-snmp-oid="OC-STB-HOST-MIB::ocStbHostInBandTunerTable" 
         	cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    <th scope="col">Tuner</th>
-                    <th scope="col">Frequency (hertz)</th>
-                    <th scope="col">Modulation</th>
-                    <th scope="col">Power (dBmV)</th>
-                    <th scope="col">SNR (dB)</th>
-                    <th scope="col">Carrier Lock</th>
+                    <th scope="col" class="readonlyText">Tuner</th>
+                    <th scope="col" class="readonlyText">Frequency (hertz)</th>
+                    <th scope="col" class="readonlyText">Modulation</th>
+                    <th scope="col" class="readonlyText">Power (dBmV)</th>
+                    <th scope="col" class="readonlyText">SNR (dB)</th>
+                    <th scope="col" class="readonlyText">Carrier Lock</th>
                 </tr>
             </thead>
             <tbody> <!-- TODO even/odd -->
                 <tr class="snmp-row-template" >
-                    <th class="row-label">Tuner-<span class="snmp-row-id"></span></th>
+                    <th class="row-label readonlyText">Tuner-<span class="snmp-row-id"></span></th>
                     <td data-snmp-oid-row="OC-STB-HOST-MIB::ocStbHostInBandTunerFrequency"></td>
                     <td data-snmp-oid-row="OC-STB-HOST-MIB::ocStbHostInBandTunerModulationMode"></td>
                     <td data-snmp-oid-row="OC-STB-HOST-MIB::ocStbHostInBandTunerPower"></td>

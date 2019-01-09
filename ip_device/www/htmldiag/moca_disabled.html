@@ -24,6 +24,10 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
+
 $(function() {
      loadScripts("Moca > moca", "nav-moca-disable");
 });
@@ -37,7 +41,7 @@ function snmp_make_blue(str, oid, $element) {
 </script>
 
 <div id="moca_main">
-        <p id="moca_error">Moca Interface not available</p>
+        <p id="moca_error" class="readonlyText">Moca Interface not available</p>
 </div>
 
 <!--#include file="includes/footer.html" -->

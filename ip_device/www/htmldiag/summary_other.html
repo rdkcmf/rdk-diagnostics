@@ -25,6 +25,9 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
 $(function() {
     loadScripts("Summary > Other", "nav-summary-other");
 
@@ -68,10 +71,10 @@ $(document).keydown(function(event){
 
 
 <div id="content">
-    <h1>Other Details</h1>
+    <h1 class="readonlyText">Other Details</h1>
     <div class="snmp-get" >
 	<div class="module forms" id="home-netw">
-            <h2>Other Details</h2>
+            <h2 class="readonlyText">Other Details</h2>
 	    <div class="form-row odd">
                 <span class="readonlyLabel">XRE Server Connection Status:</span>
                 <span class="value" data_donor_id="Device.X_COMCAST-COM_Xcalibur.Client.XRE.xreStatus"> </span>

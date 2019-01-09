@@ -27,6 +27,10 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
+
 $(function() {
     loadScripts("Summary > Info", "nav-gateway");
 });
@@ -66,7 +70,7 @@ $.ajax({
 
 
 <div id="content">
-    <h1>Press OK button  to display sub-menu</h1>
+    <h1 class="readonlyText">Press OK button  to display sub-menu</h1>
 </div><!-- end #content -->
 
 <!--#include file="includes/footer.html" -->

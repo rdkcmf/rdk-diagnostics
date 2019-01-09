@@ -28,6 +28,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("DVR Info > TSB Info", "nav-dvr-tsb");
     $.ajax({
            async: false,
@@ -43,7 +44,7 @@ $(document).ready(function() {
               if (data.length) {
                   if( data == "RNG150\n") {
                       $(".value").remove();
-                      $(".form-row").append("<span class='value'>DVR Info Not Applicable</span>");
+                      $(".form-row").append("<span class='value readonlyText'>DVR Info Not Applicable</span>");
                   }
               }
           }
@@ -54,10 +55,10 @@ $(document).ready(function() {
 
 
 <div id="content" class='snmp-get' >
-	<h1>DVR Info > TSB Info</h1>
+	<h1 class="readonlyText">DVR Info > TSB Info</h1>
 
 	<div class="module forms enable">
-	<h2>TSB Info > Timeshift Status</h2>
+	<h2 class="readonlyText">TSB Info > Timeshift Status</h2>
     <div class="form-row odd">
             <span class="readonlyLabel">TSB Enable Status Signaling:</span>
             <span class="value" data-snmp-oid="XcaliburClientMIB::xreHeartbeatEnabled.0"></span>

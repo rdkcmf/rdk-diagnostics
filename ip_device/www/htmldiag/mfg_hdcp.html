@@ -25,6 +25,10 @@
 <!--#include file="includes/nav.html" -->
 
 <script type="text/javascript">
+$(document).ready(function() {
+    getServiceManager()
+});
+
 $(function() {
    loadScripts("Manufacturer > Info", "nav-manufacturer-info");
     
@@ -40,10 +44,10 @@ function snmp_make_blue(str, oid, $element) {
 
 
 <div id="content">
-    <h1>Manufacturer -> HDMI</h1>
+    <h1 class="readonlyText">Manufacturer -> HDMI</h1>
     <div class="snmp-get" >
 	<div class="module forms" id="home-netw">
-            <h2>HDMI Certificate</h2>
+            <h2 class="readonlyText">HDMI Certificate</h2>
 	    <div class="form-row odd">
                 <span class="readonlyLabel">HDCP Enable Status:</span>
                 <span class="value" data_donor_id="Device.Services.STBService.1.Components.VideoOutput.1.HDCP"> </span>

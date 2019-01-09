@@ -28,17 +28,18 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("Manufacturer > M-Card", "nav-mfg-mcard");
 });
 </script>
 
 <div id="content" class='snmp-get'>
-	<h1>Manufacturer > M-Card</h1>
+	<h1 class="readonlyText">Manufacturer > M-Card</h1>
 
 
     <div>
     <div class="module forms enable">
-		<h2>M-Card Certificate</h2>
+		<h2 class="readonlyText">M-Card Certificate</h2>
 		<div class="form-row odd">
             <span class="readonlyLabel">Host ID:</span>
             <span class="value" data-snmp-oid="VIVIDLOGIC-MIB::VividlogicMcardAcHostId.1"> </span>

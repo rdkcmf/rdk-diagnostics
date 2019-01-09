@@ -42,6 +42,7 @@ function addCardNavEventListener(id) {
 }
 
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("Card > Info", "nav-card-info");
     CARD_HANDLER_RETRY_PERIOD = 1000;
     RETRY_COUNT = 10;
@@ -62,11 +63,11 @@ $(document).ready(function() {
 </script>
 
 <div id="content" class='snmp-get' >
-	<h1>Card > Info</h1>
+	<h1 class="readonlyText">Card > Info</h1>
 
     <div>
     <div class="module forms enable">
-            <h2>CP Certificate</h2>
+            <h2 class="readonlyText">CP Certificate</h2>
         <div class="form-row">
             <span class="readonlyLabel">OOB Mode:</span>
             <span class="value" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostOobMessageMode.0"></span>
@@ -89,7 +90,7 @@ $(document).ready(function() {
         </div>
 	</div> <!-- end .module -->
     <div class="module forms enable">
-		<h2>CP ID List</h2>
+		<h2 class="readonlyText">CP ID List</h2>
 		<div class="form-row odd">
             <span class="readonlyLabel">Card ID:</span>
             <span class="value" data-snmp-oid="OC-STB-HOST-MIB::ocStbHostCardId.0"></span>

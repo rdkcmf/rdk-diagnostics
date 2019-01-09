@@ -28,15 +28,16 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    getServiceManager()
     loadScripts("Manufacturer -> HDMI", "nav-mfg-hdmi");
 });
 </script>
 
 <div id="content" class="snmp-get" >
-	<h1>Manufacturer -> HDMI</h1>
+	<h1 class="readonlyText">Manufacturer -> HDMI</h1>
     <div>
     <div class="module forms enable">
-		<h2>HDMI Certificate</h2>
+		<h2 class="readonlyText">HDMI Certificate</h2>
 		<div class="form-row odd">
             <span class="on-off">On</span>
             <span class="readonlyLabel">HDCP Enable Status:</span>

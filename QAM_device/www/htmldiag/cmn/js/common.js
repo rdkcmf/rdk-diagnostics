@@ -114,7 +114,7 @@ comcast.page = function() {
                         if (thisClass != "nav-reboot-stb" ) {
                             if ( event.which != 13 && isMainMenu ) {
                                 $("#content").empty();
-                                $("#content").append("<h1>Press OK button  to display sub-menu</h1>");
+                                $("#content").append("<h1 class='readonlyText'>Press OK button  to display sub-menu</h1>");
                                 $(".top-level-active").next("ul").hide();
                                 $("#card_info").hide();
                                 if (thisClass != "nav-moca" ) {
