@@ -29,10 +29,8 @@ else
     $tr181Set -s -v true Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable > /dev/null 2>&1
 fi
 
-echo "RebootReason: ($0) Restarting STB from HTML diagnostics ..!" >> /opt/logs/rebootInfo.log
-
 if [ -f /rebootNow.sh ] ; then
-    sh /rebootNow.sh -s htmlDiagnostics
+    sh /rebootNow.sh -s HtmlDiagnostics -o "Restarting STB from HTML diagnostics IP_device `basename $0`..."
 fi
 
 echo "Content-Type: text/html"
