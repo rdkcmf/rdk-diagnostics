@@ -172,6 +172,9 @@ if [ -z "$OID" ]; then
 fi    
 
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
+if [ -z "$snmpCommunityVal" ] || [ "$snmpCommunityVal" == " " ]; then
+    snmpCommunityVal="private"
+fi
 
 if [ "OC-STB-HOST-MIB::ocStbHostCardDaylightSavingsTimeDelta" = "$OID" ]; then
     VALUE=`snmpwalk -Oxv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID" \

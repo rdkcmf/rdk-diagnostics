@@ -24,6 +24,9 @@ export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib:/usr/local/lib
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
+if [ -z "$snmpCommunityVal" ] || [ "$snmpCommunityVal" == " " ]; then
+    snmpCommunityVal="private"
+fi
 
 RFC_OPER_STATUS=`snmpget -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 "RFC1213-MIB::ifOperStatus.2" | sed -e "s/IF-MIB::ifOperStatus.*=//g"`
 IPNET_PHYSICAL_ADDR=`snmpwalk -OQ -v 2c -c "$snmpCommunityVal" 127.0.0.1 "IP-MIB::ipNetToPhysicalPhysAddress.2.ipv4" | sed -e "s/IP-MIB::ipNetToPhysicalPhysAddress.*=//g"`

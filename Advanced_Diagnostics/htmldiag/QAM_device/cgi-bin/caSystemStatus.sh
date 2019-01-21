@@ -29,6 +29,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
+if [ -z "$snmpCommunityVal" ] || [ "$snmpCommunityVal" == " " ]; then
+    snmpCommunityVal="private"
+fi
 
 OID='OC-STB-HOST-MIB::ocStbHostCardBindingStatus.0'
 VALUE=`snmpwalk -OQ -v 2c -c public 127.0.0.1 $OID | sed -e "s/$OID.*=//g"`

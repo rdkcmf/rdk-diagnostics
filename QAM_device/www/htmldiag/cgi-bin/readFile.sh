@@ -48,6 +48,9 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib:/usr/local/
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/sbin:/usr/sbin/
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
+if [ -z "$snmpCommunityVal" ] || [ "$snmpCommunityVal" == " " ]; then
+    snmpCommunityVal="private"
+fi
 
 if [ -f "$FILENAME_PROP" ]
 then 

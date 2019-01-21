@@ -24,6 +24,9 @@ export MIBDIRS=/mnt/nfs/bin/target-snmp/share/snmp/mibs:/usr/share/snmp/mibs
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/mnt/nfs/bin/target-snmp/lib:/usr/local/lib
 export PATH=$PATH:/mnt/nfs/bin/target-snmp/bin
 snmpCommunityVal=`head -n1 /tmp/snmpd.conf | awk '{print $4}'`
+if [ -z "$snmpCommunityVal" ] || [ "$snmpCommunityVal" == " " ]; then
+    snmpCommunityVal="private"
+fi
 OID='OC-STB-HOST-MIB::ocStbHostCardCpAuthKeyStatus.0'
 VALUE=`snmpget -OQv -v 2c -c "$snmpCommunityVal" 127.0.0.1 "$OID"`
 RETURN_VALUE=''
