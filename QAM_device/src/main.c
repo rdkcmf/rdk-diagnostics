@@ -256,21 +256,42 @@ int main(int argc, char **argv)
     const char *jsonstr = json_object_to_json_string(my_object);
     puts(jsonstr);
     printf("\n");
-    char outfile[256];
 
-    if (file) {
-	sprintf(outfile, "%s.out", file);
-	FILE *fp = fopen(outfile, "w");
-	if (!fp) {
-	    fprintf(stderr, "error opening file = '%s'\n", outfile);
-	    fflush(stdout);
-	    perror("...");
-	    return 0;
+    if (file)
+    {
+        char outfile[256];
+        size_t i;
+        char *p;
+        // get the base file name
+        // everything after a forward slash is considered the file name
+        i = strlen( file );
+        p = file + i;
+        while( p > file )
+        {
+            --p;
+            if( *p == '/' )    // if we see a slash character
+            {
+                ++p;    // go back 1 char to the right, that's the filename
+                break;
+            }
+        }
+        if( *p )    // if we have some character, treat it as a filename
+        {
+	    FILE *fp;
+	    sprintf(outfile, "/tmp/%s.out", p);
+	    if( (fp = fopen(outfile, "w")) != NULL )
+            {
+                fputs(jsonstr, fp);
+                fprintf(fp, "\n");
+                fflush(fp);
+                fclose(fp);
+            }
+            else
+	    {
+	        fprintf(stderr, "error opening file = '%s'\n", outfile);
+	        perror("...");
+            }
 	}
-	fputs(jsonstr, fp);
-	fprintf(fp, "\n");
-	fflush(fp);
-	fclose(fp);
     }
     fflush(stdout);
 
