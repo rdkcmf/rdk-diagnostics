@@ -56,7 +56,7 @@ if [ -f "$FILENAME_PROP" ]
 then 
     FILENAME="$FILENAME_PROP"
 else
-    FILENAME=`cat /opt/www/htmldiag/fileLocation.properties | grep "$FILENAME_PROP" | cut -d "=" -f2`
+    FILENAME=`cat /var/www/htmldiag/fileLocation.properties | grep "$FILENAME_PROP" | cut -d "=" -f2`
 fi
 
 if [ ! -f "$deviceDetailsUpdateFlag" ]; then

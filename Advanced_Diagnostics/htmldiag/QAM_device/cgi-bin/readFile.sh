@@ -122,7 +122,7 @@ if [ -f "$FILENAME_PROP" ]
 then 
     FILENAME="$FILENAME_PROP"
 else
-    FILENAME=`cat /opt/www/htmldiag2/fileLocation.properties | grep "$FILENAME_PROP | cut -d "=" -f2`
+    FILENAME=`cat /var/www/htmldiag2/fileLocation.properties | grep "$FILENAME_PROP | cut -d "=" -f2`
 fi
 RESULT=""
 
