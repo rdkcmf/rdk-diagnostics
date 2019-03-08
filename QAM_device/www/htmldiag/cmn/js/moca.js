@@ -17,9 +17,9 @@
  * limitations under the License.
 */
 
+var mocaVersion = "";
 
 function getMocaVersion() {
-    var mocaVersion = "";
     $.ajax({
        async: false,
        url: "cgi-bin/getMocaVersion.sh",
@@ -36,18 +36,27 @@ function getMocaVersion() {
     return mocaVersion;
 }
 
-function logMocaDiagnostics() {
+function updateMocaVal() {
     var msge = "";
     $.ajax({
-       async: false,
-       url: "cgi-bin/logMocaDiag.sh",
+       async: true,
+       url: "cgi-bin/mocaDiag.sh",
        context: document.body,
        dataType: 'json',
        type: "POST",
        success: function(data, text_status)
        {
            if ( typeof data !== "undefined" && data !== "") {
-              msge = data;
+              $('#moca-network-status').text(data.mocaIfEnable);
+              $('#moca-link-status').text(data.mocaIfStatus);
+              $('#moca-ip').text(data.mocaIp);
+              $('#moca-mac').text(data.mocaMac);
+              $('#moca-turbo-enable').text(data.turboMode);
+              $('#moca-network-rfchan').text(data.rfChannel);
+              if ( mocaVersion === 2.0 ) {
+                  $('#moca-network-pco').text(data.primaryChFreq);
+                  $('#moca-network-sco').text(data.secondaryChFreq);
+              }
            }
        }
     });
