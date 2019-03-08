@@ -40,13 +40,12 @@ $(document).ready(function() {
         processLanguageTexts(language);
     }
     if(getMocaVersion() === 2.0) {
-        $('#moca-turbo-enable').attr('data-property-file', 'snmp#mocaIfTurboModeEnable:::value');
         $('#moca20').show();
 
     }
+    updateMocaVal();
 
     loadScripts("MoCA Info > MoCA Diagnostic Details", "nav-moca-diag");
-    logMocaDiagnostics();
 });
 </script>
 
@@ -58,43 +57,43 @@ $(document).ready(function() {
         <h2 class="readonlyText">Diagnostic details</h2>
     <div class="form-row odd">
             <span class="readonlyLabel">MoCA Network Status:</span>
-            <span class="value" id="moca-network-status" data-property-file="snmp#mocaIfEnable:::value"></span>
+            <span class="value" id="moca-network-status"></span>
         </div>
 
         <div class="form-row">
             <span class="readonlyLabel">MoCA Link Status:</span>
-            <span class="value" id="moca-link-status" data-property-file="snmp#mocaIfStatus:::value"></span>
+            <span class="value" id="moca-link-status"></span>
         </div>
 
     <div class="form-row odd">
             <span class="readonlyLabel">MoCA IP:</span>
-            <span class="value" data-property-file="read#DEVICE_ADDRESS:::MocaIP"></span>
+            <span class="value" id="moca-ip"></span>
         </div>
 
         <div class="form-row">
             <span class="readonlyLabel">MoCA MAC:</span>
-            <span class="value"  data-property-file="read#DEVICE_ADDRESS:::MocaMAC"></span>
+            <span class="value"  id="moca-mac"></span>
         </div>
 
         <div class="form-row odd">
             <span class="readonlyLabel">MoCA Turbo Mode:</span>
-            <span class="value" id="moca-turbo-enable" data-property-file="">Disabled</span>
+            <span class="value" id="moca-turbo-enable" >Disabled</span>
         </div>
 
         <div class="form-row">
             <span class="readonlyLabel">MoCA RF Channel:</span>
-            <span class="value" id="moca-network-rfchan" data-property-file="snmp#mocaIfRFChannel:::value"></span>
+            <span class="value" id="moca-network-rfchan" ></span>
         </div>
         <!-- enable these if device is operating in 2.0 Mode Hide by default  -->
         <div id="moca20" style="display: none;"> 
             <div class="form-row odd">
                 <span class="readonlyLabel">MoCA Primary Channel Freq.:</span>
-                <span class="value" id="moca-network-pco" data-property-file="snmp#PrimaryChannelFreq:::value"></span>
+                <span class="value" id="moca-network-pco"></span>
             </div>
 
             <div class="form-row">
                 <span class="readonlyLabel">MoCA Secondary Channel Freq.:</span>
-                <span class="value" id="moca-network-sco" data-property-file="snmp#SecondaryChannelFreq:::value"></span>
+                <span class="value" id="moca-network-sco"></span>
             </div>
         </div>
 	</div> <!-- end .module -->
