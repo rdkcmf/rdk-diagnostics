@@ -129,6 +129,8 @@ function updatePage(id) {
      var element = '<div><span id\=\"card_value\" class\=\"value readonlyText\"' +
                    '>Loading ...</span></div>';
      $(".module.forms.enable").append(element);
+     processLanguageTexts(window.glob, "false");
+
      if (typeof tableValue != 'undefined' && tableValue.length ) {
          tableValue.length = 0 ;
      }
@@ -163,10 +165,9 @@ function updatePage(id) {
 
 $(document).ready(function(){
 var url_arg = window.location.search.substring(1);
-var cardOID = url_arg.split("=")[1].trim();
+var cardOID = url_arg.split("&")[0].split("=")[1].trim();
 var temp_id = cardOID.split(".")[1].trim();
-window.glob = url_arg.split("=")[2].trim();
-document.getElementById("container").style.display = "";
+window.glob = url_arg.split("&")[1].split("=")[1].trim();
 
 id = 0;
 focusId = id;
@@ -174,6 +175,8 @@ var SUB_MENU_LOAD_PERIOD = 10;
 var element = '<div><span id\=\"card_value\" class\=\"value readonlyText\"'  + 
               '>Loading ...</span></div>';
 $(".module.forms.enable").append(element);
+processLanguageTexts(window.glob);
+document.getElementById("container").style.display = "";
 
 loadScripts("Card > Info", "nav-card-info");
 var focusFuncId = setInterval(function() {
