@@ -21,15 +21,14 @@
 
 . /etc/device.properties
 
-rfcFile="/opt/secure/RFC/.RFC_IPREMOTE.ini"
-tr181TestFile="/usr/bin/tr181Set"
+tr181TestFile="/usr/bin/tr181"
 
 enabled="False"
 ip="Unknown"
 mac="Unknown"
 
-if [ -f $rfcFile ]; then
-    if grep -q 'RFC_ENABLE_IPREMOTE=true' $rfcFile; then
+if [ -f $tr181TestFile ]; then
+    if $tr181TestFile RFC_ENABLE_IPREMOTE 2>&1 > /dev/null|grep -qi "true"; then
         enabled="True"
     fi
 fi
