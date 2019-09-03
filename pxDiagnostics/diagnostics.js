@@ -71,9 +71,9 @@ px.import({
         var hScroll;
 
         // first load the required fonts
-        Utils.regularFont = scene.create({ t: "fontResource", url: basePath + "/fonts/XFINITYStandardTT.ttf" });
+        Utils.regularFont = scene.create({ t: "fontResource", url: basePath + "/fonts/DejaVuSans.ttf" });
         Utils.regularFont.ready.then(function () {
-            Utils.boldFont = scene.create({ t: "fontResource", url: basePath + "/fonts/XFINITYStandardTT-Bold.ttf" });
+            Utils.boldFont = scene.create({ t: "fontResource", url: basePath + "/fonts/DejaVuSans-Bold.ttf" });
             Utils.boldFont.ready.then(function () {
                 console.log("loaded all fonts");
 
