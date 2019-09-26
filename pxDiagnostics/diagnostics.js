@@ -195,7 +195,7 @@ px.import({
                     (Utils.modelName.indexOf("AX061") !== -1) ||
                     (Utils.modelName.indexOf("CXD01") !== -1) ||
                     (Utils.modelName.indexOf("PXD01") !== -1) || 
-                    (Utils.modelName.indexOf("unknown") !== -1)) // revisit, For Pi model comes as unknown.
+                    (Utils.modelName.indexOf("RPIMC") !== -1)) // revisit, For Pi model comes as unknown.
                 {
                     Utils.isClientDevice = true;
                 }
