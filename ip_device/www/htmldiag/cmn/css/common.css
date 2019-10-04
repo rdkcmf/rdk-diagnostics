@@ -366,14 +366,26 @@ h1 {
     border: none;
     font-size: 1.0em;
     background: url(../img/arrows_nav.png) no-repeat 4px 1px;
-		padding-left: 15px;
+    padding-left: 15px;
 }
 
 #nav a.top-level-active {
     background-color: #838c91;
     color: #fff !important;
     background: #838c91 url(../img/arrows_nav.png) no-repeat 4px -179px;
-		padding-left: 15px;
+    padding-left: 15px;
+}
+
+#nav ul {
+    padding-left: 0 !important;
+}
+
+#nav li {
+    list-style: none !important;
+}
+
+#nav *:focus {
+    outline: none !important;
 }
 
 /* Modules

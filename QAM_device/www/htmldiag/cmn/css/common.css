@@ -328,9 +328,20 @@ h1 {
     background-color: #838c91;
     color: #fff !important;
     background: #838c91 url(../img/arrows_nav.png) no-repeat 2% 97%;
-		padding-left: 10%;
+    padding-left: 10%;
 }
 
+#nav ul {
+    padding-left: 0 !important;
+}
+
+#nav li {
+    list-style: none !important;
+}
+
+#nav *:focus {
+    outline: none !important;
+}
 
 /* Modules
 ------------------------------------------------ */
