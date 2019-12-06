@@ -460,14 +460,15 @@ h1 {
 ----------------------------------------*/
 .form-row {
 	clear:both;
-	font-size : 0.79em;
+	font-size : 0.69em;
 	overflow:hidden;
 	white-space:nowrap;
-	padding: 0.6%;
+	padding: 0.5%;
 }
 
 .form-row .on-off {
 	margin-right: 0.78%;
+	word-wrap: break-word;
 }
 
 .form-btn {
