@@ -199,6 +199,14 @@ px.import({
                     (Utils.modelName.indexOf("RPIMC") !== -1))
                 {
                     Utils.isClientDevice = true;
+
+                    if ((Utils.modelName.indexOf("TX061") !== -1) ||
+                        (Utils.modelName.indexOf("PX051") !== -1) ||
+                        (Utils.modelName.indexOf("AX061") !== -1) ||
+                        (Utils.modelName.indexOf("RPIMC") !== -1))
+                        {
+                            Utils.isClientNoMocaDevice = true;
+                        }
                 }
                 else {
                     Utils.isClientDevice = false;
