@@ -181,6 +181,36 @@ px.import({
                     {
                         console.log("xconfParams is not set from getXconfParams");
                     }
+
+                    //get mac addresses
+                    var bVal;
+                    systemService.registerForAsyncResponses(bVal);
+                    systemService.onAsyncResponse = function (response, callGuid) {
+
+                        console.log("getMacAddresses " + response);
+                        var macAddresses = JSON.parse(response);
+
+                        if(!macAddresses.ecm_mac || macAddresses.ecm_mac == "00:00:00:00:00:00")
+                        {
+                            Utils.isClientDevice = true;
+                            console.log("Spark Diagnostics - Client(Xi) device");
+                        }
+                        else
+                        {
+                            console.log("Spark Diagnostics - gateway(XG) device");
+                        }
+                        
+                        if(macAddresses.wifi_mac && macAddresses.wifi_mac != "00:00:00:00:00:00")
+                        {
+                            Utils.isClientNoMocaDevice = true;
+                            console.log("Spark Diagnostics - Client(Xi) device with no moca");
+                        }
+
+                        launchDiagnostics();
+
+                    }
+
+                    res = systemService.callMethod("getMacAddresses");
                 }
             }
             catch(error)
@@ -188,32 +218,6 @@ px.import({
                 console.log("caught exception in getDeviceDetails")
                 console.log(error);
             }
-
-            if (Utils.modelName) {
-                if ((Utils.modelName.indexOf("PX032") !== -1) ||
-                    (Utils.modelName.indexOf("PX051") !== -1) ||
-                    (Utils.modelName.indexOf("AX061") !== -1) ||
-                    (Utils.modelName.indexOf("CXD01") !== -1) ||
-                    (Utils.modelName.indexOf("PXD01") !== -1) || 
-                    (Utils.modelName.indexOf("TX061") !== -1) ||
-                    (Utils.modelName.indexOf("RPIMC") !== -1))
-                {
-                    Utils.isClientDevice = true;
-
-                    if ((Utils.modelName.indexOf("TX061") !== -1) ||
-                        (Utils.modelName.indexOf("PX051") !== -1) ||
-                        (Utils.modelName.indexOf("AX061") !== -1) ||
-                        (Utils.modelName.indexOf("RPIMC") !== -1))
-                        {
-                            Utils.isClientNoMocaDevice = true;
-                        }
-                }
-                else {
-                    Utils.isClientDevice = false;
-                }
-            }
-
-            launchDiagnostics();
         }
     }).catch((err) => {
         console.log(err);
