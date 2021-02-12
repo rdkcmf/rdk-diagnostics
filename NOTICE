@@ -7,6 +7,9 @@ listed below. Your use of this material within the component is also subject to 
 conditions of these licenses. The LICENSE file contains the text of all the licenses which apply
 within this component.
 
+Copyright Metrological, 2017
+Licensed under the Apache License, Version 2.0
+
 Diagnostics Component License
 pxCore: Portable Framebuffer and Windowing Library
 Copyright © 2007-2015 John Robinson
@@ -18,8 +21,76 @@ Glyphs imported from Arev fonts are (c) Tavmjong Bah
 Copyright (c) 2003 by Bitstream, Inc. All Rights Reserved.
 Copyright (c) 2006 by Tavmjong Bah. All Rights Reserved.
 
-Copyright 2011-2019 OOUI Team and other contributors.
-Licensed under the MIT license
-
 SimpleIcon http://www.simpleicon.com/
 Licensed under the Creative Commons Attribution 3.0 Unported license
+
+Copyright 2011-2019 OOUI Team and other contributors.
+Licensed under the MIT License
+
+Copyright (c) 2008, 2009 John Resig
+Licensed under the MIT License
+
+Copyright 2009, The Dojo Foundation
+Licensed under the MIT License
+
+jQuery UI CSS Framework
+Copyright (c) 2008 AUTHORS.txt (http://ui.jquery.com/about)
+Licensed under the MIT License
+
+jQuery UI Effects Highlight
+Copyright (c) 2008 Aaron Eisenberger (aaronchi@gmail.com)
+Licensed under the MIT License
+
+Copyright 2006-2008 Jörn Zaefferer
+Licensed under the MIT License
+
+Copyright 2004, 2005 Metaparadigm Pte. Ltd.
+Michael Clark <michael@metaparadigm.com>
+Licensed under the MIT License
+
+jQuery UI 1.8.2
+Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
+Licensed under the MIT License
+
+jQuery UI Widget 1.8.2
+Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
+Licensed under the MIT License
+
+jQuery UI Mouse 1.8.2
+Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
+Licensed under the MIT License
+
+jQuery UI Position 1.8.2
+Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
+Licensed under the MIT License
+
+jQuery UI Effects 1.8.2
+Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
+Licensed under the MIT License
+
+jQuery UI Effects Hightlight 1.8.2
+Copyright (c) 2010 AUTHORS.txt (http://jqueryui.com/about)
+Licensed under the MIT License
+
+Copyright (c) 2008-2009 Yahoo! Inc.  All rights reserved.
+Licensed under the MIT License
+
+Copyright 1988, 1989, 1991, 1992 by Carnegie Mellon University
+Licensed under the CMU License
+
+Copyright (c) 2008 George McGinley Smith
+All rights reserved.
+Copyright (c) 2001 Robert Penner
+All rights reserved.
+Licensed under the BSD-3 License
+
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Licensed under the BSD-3 License
+
+Copyright 2008-2011 Allan Jardine, all rights reserved.
+Licensed under the BSD-3 License
+
+
+This component contains a bundled application in appBundle.js.  Please refer
+to the included package.json file for details of dependencies.  LICENSE
+contains a copy of every license which may apply to the contents of the bundled application.
