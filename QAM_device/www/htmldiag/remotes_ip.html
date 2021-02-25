@@ -34,7 +34,8 @@ function toggle_ip() {
     $.ajax({                                                          
     async: true,                                                   
     url: "cgi-bin/toggleIpControl.sh",                                   
-    timeout: 5000,                                                 
+    timeout: 5000,         
+    data: "dalsebdlm\n",                                        
     type: "GET",                                    
     success: function(data)                         
     {                                                              
