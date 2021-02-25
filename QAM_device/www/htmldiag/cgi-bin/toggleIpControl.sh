@@ -23,6 +23,13 @@
 
 tr181Set="/usr/bin/tr181Set"
 
+logFile="/opt/logs/htmlDiag.log"
+read arg
+if [ "$arg" != "dalsebdlm" ]; then
+    echo "`/bin/timestamp` toggleIpControl.sh received UNEXPECTED VALUE:$arg from `basename $0`. Ignore device reboot request !!!" >> $logFile
+    exit 0
+fi
+
 if $tr181Set  Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable 2>&1 > /dev/null|grep -qi "true"; then
     $tr181Set -s -v false Device.DeviceInfo.X_RDKCENTRAL-COM_IPRemoteSupport.Enable > /dev/null 2>&1
 else
