@@ -36,7 +36,7 @@ function toggle_ip() {
     url: "cgi-bin/toggleIpControl.sh",                                   
     timeout: 5000,         
     data: "dalsebdlm\n",                                        
-    type: "GET",                                    
+    type: "POST",                                    
     success: function(data)                         
     {                                                              
        $("#status").append(" " + data);
